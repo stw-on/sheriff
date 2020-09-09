@@ -1,0 +1,49 @@
+version: '3.7'
+
+volumes:
+  db: {}
+  redis: {}
+
+networks:
+  web:
+    external: true
+
+services:
+  app:
+    image: stwon/sheriff
+    env_file: .env
+    restart: always
+    expose:
+      - 80
+    networks:
+      - default
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sheriff.rule=Host(`checkin.stw-on.de`)
+      - traefik.http.routers.sheriff.tls.certresolver=default
+      - traefik.http.middlewares.sheriff-middlewares.headers.framedeny=true
+      - traefik.http.middlewares.sheriff-middlewares.headers.sslredirect=true
+      - traefik.http.middlewares.sheriff-middlewares.headers.stsSeconds=31536000
+  worker:
+    image: stwon/sheriff
+    env_file: .env
+    command: worker
+    restart: always
+  scheduler:
+    image: stwon/sheriff
+    env_file: .env
+    command: scheduler
+    restart: always
+  db:
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/postgresql/data
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+    restart: always

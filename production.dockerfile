@@ -1,0 +1,46 @@
+# Stage 1: Build PHP container
+FROM composer as build1
+
+WORKDIR /app
+
+COPY ./ /app
+
+RUN composer global require hirak/prestissimo && \
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+
+
+# Stage 2: Build UI
+FROM node as build2
+
+WORKDIR /app
+
+COPY --from=build1 /app /app
+
+RUN cd ui && \
+    yarn install && \
+    yarn build && \
+    yarn generate && \
+    cp -rf ./dist/* /app/public && \
+    rm -rf /app/ui
+
+
+# Stage 3: Build the final container
+FROM php:7.4-apache
+
+ENV APACHE_DOCUMENT_ROOT /app/public
+WORKDIR /app
+
+COPY --from=build2 --chown=www-data:www-data /app /app
+
+RUN apt-get update -y && \
+    a2enmod rewrite && \
+    apt-get -y install libpq-dev wait-for-it && \
+    docker-php-ext-install pdo pgsql pdo_pgsql && \
+    pecl install libsodium && \
+    docker-php-ext-enable sodium && \
+    pecl install redis && \
+    docker-php-ext-enable redis && \
+    sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
+    sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+ENTRYPOINT ["/app/docker/entrypoint.sh"]
