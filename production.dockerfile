@@ -18,9 +18,9 @@ COPY --from=build1 /app /app
 
 RUN cd ui && \
     yarn install && \
-    yarn build && \
-    yarn generate && \
-    cp -rf ./dist/* /app/public && \
+    yarn build &&
+    mv dist/* /app/public && \
+    mv /app/public/index.html /app/public/ui-index.html && \
     rm -rf /app/ui
 
 

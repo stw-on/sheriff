@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Don't add this rule in development. 404s are easier to debug without it.
+if (app()->environment('production')) {
+    Route::get('/{any}', function () {
+        return file_get_contents(public_path('ui-index.html'));
+    })->where('any', '.*');
+}
