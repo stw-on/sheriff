@@ -22,7 +22,7 @@ class CreateVisitsTable extends Migration
             $table->dateTime('left_at')->nullable();
 
             $table->text('contact_details'); // binary, base64
-            $table->string('public_key');
+            $table->foreignUuid('public_key_id')->constrained();
 
             $table->timestamps();
         });

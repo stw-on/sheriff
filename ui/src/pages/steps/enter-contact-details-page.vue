@@ -27,7 +27,7 @@
           <a v-else @click="deleteSavedContactDetails">Gespeicherte Daten von diesem Gerät löschen</a>
         </v-col>
         <v-col class="text-center" cols="12">
-          <v-btn @click="save" large color="primary" class="mt-4" :disabled="!isValid">
+          <v-btn @click="save" large color="primary" class="mt-4" :disabled="!isValid" :loading="loading">
             Weiter
             <v-icon right>mdi-chevron-right</v-icon>
           </v-btn>
@@ -40,6 +40,9 @@
 <script>
   export default {
     name: 'enter-contact-details-page',
+    props: {
+      loading: Boolean,
+    },
     data: () => ({
       firstName: '',
       lastName: '',

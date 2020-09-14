@@ -2,114 +2,72 @@
   <div>
     <h2 class="font-weight-light text-center mb-3">QR-Code scannen</h2>
 
-    <v-card color="black" dark class="scanner-card">
-      <div class="info-container">
-        <v-progress-circular indeterminate />
-      </div>
-      <v-fade-transition>
-        <video
-          v-show="showVideo"
-          class="qr-video"
-          ref="qrVideo"
-          @playing="showVideo = true"
-          @emptied="showVideo = false"
-        ></video>
-      </v-fade-transition>
-      <div class="scan-overlay" :class="{visible: showVideo}">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </v-card>
+    <div class="scanner-card-container">
+      <v-card color="black" dark class="scanner-card">
+        <div class="info-container">
+          <v-progress-circular indeterminate />
+        </div>
+        <v-fade-transition>
+          <video
+            v-show="showVideo"
+            class="qr-video"
+            ref="qrVideo"
+            @playing="showVideo = true"
+            @emptied="showVideo = false"
+          ></video>
+        </v-fade-transition>
+        <div class="scan-overlay" :class="{visible: showVideo}">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </v-card>
+    </div>
 
     <p class="mt-3 grey--text text-center">
       Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist.
     </p>
-
-    <v-snackbar top color="primary" v-model="errorSnackbar">
-      {{ errorSnackbarText }}
-    </v-snackbar>
   </div>
 </template>
 
 <script>
   import QrScanner from 'qr-scanner'
-  import {axios, axiosForHost} from '@/lib/axios'
 
   export default {
     name: 'scan-page',
+    props: {
+      loading: Boolean,
+    },
     data: () => ({
       showVideo: false,
-      loading: false,
-      errorSnackbar: false,
-      errorSnackbarText: '',
     }),
+    watch: {
+      loading(value) {
+        if (value) {
+          this.qrScanner.start()
+        } else {
+          this.qrScanner.pause()
+          this.showVideo = false
+        }
+      },
+    },
     mounted() {
-      this.qrScanner = new QrScanner(this.$refs.qrVideo, this.onQrCodeScanned)
+      this.qrScanner = new QrScanner(this.$refs.qrVideo, result => !this.loading && this.$emit('scanned', result))
       this.qrScanner.start()
     },
     beforeDestroy() {
       this.qrScanner.destroy()
     },
-    methods: {
-      async onQrCodeScanned(result) {
-        if (this.loading || !result) {
-          return
-        }
-
-        this.loading = true
-        this.qrScanner.pause()
-        this.showVideo = false
-
-        console.log('Got scan result:', result)
-
-        try {
-          const qrData = JSON.parse(result)
-
-          if (!qrData.host || !qrData.data) {
-            this.onReadError()
-            return
-          }
-
-          // Check if we are allowed to communicate with the host
-          const {data: hostConfig} = await axios.get('/config/host', {
-            params: {host: qrData.host},
-          })
-
-          if (!hostConfig.allowed) {
-            this.onReadError('Du kannst dich an dieser Örtlichkeit nicht über diese Webseite anmelden')
-            return
-          }
-
-          const {data: visitData} = await axiosForHost(qrData.host).post(`/visit/register`, {
-            id_data: qrData.data,
-          })
-
-          this.$emit('proceed', {
-            qrData,
-            visitData,
-          })
-        } catch (e) {
-          this.onReadError()
-        }
-
-        this.loading = false
-      },
-      onReadError(text = 'Der QR-Code ist ungültig') {
-        this.errorSnackbar = true
-        this.errorSnackbarText = text
-
-        setTimeout(() => {
-          this.loading = false
-          this.qrScanner.start()
-        }, 1000)
-      },
-    },
   }
 </script>
 
 <style lang="scss" scoped>
+  .scanner-card-container {
+    max-width: 66vh;
+    margin: 0 auto;
+  }
+
   .scanner-card {
     padding-bottom: 100%;
     position: relative;

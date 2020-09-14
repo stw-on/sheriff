@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Models\Casts\Base64Cast;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 
 /**
@@ -12,10 +13,17 @@ use Illuminate\Support\Facades\Crypt;
  * @package App\Models
  * @property string id
  * @property string name
- * @property string public_key
+ * @property PublicKey publicKey
+ * @property Visit[]|Collection visits
+ * @property string public_key_id
  */
 class Location extends BaseModel
 {
+    protected $visible = [
+        'id',
+        'name',
+    ];
+
     const COLORS = [
         '#d32f2f',
         '#7b1fa2',
@@ -27,10 +35,6 @@ class Location extends BaseModel
         '#e64a19',
         '#795548',
         '#607d8b',
-    ];
-
-    protected $casts = [
-        'public_key' => Base64Cast::class,
     ];
 
     public function generateQrString()
@@ -46,9 +50,14 @@ class Location extends BaseModel
         return $this->hasMany(Visit::class);
     }
 
+    public function publicKey()
+    {
+        return $this->belongsTo(PublicKey::class);
+    }
+
     public function getColorOfTheDay()
     {
-        $hash = crc32($this->public_key . Carbon::today()->format('Ymd'));
+        $hash = crc32($this->publicKey->id . Carbon::today()->format('Ymd'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
     }
 }

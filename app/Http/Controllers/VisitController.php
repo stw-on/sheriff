@@ -16,13 +16,13 @@ class VisitController extends Controller
     public function registerVisit()
     {
         $data = $this->validateWith([
-            'id_data' => 'string|max:4096',
-            'first_name' => 'string|max:128',
-            'last_name' => 'string|max:128',
-            'street' => 'string|max:128',
-            'zip' => 'string|max:5',
-            'city' => 'string|max:128',
-            'phone' => 'string|numeric|max:32',
+            'id_data' => 'string|max:4096|required',
+            'first_name' => 'string|max:128|required',
+            'last_name' => 'string|max:128|required',
+            'street' => 'string|max:128|required',
+            'zip' => 'string|max:5|required',
+            'city' => 'string|max:128|required',
+            'phone' => 'string|numeric|digits_between:5,32|required',
         ]);
 
         try {

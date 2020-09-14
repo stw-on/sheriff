@@ -30,7 +30,6 @@
     props: {
       visitData: Object,
       contactDetails: Object,
-      qrData: Object,
     },
     data: () => ({
 

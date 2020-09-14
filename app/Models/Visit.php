@@ -18,18 +18,34 @@ use SodiumException;
  * @property Location location
  * @property string location_id
  * @property string contact_details
- * @property string public_key
+ * @property PublicKey publicKey
+ * @property string public_key_id
  */
 class Visit extends BaseModel
 {
+    const PAD_LENGTH = 512;
+
+    protected $visible = [
+        'id'
+    ];
+
     protected $casts = [
         'contact_details' => Base64Cast::class,
-        'public_key' => Base64Cast::class,
+    ];
+
+    protected $dates = [
+        'entered_at',
+        'left_at'
     ];
 
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function publicKey()
+    {
+        return $this->belongsTo(PublicKey::class);
     }
 
     /**
@@ -43,7 +59,7 @@ class Visit extends BaseModel
             throw new Exception('Cannot store contact details without an associated location!');
         }
 
-        $this->contact_details = sodium_crypto_box_seal(sodium_pad(json_encode($data), 512), $this->location->public_key);
-        $this->public_key = $this->location->public_key;
+        $this->contact_details = sodium_crypto_box_seal(sodium_pad(json_encode($data), self::PAD_LENGTH), $this->location->publicKey->key);
+        $this->publicKey()->associate($this->location->publicKey);
     }
 }
