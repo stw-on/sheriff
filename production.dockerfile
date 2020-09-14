@@ -34,7 +34,7 @@ COPY --from=build2 --chown=www-data:www-data /app /app
 
 RUN apt-get update -y && \
     a2enmod rewrite && \
-    apt-get -y install libpq-dev wait-for-it && \
+    apt-get -y install libpq-dev wait-for-it libsodium-dev && \
     docker-php-ext-install pdo pgsql pdo_pgsql && \
     pecl install libsodium && \
     docker-php-ext-enable sodium && \
