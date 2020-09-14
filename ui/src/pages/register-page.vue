@@ -19,7 +19,12 @@
           @proceed="onEnterContactDetailsPageProceed"
           :loading="loading"
         />
-        <scan-page v-else-if="step === '2'" :loading="loading" @scanned="onQrCodeScanned" />
+        <scan-page
+          v-else-if="step === '2'"
+          :loading="loading"
+          @scanned="onQrCodeScanned"
+          @error="message => onReadError(message)"
+        />
         <submit-page
           v-else-if="step === '3'"
           :contact-details="contactDetails"

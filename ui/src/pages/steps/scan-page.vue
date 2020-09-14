@@ -5,7 +5,10 @@
     <div class="scanner-card-container">
       <v-card color="black" dark class="scanner-card">
         <div class="info-container">
-          <v-progress-circular indeterminate />
+          <v-icon v-if="noCameraFound" size="64">
+            mdi-camera-off
+          </v-icon>
+          <v-progress-circular v-else indeterminate />
         </div>
         <v-fade-transition>
           <video
@@ -41,6 +44,7 @@
     },
     data: () => ({
       showVideo: false,
+      noCameraFound: false,
     }),
     watch: {
       loading(value) {
@@ -52,9 +56,25 @@
         }
       },
     },
-    mounted() {
-      this.qrScanner = new QrScanner(this.$refs.qrVideo, result => !this.loading && this.$emit('scanned', result))
-      this.qrScanner.start()
+    async mounted() {
+      if (!await QrScanner.hasCamera()) {
+        this.noCameraFound = true
+        this.$emit('error', 'Kein Zugriff auf die Kamera')
+        return
+      }
+
+      this.qrScanner = new QrScanner(
+        this.$refs.qrVideo,
+        result => !this.loading && this.$emit('scanned', result),
+      )
+
+      try {
+        await this.qrScanner.start()
+        this.noCameraFound = false
+      } catch (e) {
+        this.noCameraFound = true
+        this.$emit('error', 'Kein Zugriff auf die Kamera')
+      }
     },
     beforeDestroy() {
       this.qrScanner.destroy()
