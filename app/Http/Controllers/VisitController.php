@@ -17,12 +17,12 @@ class VisitController extends Controller
     {
         $data = $this->validateWith([
             'id_data' => 'string|max:4096|required',
-            'first_name' => 'string|max:128|required',
-            'last_name' => 'string|max:128|required',
-            'street' => 'string|max:128|required',
-            'zip' => 'string|max:5|required',
-            'city' => 'string|max:128|required',
-            'phone' => 'string|numeric|digits_between:5,32|required',
+            'first_name' => 'string|min:2|max:128|required',
+            'last_name' => 'string|min:2|max:128|required',
+            'street' => 'string|min:2|max:128|required',
+            'zip' => 'string|min:5|max:5|required',
+            'city' => 'string|min:3|max:128|required',
+            'phone' => 'string|min:5|max:128|required',
         ]);
 
         try {

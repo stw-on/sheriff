@@ -5,22 +5,22 @@
     <v-form v-model="isValid">
       <v-row dense>
         <v-col cols="6">
-          <v-text-field v-model="firstName" :rules="[v => !!v, v => v.length >= 2]" hide-details outlined placeholder="Vorname" />
+          <v-text-field v-model="firstName" :rules="[v => !!v, v => v.length >= 2]" maxlength="128" hide-details outlined placeholder="Vorname" />
         </v-col>
         <v-col cols="6">
-          <v-text-field v-model="lastName" :rules="[v => !!v, v => v.length >= 2]" hide-details outlined placeholder="Nachname" />
+          <v-text-field v-model="lastName" :rules="[v => !!v, v => v.length >= 2]" maxlength="128" hide-details outlined placeholder="Nachname" />
         </v-col>
         <v-col cols="12">
-          <v-text-field v-model="street" :rules="[v => !!v, v => v.length >= 2]" hide-details outlined placeholder="Straße + Nr." />
+          <v-text-field v-model="street" :rules="[v => !!v, v => v.length >= 2]" maxlength="128" hide-details outlined placeholder="Straße + Nr." />
         </v-col>
         <v-col cols="4">
-          <v-text-field v-model="zip" :rules="[v => !!v, v => v.length === 5]" hide-details outlined placeholder="PLZ" />
+          <v-text-field v-model="zip" :rules="[v => !!v, v => v.length === 5]" maxlength="5" hide-details outlined placeholder="PLZ" />
         </v-col>
         <v-col cols="8">
-          <v-text-field v-model="city" :rules="[v => !!v, v => v.length >= 2]" hide-details outlined placeholder="Ort" />
+          <v-text-field v-model="city" :rules="[v => !!v, v => v.length >= 2]" maxlength="128" hide-details outlined placeholder="Ort" />
         </v-col>
         <v-col cols="12">
-          <v-text-field v-model="phone" :rules="[v => !!v, v => v.length >= 2]" hide-details outlined placeholder="Telefon- oder Handynummer" />
+          <v-text-field v-model="phone" :rules="[v => !!v, v => v.length >= 2]" maxlength="128" hide-details outlined placeholder="Telefon- oder Handynummer" />
         </v-col>
         <v-col cols="12">
           <v-checkbox v-if="!hasSavedContactDetails" v-model="saveContactDetails" label="Meine Daten für das nächste Mal auf diesem Gerät speichern" />
