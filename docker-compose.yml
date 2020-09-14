@@ -7,6 +7,7 @@ volumes:
 services:
   reverse_proxy:
     image: traefik
+    restart: on-failure
     command:
       - --api.insecure=true
       - --providers.docker=true
@@ -21,6 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./development.dockerfile
+    restart: on-failure
     env_file: .env
     volumes:
       - ./:/app
@@ -55,6 +57,7 @@ services:
       - traefik.http.services.ui.loadbalancer.server.port=8080
   db:
     image: postgres:12-alpine
+    restart: on-failure
     ports:
       - 5432:5432
     environment:
