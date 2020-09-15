@@ -2,7 +2,7 @@
   <div class="card-container">
     <v-card class="d-inline-block" elevation="12" light min-width="60%">
       <div class="pa-5 text-center">
-        <v-icon size="72" color="success">
+        <v-icon color="success" size="72">
           mdi-check
         </v-icon>
 
@@ -39,15 +39,15 @@
 
 <style lang="scss" scoped>
   .card-container {
-    flex-grow: 1;
+    align-items: center;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     justify-content: center;
-    align-items: center;
   }
 
   .contact-details {
-    line-height: 1.3;
     font-size: small;
+    line-height: 1.3;
   }
 </style>

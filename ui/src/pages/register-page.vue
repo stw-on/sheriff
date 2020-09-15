@@ -2,7 +2,7 @@
   <v-sheet :color="colorOfTheDay" :dark="!!colorOfTheDay" class="fill-height transition-background-color">
     <v-container class="full-height">
       <v-expand-transition>
-        <v-stepper v-if="step !== '3'" class="elevation-0 transparent" alt-labels :value="step">
+        <v-stepper v-if="step !== '3'" :value="step" alt-labels class="elevation-0 transparent">
           <v-stepper-header>
             <v-stepper-step step="1" />
             <v-divider></v-divider>
@@ -16,14 +16,14 @@
       <v-fade-transition mode="out-in">
         <enter-contact-details-page
           v-if="step === '1'"
-          @proceed="onEnterContactDetailsPageProceed"
           :loading="loading"
+          @proceed="onEnterContactDetailsPageProceed"
         />
         <scan-page
           v-else-if="step === '2'"
           :loading="loading"
-          @scanned="onQrCodeScanned"
           @error="message => onReadError(message)"
+          @scanned="onQrCodeScanned"
         />
         <submit-page
           v-else-if="step === '3'"
@@ -33,7 +33,7 @@
       </v-fade-transition>
     </v-container>
 
-    <v-snackbar top color="primary" v-model="errorSnackbar">
+    <v-snackbar v-model="errorSnackbar" color="primary" top>
       {{ errorSnackbarText }}
     </v-snackbar>
   </v-sheet>
@@ -178,9 +178,9 @@
 
 <style lang="scss" scoped>
   .full-height {
-    min-height: 100%;
     display: flex;
     flex-direction: column;
+    min-height: 100%;
   }
 
   .transition-background-color {
