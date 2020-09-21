@@ -90,10 +90,17 @@
 
         if (this.urlData) {
           this.loading = true
-          this.visitData = await this.registerVisit(this.urlData)
-          this.urlData = null
+
+          try {
+            this.visitData = await this.registerVisit(this.urlData)
+            this.urlData = null
+            this.step = '3'
+          } catch (e) {
+            this.onReadError()
+            console.error(e)
+          }
+
           this.loading = false
-          this.step = '3'
         } else {
           this.step = '2'
         }

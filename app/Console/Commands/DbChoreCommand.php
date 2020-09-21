@@ -2,25 +2,27 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Location;
 use App\Models\Visit;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
-class ProcessVisitsCommand extends Command
+class DbChoreCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'visits:process';
+    protected $signature = 'db:chore';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Process visits';
+    protected $description = 'Do database chore';
 
     /**
      * Create a new command instance.
@@ -44,7 +46,7 @@ class ProcessVisitsCommand extends Command
             ->delete();
 
         if ($deleted > 0) {
-            $this->info("Deleted $deleted visit(s).");
+            Log::info("Deleted $deleted visit(s).");
         }
 
         $expiredVisits = Visit::query()
@@ -59,9 +61,17 @@ class ProcessVisitsCommand extends Command
             try {
                 $expiredVisit->left_at = $expiredVisit->entered_at->endOfDay();
                 $expiredVisit->save();
-                $this->info("Expired visit $visitId.");
+                Log::info("Expired visit $visitId.");
             } catch (\Exception $exception) {
-                $this->error("Could not update visit $visitId.");
+                Log::error("Could not update visit $visitId.");
+            }
+        }
+
+        /** @var Location $deletedLocation */
+        foreach (Location::onlyTrashed()->cursor() as $deletedLocation) {
+            if (!$deletedLocation->visits()->exists()) {
+                $deletedLocation->forceDelete();
+                Log::info("Deleted location " . $deletedLocation->id);
             }
         }
 

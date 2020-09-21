@@ -18,7 +18,10 @@ class PublicKey extends BaseModel
 {
     use SoftDeletes;
 
-    protected $visible = ['name'];
+    protected $visible = [
+        'id',
+        'name',
+    ];
 
     protected $casts = [
         'key' => Base64Cast::class,

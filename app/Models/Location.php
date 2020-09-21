@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Models\Casts\Base64Cast;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Crypt;
  */
 class Location extends BaseModel
 {
+    use SoftDeletes;
+
     protected $visible = [
         'id',
         'name',
@@ -45,6 +48,11 @@ class Location extends BaseModel
         ]);
     }
 
+    public function getQrUrlAttribute()
+    {
+        return 'https://' . config('sheriff.host') . '/register?scan=' . base64_encode($this->generateQrString());
+    }
+
     public function visits()
     {
         return $this->hasMany(Visit::class);
@@ -57,7 +65,7 @@ class Location extends BaseModel
 
     public function getColorOfTheDay()
     {
-        $hash = crc32($this->publicKey->id . Carbon::today()->format('Ymd'));
+        $hash = crc32($this->publicKey->key . Carbon::today()->format('Ymd'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
     }
 }
