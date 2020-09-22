@@ -180,6 +180,13 @@
           damit du sie nicht jedes Mal erneut eingeben musst.
         </v-expansion-panel-content>
       </v-expansion-panel>
+      <v-expansion-panel>
+        <v-expansion-panel-header>Kann ich die Sicherheit dieser App überprüfen?</v-expansion-panel-header>
+        <v-expansion-panel-content>
+          Der gesamte Quellcode dieser App und der dazugehörigen API ist frei verfügbar auf
+          <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+        </v-expansion-panel-content>
+      </v-expansion-panel>
     </v-expansion-panels>
   </v-container>
 </template>

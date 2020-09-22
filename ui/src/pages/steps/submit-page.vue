@@ -9,7 +9,7 @@
         <h1 class="font-weight-bold">{{ visitData.location_name }}</h1>
         <h1 class="font-weight-bold">{{ visitData.entered_at }}</h1>
 
-        <div class="contact-details mt-4">
+        <div v-if="!!contactDetails" class="contact-details mt-4">
           {{ contactDetails.first_name }} {{ contactDetails.last_name }}<br>
           {{ contactDetails.street }}<br>
           {{ contactDetails.zip }} {{ contactDetails.city }}<br>
