@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Location;
+use App\Models\PublicKey;
 use App\Models\Visit;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -72,6 +73,14 @@ class DbChoreCommand extends Command
             if (!$deletedLocation->visits()->exists()) {
                 $deletedLocation->forceDelete();
                 Log::info("Deleted location " . $deletedLocation->id);
+            }
+        }
+
+        /** @var PublicKey $deletedPublicKey */
+        foreach (PublicKey::onlyTrashed()->cursor() as $deletedPublicKey) {
+            if (!$deletedPublicKey->visits()->exists()) {
+                $deletedPublicKey->forceDelete();
+                Log::info("Deleted public key " . $deletedPublicKey->id);
             }
         }
 
