@@ -73,9 +73,15 @@
           <a v-else @click="deleteSavedContactDetails">Gespeicherte Daten von diesem Gerät löschen</a>
         </v-col>
         <v-col class="text-center" cols="12">
-          <v-btn :disabled="!isValid" :loading="loading" class="mt-4" color="primary" large @click="save">
-            Weiter
-            <v-icon right>mdi-chevron-right</v-icon>
+          <v-btn :disabled="!isValid || offline" :loading="loading" class="mt-4" color="primary" large @click="save">
+            <template v-if="offline">
+              <v-icon left>mdi-cloud-off-outline</v-icon>
+              Offline
+            </template>
+            <template v-else>
+              Weiter
+              <v-icon right>mdi-chevron-right</v-icon>
+            </template>
           </v-btn>
         </v-col>
       </v-row>
@@ -88,6 +94,7 @@
     name: 'enter-contact-details-page',
     props: {
       loading: Boolean,
+      offline: Boolean,
     },
     data: () => ({
       firstName: '',

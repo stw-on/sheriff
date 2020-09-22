@@ -17,11 +17,13 @@
         <enter-contact-details-page
           v-if="step === '1'"
           :loading="loading"
+          :offline="offline"
           @proceed="onEnterContactDetailsPageProceed"
         />
         <scan-page
           v-else-if="step === '2'"
           :loading="loading"
+          :offline="offline"
           @error="message => onReadError(message)"
           @scanned="onQrCodeScanned"
         />
@@ -29,12 +31,18 @@
           v-else-if="step === '3'"
           :contact-details="contactDetails"
           :visit-data="visitData"
+          :offline="offline"
         />
       </v-fade-transition>
     </v-container>
 
-    <v-snackbar v-model="errorSnackbar" color="primary" top>
+    <v-snackbar v-model="errorSnackbar" multi-line color="primary" top>
       {{ errorSnackbarText }}
+    </v-snackbar>
+
+    <v-snackbar v-model="offline" color="primary" bottom timeout="-1">
+      <v-icon left>mdi-cloud-off-outline</v-icon>
+      Keine Internetverbindung
     </v-snackbar>
   </v-sheet>
 </template>
@@ -57,6 +65,7 @@
       visitData: null,
       errorSnackbar: false,
       errorSnackbarText: '',
+      offline: !navigator.onLine || false,
     }),
     computed: {
       colorOfTheDay() {
@@ -64,6 +73,9 @@
       },
     },
     async mounted() {
+      window.addEventListener('online', () => this.offline = false)
+      window.addEventListener('offline', () => this.offline = true)
+
       if (this.$route.query.scan) {
         const data = this.$route.query.scan
 
