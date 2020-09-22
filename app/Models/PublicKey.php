@@ -26,4 +26,9 @@ class PublicKey extends BaseModel
     protected $casts = [
         'key' => Base64Cast::class,
     ];
+
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
+    }
 }
