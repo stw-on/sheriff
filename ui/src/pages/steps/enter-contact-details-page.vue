@@ -77,13 +77,12 @@
         </v-col>
         <v-col cols="12">
           <v-checkbox
-            v-if="!hasSavedContactDetails"
             v-model="acceptedPrivacy"
             :rules="[v => !!v]"
           >
             <template v-slot:label>
               <div>
-                Ich stimme der <a href="#" @click.prevent.stop="showPrivacyPolicy = true">Datenschutzerklärung</a> zu
+                Ich habe die <a href="#" @click.prevent.stop="showPrivacyPolicy = true">Hinweise zum Datenschutz</a> gelesen und stimme ihnen zu.
               </div>
             </template>
           </v-checkbox>
@@ -130,7 +129,7 @@
           <v-btn icon dark @click="showPrivacyPolicy = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Datenschutzerklärung</v-toolbar-title>
+          <v-toolbar-title>Hinweise zum Datenschutz</v-toolbar-title>
         </v-toolbar>
 
         <div class="pa-3">
@@ -273,6 +272,7 @@
           this.phone = data.phone
           this.saveContactDetails = true
           this.hasSavedContactDetails = true
+          this.acceptedPrivacy = true
 
           this.$nextTick(() => this.saved = true)
         } catch (e) {

@@ -3,10 +3,10 @@
     <v-container class="full-height">
       <v-expand-transition>
         <v-stepper v-if="step !== '3'" :value="step" alt-labels class="elevation-0 transparent">
-          <v-stepper-header>
+          <v-stepper-header class="elevation-0">
             <v-stepper-step step="1" />
             <v-divider></v-divider>
-            <v-stepper-step step="2" />
+            <v-stepper-step :complete="!!urlData" step="2" />
             <v-divider></v-divider>
             <v-stepper-step step="3" />
           </v-stepper-header>
