@@ -11,13 +11,7 @@
           <v-progress-circular v-else indeterminate />
         </div>
         <v-fade-transition>
-          <video
-            v-show="showVideo"
-            ref="qrVideo"
-            class="qr-video"
-            @emptied="showVideo = false"
-            @playing="showVideo = true"
-          ></video>
+          <qrcode-stream class="qr-video" v-show="showVideo" @init="qrStreamInit" @decode="qrStreamDecoded" />
         </v-fade-transition>
         <div :class="{visible: showVideo}" class="scan-overlay">
           <div></div>
@@ -35,10 +29,13 @@
 </template>
 
 <script>
-  import QrScanner from 'qr-scanner'
+  import {QrcodeStream} from 'vue-qrcode-reader'
 
   export default {
     name: 'scan-page',
+    components: {
+      QrcodeStream,
+    },
     props: {
       loading: Boolean,
     },
@@ -48,36 +45,24 @@
     }),
     watch: {
       loading(value) {
-        if (value) {
-          this.qrScanner.start()
-        } else {
-          this.qrScanner.pause()
-          this.showVideo = false
-        }
+        this.showVideo = !value
       },
     },
-    async mounted() {
-      if (!await QrScanner.hasCamera()) {
-        this.noCameraFound = true
-        this.$emit('error', 'Kein Zugriff auf die Kamera')
-        return
-      }
-
-      this.qrScanner = new QrScanner(
-        this.$refs.qrVideo,
-        result => !this.loading && this.$emit('scanned', result),
-      )
-
-      try {
-        await this.qrScanner.start()
-        this.noCameraFound = false
-      } catch (e) {
-        this.noCameraFound = true
-        this.$emit('error', 'Kein Zugriff auf die Kamera')
-      }
-    },
-    beforeDestroy() {
-      this.qrScanner.destroy()
+    methods: {
+      async qrStreamInit(promise) {
+        try {
+          await promise
+          this.showVideo = true
+        } catch (e) {
+          this.noCameraFound = true
+          this.$emit('error', 'Kein Zugriff auf die Kamera')
+          console.error(e)
+        }
+      },
+      qrStreamDecoded(content) {
+        if (this.loading) return
+        this.$emit('scanned', content)
+      },
     },
   }
 </script>
