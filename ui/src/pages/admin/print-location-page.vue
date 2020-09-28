@@ -176,7 +176,7 @@
       this.location = data
       this.qrSvg = new QRCode({
         content: data.qr_url,
-        ecl: 'L',
+        ecl: 'M',
         join: true,
         container: 'svg-viewbox',
         padding: 0,
