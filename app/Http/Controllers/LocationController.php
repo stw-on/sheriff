@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use App\Models\PublicKey;
+use Illuminate\Support\Facades\Http;
 
 class LocationController extends Controller
 {
@@ -47,5 +48,25 @@ class LocationController extends Controller
         $location->save();
 
         return response()->json($location->makeVisible('public_key_id'));
+    }
+
+    public function downloadPdf(string $id)
+    {
+        /** @var Location $location */
+        $location = Location::query()->findOrFail($id);
+
+        $response = Http::post('http://pdfrenderer:8082/render', [
+            'html' => view('poster', [
+                'qr_url' => $location->getQrUrlAttribute(),
+            ])->render(),
+        ]);
+
+        $pdf = $response->throw()->body();
+
+        return response()->stream(function () use ($pdf) {
+            echo $pdf;
+        }, 200, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 }

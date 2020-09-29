@@ -69,3 +69,8 @@ services:
     volumes:
       - redis:/data
     restart: on-failure
+  pdfrenderer:
+    image: timoschwarzer/headless-pdf-renderer
+    restart: on-failure
+    cap_add:
+      - SYS_ADMIN

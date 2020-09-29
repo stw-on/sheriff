@@ -38,6 +38,7 @@ Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], functio
             Route::get('/', [LocationController::class, 'getAll']);
             Route::put('/', [LocationController::class, 'createOrUpdate']);
             Route::get('/{id}', [LocationController::class, 'get']);
+            Route::get('/{id}/pdf', [LocationController::class, 'downloadPdf']);
         });
 
         Route::group(['prefix' => '/public-key'], function () {

@@ -20,7 +20,7 @@
           />
         </v-col>
         <v-col class="py-0" cols="12" lg="5">
-          <v-btn :disabled="!$route.params.id" :to="{name: 'admin/location/print', params: {id: $route.params.id}}" block class="mb-2" color="primary" depressed>
+          <v-btn :disabled="!$route.params.id" @click="generatePdf" block class="mb-2" color="primary" depressed>
             <v-icon left>mdi-qrcode</v-icon>
             QR-Code erzeugen
           </v-btn>
@@ -93,6 +93,22 @@
           }
         } catch (e) {
           console.error(e)
+        }
+      },
+      async generatePdf() {
+        const pdfWindow = window.open()
+
+        pdfWindow.document.documentElement.innerHTML = 'PDF wird geladen...';
+
+        try {
+          const {data} = await axios.get(`/location/${this.$route.params.id}/pdf`, {
+            responseType: 'blob',
+          })
+
+          pdfWindow.location.href = window.URL.createObjectURL(new Blob([data], {type: 'application/pdf'}))
+        } catch (e) {
+          console.error(e)
+          pdfWindow.document.documentElement.innerHTML = 'Ein Fehler ist aufgetreten.';
         }
       },
     },
