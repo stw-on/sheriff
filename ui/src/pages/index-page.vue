@@ -152,32 +152,29 @@
       <v-expansion-panel>
         <v-expansion-panel-header>Warum muss ich mich registrieren?</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat.
+          Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Niedersächsischen
+          Verordnung zur Neuordnung der Maßnahmen gegen die Ausbreitung des Corona-Virus</a>
+          SARS-CoV-2 (CoronaVO) müssen wir alle Gäste erfassen, die ihr Essen in unseren Einrichtungen vor Ort
+          einnehmen.
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>Bei welchen Einrichtungen kann ich mich über diese App registrieren?</v-expansion-panel-header>
+        <v-expansion-panel-header>Bei welchen Einrichtungen kann ich mich über diese App registrieren?
+        </v-expansion-panel-header>
         <v-expansion-panel-content>
-          Grundsätzlich kannst du diese App für <b>alle Örtlichkeiten des Studentenwerk OstNiedersachsens</b> benutzen.
-          Zusätzlich werden auch Örtlichkeiten <b>anderer Einrichtungen wie z.B. Hochschulen</b> unterstützt.
+          Die Web-App wird in den Einrichtungen unserer Hochschulgastronomie eingesetzt,
+          in denen ein Verzehr der Speisen vor Ort vorgesehen ist.
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header>Wie und wo werden meine Daten gespeichert?</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Deine Daten werden grundsätzlich auf Servern des Studentenwerk OstNiedersachsens gespeichert.
-          Um es so einfach wie möglich zu machen, wird diese App auch für Dritte Einrichtungen (z.B. Hochschulen)
-          explizit freigeschaltet. Wenn du dich bei einer Örtlichkeit anderer Einrichtungen registrierst, werden die
-          Daten ausschließlich auf Servern dieser Einrichtungen gespeichert. Die Daten werden in diesem Fall nie zu
-          einem Server des Studentenwerk OstNiedersachsens übertragen.<br>
+          Deine Daten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
+          transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach spätestens 14
+          Tagen gelöscht.<br>
           <br>
-          Deine Daten werden transportverschlüsselt zum Server übertragen, dort
-          End-to-End verschlüsselt gespeichert und nach spätestens 14 Tagen gelöscht.<br>
-          <br>
-          Sofern du die Option aktivierst, werden deine eingegebenen Daten lokal auf deinem Gerät gespeichert,
-          damit du sie nicht jedes Mal erneut eingeben musst.
+          Sofern die Option aktiviert ist, werden deine eingegebenen Daten lokal auf deinem Gerät
+          gespeichert, damit du sie nicht jedes Mal erneut eingeben musst.
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
