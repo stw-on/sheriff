@@ -82,7 +82,7 @@
           >
             <template v-slot:label>
               <div>
-                Ich habe die <a href="#" @click.prevent.stop="showPrivacyPolicy = true">Hinweise zum Datenschutz</a> gelesen und stimme ihnen zu.
+                Ich habe die <a href="#" @click.prevent.stop="showPrivacyPolicy = true">Hinweise zum Datenschutz</a> gelesen, stimme ihnen zu und versichere, meine Daten korrekt angegeben zu haben
               </div>
             </template>
           </v-checkbox>

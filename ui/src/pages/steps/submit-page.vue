@@ -1,16 +1,18 @@
 <template>
   <div class="card-container">
-    <v-card class="d-inline-block" elevation="12" light min-width="60%">
+    <v-card class="d-inline-block overflow-hidden" elevation="12" light min-width="60%">
       <div class="pa-5 text-center">
         <v-icon color="success" size="72">
           mdi-check
         </v-icon>
 
-        <h1 class="font-weight-bold">{{ visitData.location_name }}</h1>
-        <h1 class="font-weight-bold">{{ visitData.entered_at }}</h1>
-
-        <div v-if="!!contactDetails" class="contact-details mt-4">
-          {{ contactDetails.first_name }} {{ contactDetails.last_name }}<br>
+        <h1 class="font-weight-bold pt-2 line-height-1">{{ visitData.entered_at }}</h1>
+        <h1 class="font-weight-light">{{ visitData.location_name }}</h1>
+      </div>
+      <v-divider />
+      <div class="text-center white--text">
+        <div v-if="!!contactDetails" :style="{backgroundColor: visitData.color_of_the_day}" class="pa-5 contact-details">
+          <span class="text-uppercase font-weight-bold">{{ contactDetails.first_name }} {{ contactDetails.last_name }}</span><br>
           {{ contactDetails.street }}<br>
           {{ contactDetails.zip }} {{ contactDetails.city }}<br>
           {{ contactDetails.phone }}
@@ -18,7 +20,7 @@
       </div>
     </v-card>
 
-    <p class="mt-5 text-center">
+    <p class="mt-5 pt-3 text-center">
       Bitte lass' diese Seite geöffnet. Es kann sein, dass du sie in der Örtlichkeit vorzeigen musst.
     </p>
   </div>
@@ -47,7 +49,16 @@
   }
 
   .contact-details {
-    font-size: small;
     line-height: 1.3;
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+  .position-relative {
+    position: relative;
+  }
+
+  .line-height-1 {
+    line-height: 1;
   }
 </style>
