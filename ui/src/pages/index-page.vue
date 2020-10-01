@@ -133,16 +133,15 @@
       </svg>
     </div>
 
-    <h2 class="font-weight-light text-center">Gästeregistrierung</h2>
+    <h2 class="font-weight-light text-center">{{ $t('guest-registration') }}</h2>
 
     <p class="text-center">
-      Hier findest du die schnelle und sichere Gästeregistrierung für
-      Mensen des Studentenwerk OstNiedersachsens.
+      {{ $t('guest-registration-welcome') }}
     </p>
 
     <div class="text-center mb-5">
       <v-btn :to="{name: 'register'}" color="primary" x-large>
-        Los geht's
+        {{ $t('lets-go') }}
       </v-btn>
     </div>
 
@@ -150,38 +149,27 @@
 
     <v-expansion-panels accordion>
       <v-expansion-panel>
-        <v-expansion-panel-header>Warum muss ich mich registrieren?</v-expansion-panel-header>
+        <v-expansion-panel-header>{{ $t('why-register') }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Niedersächsischen
-          Verordnung zur Neuordnung der Maßnahmen gegen die Ausbreitung des Corona-Virus</a>
-          SARS-CoV-2 (CoronaVO) müssen wir alle Gäste erfassen, die ihr Essen in unseren Einrichtungen vor Ort
-          einnehmen.
+          <div v-html="$t('why-register-text')"></div>
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>Bei welchen Einrichtungen kann ich mich über diese App registrieren?
-        </v-expansion-panel-header>
+        <v-expansion-panel-header>{{ $t('where-register') }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Die Web-App wird in den Einrichtungen unserer Hochschulgastronomie eingesetzt,
-          in denen ein Verzehr der Speisen vor Ort vorgesehen ist.
+          {{ $t('where-register-text') }}
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>Wie und wo werden meine Daten gespeichert?</v-expansion-panel-header>
+        <v-expansion-panel-header>{{ $t('how-and-where-saved') }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Deine Daten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
-          transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach spätestens 14
-          Tagen gelöscht.<br>
-          <br>
-          Sofern die Option aktiviert ist, werden deine eingegebenen Daten lokal auf deinem Gerät
-          gespeichert, damit du sie nicht jedes Mal erneut eingeben musst.
+          <div v-html="$t('how-and-where-saved-text')"></div>
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>Kann ich die Sicherheit dieser App überprüfen?</v-expansion-panel-header>
+        <v-expansion-panel-header>{{ $t('security-check') }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Der gesamte Quellcode dieser App und der dazugehörigen API ist frei verfügbar auf
-          <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+          <div v-html="$t('security-check-text')"></div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>

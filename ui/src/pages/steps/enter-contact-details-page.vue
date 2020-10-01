@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="font-weight-light text-center">Daten erfassen</h2>
+    <h2 class="font-weight-light text-center">{{ $t('enter-data') }}</h2>
 
     <v-form v-model="isValid">
       <v-row dense>
@@ -11,7 +11,7 @@
             hide-details
             maxlength="128"
             outlined
-            placeholder="Vorname"
+            :placeholder="$t('first-name')"
           />
         </v-col>
         <v-col cols="6">
@@ -21,7 +21,7 @@
             hide-details
             maxlength="128"
             outlined
-            placeholder="Nachname"
+            :placeholder="$t('last-name')"
           />
         </v-col>
         <v-col cols="12">
@@ -31,7 +31,7 @@
             hide-details
             maxlength="128"
             outlined
-            placeholder="Straße + Nr."
+            :placeholder="$t('street-and-no')"
           />
         </v-col>
         <v-col cols="4">
@@ -41,7 +41,7 @@
             hide-details
             maxlength="5"
             outlined
-            placeholder="PLZ"
+            :placeholder="$t('zip')"
           />
         </v-col>
         <v-col cols="8">
@@ -51,7 +51,7 @@
             hide-details
             maxlength="128"
             outlined
-            placeholder="Ort"
+            :placeholder="$t('city')"
           />
         </v-col>
         <v-col cols="12">
@@ -61,7 +61,7 @@
             hide-details
             maxlength="128"
             outlined
-            placeholder="Telefon- oder Handynummer"
+            :placeholder="$t('phone')"
           />
         </v-col>
       </v-row>
@@ -70,10 +70,10 @@
           <v-checkbox
             v-if="!hasSavedContactDetails"
             v-model="saveContactDetails"
-            label="Meine Daten für das nächste Mal auf diesem Gerät speichern"
+            :label="$t('save-for-next-time')"
             hide-details
           />
-          <a v-else @click="deleteSavedContactDetails">Gespeicherte Daten von diesem Gerät löschen</a>
+          <a v-else @click="deleteSavedContactDetails">{{ $t('delete-local-data') }}</a>
         </v-col>
         <v-col cols="12">
           <v-checkbox
@@ -82,7 +82,9 @@
           >
             <template v-slot:label>
               <div>
-                Ich habe die <a href="#" @click.prevent.stop="showPrivacyPolicy = true">Hinweise zum Datenschutz</a> gelesen, stimme ihnen zu und versichere, meine Daten korrekt angegeben zu haben
+                {{ $t('privacy-accepted-1') }}
+                <a href="#" @click.prevent.stop="showPrivacyPolicy = true">{{ $t('privacy-terms') }}</a>
+                {{ $t('privacy-accepted-3') }}
               </div>
             </template>
           </v-checkbox>
@@ -99,10 +101,10 @@
             >
               <template v-if="offline">
                 <v-icon left>mdi-cloud-off-outline</v-icon>
-                Offline
+                {{ $t('offline') }}
               </template>
               <template v-else>
-                Weiter
+                {{ $t('next') }}
                 <v-icon right>mdi-chevron-right</v-icon>
               </template>
             </v-btn>
@@ -111,11 +113,11 @@
             <v-btn v-if="saveContactDetails" :disabled="!isValid || saved" text class="mt-4" color="primary" large @click="save">
               <template v-if="saved">
                 <v-icon left>mdi-check</v-icon>
-                Gespeichert
+                {{ $t('saved') }}
               </template>
               <template v-else>
                 <v-icon left>mdi-content-save-outline</v-icon>
-                Daten nur speichern
+                {{ $t('save-only') }}
               </template>
             </v-btn>
           </div>
@@ -129,7 +131,7 @@
           <v-btn icon dark @click="showPrivacyPolicy = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Hinweise zum Datenschutz</v-toolbar-title>
+          <v-toolbar-title>{{ $t('privacy-terms') }}</v-toolbar-title>
         </v-toolbar>
 
         <div class="pa-3">

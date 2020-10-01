@@ -1,0 +1,115 @@
+de:
+  # index
+  guest-registration: Gästeregistrierung
+  guest-registration-welcome: >
+    Hier findest du die schnelle und sichere Gästeregistrierung
+    für Mensen des Studentenwerk OstNiedersachsens.
+  lets-go: Los geht's
+  why-register: Warum muss ich mich registrieren?
+  why-register-text: >
+    Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Niedersächsischen
+    Verordnung zur Neuordnung der Maßnahmen gegen die Ausbreitung des Corona-Virus</a>
+    SARS-CoV-2 (CoronaVO) müssen wir alle Gäste erfassen, die ihr Essen in unseren Einrichtungen vor Ort
+    einnehmen.
+  where-register: Bei welchen Einrichtungen kann ich mich über diese App registrieren?
+  where-register-text: >
+    Die Web-App wird in den Einrichtungen unserer Hochschulgastronomie eingesetzt,
+    in denen ein Verzehr der Speisen vor Ort vorgesehen ist.
+  how-and-where-saved: Wie und wo werden meine Daten gespeichert?
+  how-and-where-saved-text: >
+    Deine Daten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
+    transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach spätestens 14
+    Tagen gelöscht.<br>
+    <br>
+    Sofern die Option aktiviert ist, werden deine eingegebenen Daten lokal auf deinem Gerät
+    gespeichert, damit du sie nicht jedes Mal erneut eingeben musst.
+  security-check: Kann ich die Sicherheit dieser App überprüfen?
+  security-check-text: >
+    Der gesamte Quellcode dieser App und der dazugehörigen API ist frei verfügbar auf
+    <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+
+  # register
+  no-connection: Keine Internetverbindung
+  invalid-link: Ungültiger Link
+  invalid-qr-code: Der QR-Code ist ungültig
+  check-in-not-possible-here: Du kannst dich an dieser Örtlichkeit nicht über diese Webseite anmelden
+  enter-data: Daten erfassen
+  first-name: Vorname
+  last-name: Nachname
+  street-and-no: Straße + Nr.
+  zip: PLZ
+  city: Ort
+  phone: Telefon- oder Handynummer
+  save-for-next-time: Meine Daten für das nächste Mal auf diesem Gerät speichern
+  delete-local-data: Gespeicherte Daten von diesem Gerät löschen
+  privacy-accepted-1: Ich habe die
+  privacy-terms: Hinweise zum Datenschutz
+  privacy-accepted-3: gelesen, stimme ihnen zu und versichere, meine Daten korrekt angegeben zu haben
+  offline: Offline
+  next: Weiter
+  saved: Gespeichert
+  save-only: Daten nur speichern
+
+  # scan
+  scan-qr-code: QR-Code scannen
+  scan-qr-code-prompt: Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist.
+  no-camera-access: Kein Zugriff auf die Kamera
+
+  # submit
+  keep-open-prompt: Bitte lass' diese Seite geöffnet. Es kann sein, dass du sie in der Örtlichkeit vorzeigen musst.
+en:
+  # index
+  guest-registration: Guest Registration
+  guest-registration-welcome: >
+    This is the fast and secure guest registration for canteens and cafeterias of
+    Studentenwerk OstNiedersachsen.
+  lets-go: Let's go
+  why-register: Why do I have to register?
+  why-register-text: >
+    According to <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Lower Saxony's order
+    for measures to prevent the spread of the Corona-Virus</a>
+    SARS-CoV-2 (CoronaVO) we have to register all guests who consume their food inside our canteens and cafeterias.
+  where-register: In which facilities can I use this app for registration?
+  where-register-text: >
+    This web app is supported in all of our gastronomic facilities where you can eat inside the building.
+  how-and-where-saved: How and where is my personal data stored?
+  how-and-where-saved-text: >
+    Your personal data is uploaded using transport encryption, stored End-to-End encrypted on servers of
+    the Studentenwerk OstNiedersachsen and will be deleted after 14 days.<br>
+    <br>
+    If the according option is enabled, your personal data will additionally be stored locally on your device so you
+    don't have to enter it again every time you want to enter a facility.
+  security-check: Can I verify the security of this web app?
+  security-check-text: >
+    The source code of this web app, including its API, freely available on
+    <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+
+  # register
+  no-connection: No connection
+  invalid-link: Invalid link
+  invalid-qr-code: Invalid QR code
+  check-in-not-possible-here: You cannot use this app for this facility
+  enter-data: Enter data
+  first-name: First name
+  last-name: Nast name
+  street-and-no: Street + No.
+  zip: ZIP
+  city: City
+  phone: Phone or mobile number
+  save-for-next-time: Save my data on this device for next time
+  delete-local-data: Delete saved data from this device
+  privacy-accepted-1: I have read the
+  privacy-terms: privacy policy
+  privacy-accepted-3: carefully, accept it and ensure to have entered my data correctly.
+  offline: Offline
+  next: Proceed
+  saved: Saved
+  save-only: Save data only
+
+  # scan
+  scan-qr-code: Scan QR code
+  scan-qr-code-prompt: Now, please scan the QR code that is posted at the facility.
+  no-camera-access: No access to the camera
+
+  # submit
+  keep-open-prompt: Please keep this page open. You might need to show it for verification.
