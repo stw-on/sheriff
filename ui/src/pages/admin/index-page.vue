@@ -14,6 +14,7 @@
       v-else
       :headers="[
         {text: 'Name', value: 'name'},
+        {text: 'Registrierungen heute', value: 'visits_today'},
       ]"
       :items="locations"
       @click:row="edit"
@@ -33,14 +34,17 @@
       locations: null,
     }),
     async mounted() {
-      const {data} = await axios.get('/location')
-      this.locations = data
+      setInterval(this.loadLocations, 20000)
+      await this.loadLocations()
     },
     methods: {
+      async loadLocations() {
+        const {data} = await axios.get('/location')
+        this.locations = data
+      },
       edit(entity) {
         this.$router.push({name: `admin/location`, params: {id: entity.id}})
       },
-
     }
   }
 </script>

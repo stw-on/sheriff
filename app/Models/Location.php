@@ -27,6 +27,10 @@ class Location extends BaseModel
         'name',
     ];
 
+    protected $appends = [
+        'visits_today',
+    ];
+
     const COLORS = [
         '#d32f2f',
         '#7b1fa2',
@@ -51,6 +55,11 @@ class Location extends BaseModel
     public function getQrUrlAttribute()
     {
         return 'https://' . config('sheriff.host') . '/register?scan=' . base64_encode($this->generateQrString());
+    }
+
+    public function getVisitsTodayAttribute()
+    {
+        return $this->visits()->whereDate('entered_at', today())->count();
     }
 
     public function visits()

@@ -12,7 +12,7 @@ class LocationController extends Controller
 {
     public function getAll()
     {
-        return response()->json(Location::query()->orderBy('name')->get());
+        return response()->json(Location::query()->orderBy('name')->get()->makeVisible('visits_today'));
     }
 
     public function get(string $id)
