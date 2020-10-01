@@ -21,7 +21,7 @@
     </v-card>
 
     <p class="mt-5 pt-3 text-center">
-      Bitte lass' diese Seite geöffnet. Es kann sein, dass du sie in der Örtlichkeit vorzeigen musst.
+      {{ $t('keep-open-prompt') }}
     </p>
   </div>
 </template>

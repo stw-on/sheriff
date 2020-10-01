@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="font-weight-light text-center mb-3">QR-Code scannen</h2>
+    <h2 class="font-weight-light text-center mb-3">{{ $t('scan-qr-code') }}</h2>
 
     <div class="scanner-card-container">
       <v-card class="scanner-card" color="black" dark>
@@ -23,7 +23,7 @@
     </div>
 
     <p class="mt-3 grey--text text-center">
-      Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist.
+      {{ $t('scan-qr-code-prompt') }}
     </p>
   </div>
 </template>
@@ -55,7 +55,7 @@
           this.showVideo = true
         } catch (e) {
           this.noCameraFound = true
-          this.$emit('error', 'Kein Zugriff auf die Kamera')
+          this.$emit('error', this.$t('no-camera-access'))
           console.error(e)
         }
       },

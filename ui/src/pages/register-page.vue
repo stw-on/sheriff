@@ -42,7 +42,7 @@
 
     <v-snackbar v-model="offline" color="primary" bottom timeout="-1">
       <v-icon left>mdi-cloud-off-outline</v-icon>
-      Keine Internetverbindung
+      {{ $t('no-connection') }}
     </v-snackbar>
   </v-sheet>
 </template>
@@ -88,7 +88,7 @@
           console.log('Got initial QR data')
         } else {
           console.error('URL data check failed')
-          this.onReadError('Ungültiger Link')
+          this.onReadError(this.$t('invalid-link'))
         }
 
         setTimeout(() => {
@@ -167,7 +167,7 @@
           })
 
           if (!hostConfig.allowed) {
-            this.onReadError('Du kannst dich an dieser Örtlichkeit nicht über diese Webseite anmelden')
+            this.onReadError(this.$t('check-in-not-possible-here'))
             return null
           }
 
@@ -187,7 +187,7 @@
 
         return visitData
       },
-      onReadError(text = 'Der QR-Code ist ungültig') {
+      onReadError(text = this.$t('invalid-qr-code')) {
         this.errorSnackbar = true
         this.errorSnackbarText = text
       },
