@@ -4,7 +4,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-Green?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-### Features
+## Features
 
 - **Asymmetric encryption after data validation**
   
@@ -18,16 +18,16 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 - **Automatic data deletion after 14 days**
 - **Easy administration interface suitable for organisations with many locations**
 
-### Setup
+## Setup
 
-#### Prerequisites
+### Prerequisites
 
 - Docker
 - Docker Compose
 - public IP
 - (sub)domain pointing to that IP
 
-#### Installation
+### Installation
 
 1.  Create a directory named `sheriff` somewhere on your server. We will use `/srv/sheriff` in this guide.
 2.  Copy `docker-compose.prod.yml` to `/srv/sheriff/docker-compose.yml`
