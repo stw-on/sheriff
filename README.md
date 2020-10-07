@@ -2,18 +2,21 @@
 
 Sheriff is a tool for easy and secure guest registration during the coronavirus pandemic.
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-blue?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-Green?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 ### Features
 
 - **Asymmetric encryption after data validation**
+  
   The personal data is stored encrypted with a public key. The private key is not stored on the server and has to be entered when decryption is requested.
 - **Progressive Web App: No app download or dedicated QR scanner app required**
+  
   Users don't need to download an app or have a dedicated QR scanner installed. The web app takes care of this and runs in all recent versions of major mobile browsers.
 - **Cross registration with other organisations**
+  
   Users can use the registration website of one single organisation for other organisations as well, so they don't have to enter their data for each one. This needs to be enabled explicitly for each 3rd party organisation.
 - **Automatic data deletion after 14 days**
-- Easy administration interface suitable for organisations with many locations
+- **Easy administration interface suitable for organisations with many locations**
 
 ### Setup
 
