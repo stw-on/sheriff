@@ -113,8 +113,8 @@
                     <div class="instructions">
                         <div class="number">1</div>
                         <div class="instruction">
-                            Scanne den QR-Code oder besuche <strong>checkin.stw-on.de</strong>
-                            <div class="translation">Scan the QR code or visit checkin.stw-on.de</div>
+                            Scanne den QR-Code oder besuche <strong>{{ config('sheriff.host') }}</strong>
+                            <div class="translation">Scan the QR code or visit {{ config('sheriff.host') }}</div>
                         </div>
                         <div class="number">2</div>
                         <div class="instruction">
