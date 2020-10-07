@@ -4,24 +4,35 @@ volumes:
   db: {}
   redis: {}
 
-networks:
-  web:
-    external: true
-
 services:
+  reverse_proxy:
+    image: traefik
+    restart: always
+    command:
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web80.address=:80
+      - --entrypoints.web443.address=:443
+      - --certificatesresolvers.letsencrypt=true
+      - --certificatesresolvers.letsencrypt.acme.email=$LETSENCRYPT_EMAIL
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --entrypoints.web443.http.tls=true
+      - --entrypoints.web443.http.tls.certresolver=letsencrypt
+      - --entrypoints.web80.http.redirections.entrypoint.to=web443
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   app:
     image: stwon/sheriff
     env_file: .env
     restart: always
     expose:
       - 80
-    networks:
-      - default
-      - web
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sheriff.rule=Host(`checkin.stw-on.de`)
-      - traefik.http.routers.sheriff.tls.certresolver=default
+      - traefik.http.routers.sheriff.rule=Host(`$SHERIFF_HOST`)
       - traefik.http.middlewares.sheriff-middlewares.headers.framedeny=true
       - traefik.http.middlewares.sheriff-middlewares.headers.sslredirect=true
       - traefik.http.middlewares.sheriff-middlewares.headers.stsSeconds=31536000
