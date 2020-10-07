@@ -2,7 +2,7 @@
 
 Sheriff is a tool for easy and secure guest registration during the coronavirus pandemic.
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge [![Uses Badges](https://img.shields.io/badge/Uses-Badges-blue?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-blue?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 ### Features
 
