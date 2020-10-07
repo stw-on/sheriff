@@ -4,16 +4,17 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-Green?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
+## Demo
+
+![Demo instance](./demo-instance.png)
+
 ## Features
 
-- **Asymmetric encryption after data validation**
-  
+- **Asymmetric encryption after data validation**<br>
   The personal data is stored encrypted with a public key. The private key is not stored on the server and has to be entered when decryption is requested.
-- **Progressive Web App: No app download or dedicated QR scanner app required**
-  
+- **Progressive Web App: No app download or dedicated QR scanner app required**<br>
   Users don't need to download an app or have a dedicated QR scanner installed. The web app takes care of this and runs in all recent versions of major mobile browsers.
-- **Cross registration with other organisations**
-  
+- **Cross registration with other organisations**<br>
   Users can use the registration website of one single organisation for other organisations as well, so they don't have to enter their data for each one. This needs to be enabled explicitly for each 3rd party organisation.
 - **Automatic data deletion after 14 days**
 - **Easy administration interface suitable for organisations with many locations**
@@ -22,8 +23,8 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 
 ### Prerequisites
 
-- Docker
-- Docker Compose
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 - public IP
 - (sub)domain pointing to that IP
 
@@ -42,8 +43,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 6.  View the logs with `docker-compose logs -f`.
 7.  Visit your domain and verify you can access the site. It may take a while to generate the certificate.
 8.  Run `docker-compose exec app php artisan user:create` and create a user with all permissions.
-9.  Run `docker-compose exec app php artisan keypair:generate` and follow the steps to generate a key pair.
-    
+9.  Run `docker-compose exec app php artisan keypair:generate` and follow the steps to generate a key pair.<br>
     **IMPORTANT: Store the private key in multiple, physically separate safe locations (e.g. a text file on a USB flash drive). DO NOT store it on the server. You will NOT see it again after running the above command. You NEED this key to decrypt all saved data.**
 10. Visit `<your domain>/admin`, log in and create a new location
 11. Generate a QR code for the new location and try to register with your phone
