@@ -4,10 +4,6 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-Green?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-## Demo
-
-![Demo instance](./demo-instance.png)
-
 ## Features
 
 - **Asymmetric encryption after data validation**<br>
@@ -18,6 +14,10 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
   Users can use the registration website of one single organisation for other organisations as well, so they don't have to enter their data for each one. This needs to be enabled explicitly for each 3rd party organisation.
 - **Automatic data deletion after 14 days**
 - **Easy administration interface suitable for organisations with many locations**
+
+## Demo
+
+![Demo instance](./demo-instance.png)
 
 ## Setup
 
