@@ -43,6 +43,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 7.  Visit your domain and verify you can access the site. It may take a while to generate the certificate.
 8.  Run `docker-compose exec app php artisan user:create` and create a user with all permissions.
 9.  Run `docker-compose exec app php artisan keypair:generate` and follow the steps to generate a key pair.
+    
     **IMPORTANT: Store the private key in multiple, physically separate safe locations (e.g. a text file on a USB flash drive). DO NOT store it on the server. You will NOT see it again after running the above command. You NEED this key to decrypt all saved data.**
 10. Visit `<your domain>/admin`, log in and create a new location
 11. Generate a QR code for the new location and try to register with your phone
