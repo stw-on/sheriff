@@ -58,6 +58,7 @@ class LocationController extends Controller
         $response = Http::post('http://pdfrenderer:8082/render', [
             'html' => view('poster', [
                 'qr_url' => $location->getQrUrlAttribute(),
+                'location' => $location,
             ])->render(),
         ]);
 
