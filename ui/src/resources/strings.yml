@@ -81,7 +81,7 @@ en:
     don't have to enter it again every time you want to enter a facility.
   security-check: Can I verify the security of this web app?
   security-check-text: >
-    The source code of this web app, including its API, freely available on
+    The source code of this web app, including its API, is freely available on
     <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
 
   # register
