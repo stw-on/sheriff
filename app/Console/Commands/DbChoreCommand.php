@@ -43,7 +43,7 @@ class DbChoreCommand extends Command
     public function handle()
     {
         $deleted = Visit::query()
-            ->whereDate('entered_at', '<', Carbon::today()->subDays(14))
+            ->whereDate('entered_at', '<', Carbon::today()->subDays(21))
             ->delete();
 
         if ($deleted > 0) {

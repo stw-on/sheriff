@@ -7,7 +7,7 @@ de:
   lets-go: Los geht's
   why-register: Warum muss ich mich registrieren?
   why-register-text: >
-    Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Niedersächsischen
+    Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/161342">Niedersächsischen
     Verordnung zur Neuordnung der Maßnahmen gegen die Ausbreitung des Corona-Virus</a>
     SARS-CoV-2 (CoronaVO) müssen wir alle Gäste erfassen, die ihr Essen in unseren Einrichtungen vor Ort
     einnehmen.
@@ -18,8 +18,8 @@ de:
   how-and-where-saved: Wie und wo werden meine Daten gespeichert?
   how-and-where-saved-text: >
     Deine Daten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
-    transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach spätestens 14
-    Tagen gelöscht.<br>
+    transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach drei Wochen
+    gelöscht.<br>
     <br>
     Sofern die Option aktiviert ist, werden deine eingegebenen Daten lokal auf deinem Gerät
     gespeichert, damit du sie nicht jedes Mal erneut eingeben musst.
@@ -57,6 +57,90 @@ de:
 
   # submit
   keep-open-prompt: Bitte lass' diese Seite geöffnet. Es kann sein, dass du sie in der Örtlichkeit vorzeigen musst.
+
+  # privacy
+  privacy-policy: >
+    <p>
+      Sie haben in der Check-In Webanwendung personenbezogene Daten angegeben. Diese Hinweise informieren Sie
+      unter anderem darüber, wer Ihre Daten zu welchem Zweck erhebt und verarbeitet und informiert Sie über Ihre
+      Rechte.
+    </p>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Verantwortlicher für die Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten ist das<br>
+      <br>
+      Studentenwerk OstNiedersachsen<br>
+      Katharinenstr. 1<br>
+      38106 Braunschweig<br>
+      Tel.: (0531) 391-4807<br>
+      E-Mail: info@stw-on.de
+    </p>
+
+    <h2>Datenschutzbeauftragter</h2>
+    <p>
+      Sollten Sie Fragen oder Bedenken zum Datenschutz haben, so wenden Sie sich bitte an unseren
+      Datenschutzbeauftragten:<br>
+      <br>
+      Mirko Pidde<br>
+      Katharinenstr. 1<br>
+      38106 Braunschweig<br>
+      Tel.: (0531) 391-4974<br>
+      E-Mail: datenschutz@stw-on.de
+    </p>
+
+    <h2>Zweck der Verarbeitung</h2>
+    <p>
+      Wir verwenden die über die Webanwendung von Ihnen erhobenen personenbezogenen Daten zur Erfüllung unserer
+      Pflichten zur Datenerhebung und Dokumentation in gastronomischen Betrieben gemäß der Niedersächsischen
+      Corona-Verordnung.
+    </p>
+
+    <h2>Grundlage für die Erhebung und Verarbeitung Ihrer Daten</h2>
+    <p>
+      Wir benötigen die Daten zur Erfüllung einer gesetzlichen Verpflichtung, der wir unterliegen. Diese begründet
+      sich aus §4 Abs. 1 der Niedersächsischen Corona-Verordnung.
+    </p>
+
+    <h2>Weitergabe von Daten an Dritte</h2>
+    <p>
+      Wir geben die von Ihnen gemachten Angaben ausschließlich an das zuständige Gesundheitsamt im Falle einer
+      vorliegenden COVID-19-Infektion weiter.
+    </p>
+
+    <h2>Speicherdauer</h2>
+    <p>
+      Ihre personenbezogenen Daten werden für die Dauer von drei Wochen gespeichert. Nach diesem Zeitpunkt erfolgt
+      die Löschung der Daten, insofern keine gesetzlichen Aufbewahrungspflichten dem entgegenstehen.
+    </p>
+
+    <h2>Ihre Rechte als von der Datenverarbeitung Betroffener</h2>
+    <p>
+      Sie haben gegenüber dem Studentenwerk OstNiedersachsen das Recht auf Auskunft über die Sie betreffenden
+      personenbezogenen Daten. Außerdem haben Sie das Recht auf Berichtigung, Löschung oder Einschränkung der
+      Verarbeitung dieser Daten Weiterhin können Sie der Verarbeitung der Daten widersprechen und haben ein Recht
+      auf Übertragbarkeit der Daten.
+    </p>
+
+    <h2>Recht auf Beschwerde bei einer Aufsichtsbehörde</h2>
+    <p>
+      Sie haben das Recht auf Beschwerde bei der Landesbeauftragten für den Datenschutz Niedersachsen, Prinzenstr.
+      5, 30159 Hannover, E-Mail: poststelle@lfd.niedersachsen.de
+    </p>
+
+    <h2>Verpflichtung zur Angabe von Daten und mögliche Folgen einer Nichtbereitstellung</h2>
+    <p>
+      Im Rahmen der Niedersächsischen Corona-Verordnung. sind wir verpflichtet, die in der Webanwendung
+      angegebenen Angaben zu erheben. Falls Sie uns diese Daten nicht bereitstellen, können wir Ihnen den Zutritt
+      zu unseren gastronomischen Einrichtungen nicht gewähren
+    </p>
+
+    <h2>Verarbeitung von Daten für einen anderen Zweck</h2>
+    <p>
+      Sollte das Studentenwerk OstNiedersachsen beabsichtigen, Ihre Daten für einen anderen Zweck als unter Punkt
+      3 angegeben weiterzuverarbeiten, stellt es Ihnen vor dieser Weiterverarbeitung Informationen über diesen
+      anderen Zweck und alle anderen maßgeblichen Informationen zur Verfügung.
+    </p>
 en:
   # index
   guest-registration: Guest Registration
@@ -66,7 +150,7 @@ en:
   lets-go: Let's go
   why-register: Why do I have to register?
   why-register-text: >
-    According to <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/158620">Lower Saxony's order
+    According to <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/161342">Lower Saxony's order
     for measures to prevent the spread of the Corona-Virus</a>
     SARS-CoV-2 (CoronaVO) we have to register all guests who consume their food inside our canteens and cafeterias.
   where-register: In which facilities can I use this app for registration?
@@ -75,7 +159,7 @@ en:
   how-and-where-saved: How and where is my personal data stored?
   how-and-where-saved-text: >
     Your personal data is uploaded using transport encryption, stored End-to-End encrypted on servers of
-    the Studentenwerk OstNiedersachsen and will be deleted after 14 days.<br>
+    the Studentenwerk OstNiedersachsen and will be deleted after 3 weeks.<br>
     <br>
     If the according option is enabled, your personal data will additionally be stored locally on your device so you
     don't have to enter it again every time you want to enter a facility.

@@ -13,7 +13,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
   Users don't need to download an app or have a dedicated QR scanner installed. The web app takes care of this and runs in all recent versions of major mobile browsers.
 - **Cross registration with other organisations**<br>
   Users can use the registration website of one single organisation for other organisations as well, so they don't have to enter their data for each one. This needs to be enabled explicitly for each 3rd party organisation.
-- **Automatic data deletion after 14 days**
+- **Automatic data deletion after 21 days**
 - **Easy administration interface suitable for organisations with many locations**
 
 
@@ -54,12 +54,13 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 11. Generate a QR code for the new location and try to register with your phone
 12. Run `docker-compose exec app php artisan visits:export`, enter the key and verify that the data you just submitted with your phone is correctly exported.
 
-If everything works as expected, you can start customizing your instance.
+If everything works as expected, you can start customizing your instance. **Remember to
+modify the privacy policy accordingly!**
 
 
 ### Customizing
 
-You can customize the user interface of your sheriff instance using environment variables and mounted files.
+You can customize the user interface of your Sheriff instance using environment variables and mounted files.
 Using ConfigMaps in Kubernetes is also possible.
 
 
