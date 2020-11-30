@@ -5,8 +5,7 @@ WORKDIR /app
 
 COPY ./ /app
 
-RUN composer global require hirak/prestissimo && \
-    composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 
 # Stage 2: Build UI
