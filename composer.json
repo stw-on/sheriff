@@ -19,7 +19,8 @@
     "laravel/tinker": "^2.0",
     "league/csv": "^9.6",
     "lstrojny/functional-php": "^1.14",
-    "spomky-labs/base64url": "^2.0"
+    "spomky-labs/base64url": "^2.0",
+    "ext-yaml": "*"
   },
   "require-dev": {
     "facade/ignition": "^2.0",

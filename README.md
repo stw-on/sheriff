@@ -4,6 +4,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/stwon/sheriff?style=for-the-badge) ![Docker Pulls](https://img.shields.io/docker/pulls/stwon/sheriff?style=for-the-badge) ![License](https://img.shields.io/github/license/stw-on/sheriff?style=for-the-badge) [![Uses Badges](https://img.shields.io/badge/Uses-Badges-Green?style=for-the-badge)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
+
 ## Features
 
 - **Asymmetric encryption after data validation**<br>
@@ -15,11 +16,14 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 - **Automatic data deletion after 14 days**
 - **Easy administration interface suitable for organisations with many locations**
 
+
 ## Demo
 
 ![Demo instance](./demo-instance.png)
 
+
 ## Setup
+
 
 ### Prerequisites
 
@@ -27,6 +31,7 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - public IP
 - (sub)domain pointing to that IP
+
 
 ### Installation
 
@@ -49,4 +54,39 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 11. Generate a QR code for the new location and try to register with your phone
 12. Run `docker-compose exec app php artisan visits:export`, enter the key and verify that the data you just submitted with your phone is correctly exported.
 
-If everything works as expected, your instance is ready to go.
+If everything works as expected, you can start customizing your instance.
+
+
+### Customizing
+
+You can customize the user interface of your sheriff instance using environment variables and mounted files.
+Using ConfigMaps in Kubernetes is also possible.
+
+
+#### Customizing the theme and logo
+
+To customize the theme color and/or logo you can set the following environment variables in your `.env` file:
+
+```dotenv
+SHERIFF_THEME_COLOR=#2342de
+SHERIFF_LOGO_URL=https://example.com/my-logo.svg
+```
+
+Apply the new Docker Compose config by running `docker-compose up -d`.
+
+
+#### Customizing strings
+
+1. Create a new file `strings.yml`
+2. Insert your custom strings into that file. Take a look at [the bundled `strings.yml`](./ui/src/resources/strings.yml)
+   for reference. You **do not** need to supply all strings in your custom file as it will be merged
+   with the bundled one.
+3. Mount your `strings.yml` to `/app/strings.yml`.
+   In your `docker-compose.yml`, add a volume like this for the `app` service:
+   ```
+   volumes:
+     - ./strings.yml:/app/strings.yml:ro 
+   ```
+4. Apply the new Docker Compose config by running `docker-compose up -d`.
+
+Future changes to your `strings.yml` should be online immediately though you might have to clear your browser cache.

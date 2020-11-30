@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import de from 'vuetify/es5/locale/de'
+import tinycolor from 'tinycolor2'
 
 Vue.use(Vuetify)
 
@@ -11,9 +12,9 @@ export default new Vuetify({
     },
     themes: {
       light: {
-        primary: '#e30712',
-        secondary: '#c00b0b',
-        accent: '#e30712',
+        primary: window.__sheriff_config?.theme_color ?? '#e30712',
+        secondary: tinycolor(window.__sheriff_config?.theme_color ?? '#e30712').darken(7).toString(),
+        accent: window.__sheriff_config?.theme_color ?? '#e30712',
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',

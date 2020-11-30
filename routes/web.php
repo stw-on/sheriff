@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 // Don't add this rule in development. 404s are easier to debug without it.
 if (app()->environment('production')) {
     Route::get('/{any}', function () {
-        return file_get_contents(public_path('ui-index.html'));
+        $configJson = json_encode([
+            'theme_color' => config('sheriff.theme_color'),
+            'logo_url' => config('sheriff.logo_url'),
+            'custom_translations' => file_exists('/app/strings.yml')
+                ? yaml_parse_file('/app/strings.yml')
+                : null,
+        ]);
+
+        $config = <<<CONFIG
+<script>
+  window.__sheriff_config = ${configJson};
+</script>
+CONFIG;
+
+        return str_replace('%CONFIG%', $config, file_get_contents(public_path('ui-index.html')));
     })->where('any', '.*');
 }

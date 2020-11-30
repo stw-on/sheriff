@@ -2,6 +2,7 @@
   <v-container>
     <div class="text-center py-5">
       <svg
+        v-if="!logoUrl"
         class="logo"
         viewBox="0 0 398.868 71.568"
         xmlns="http://www.w3.org/2000/svg"
@@ -131,6 +132,7 @@
           />
         </g>
       </svg>
+      <img v-else class="logo" :src="logoUrl" alt="Logo" />
     </div>
 
     <h2 class="font-weight-light text-center">{{ $t('guest-registration') }}</h2>
@@ -179,6 +181,11 @@
 <script>
   export default {
     name: 'index-page',
+    computed: {
+      logoUrl() {
+        return window.__sheriff_config?.logo_url ?? null
+      }
+    }
   }
 </script>
 
