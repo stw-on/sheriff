@@ -125,11 +125,6 @@
                         </div>
                         <div class="number">2</div>
                         <div class="instruction">
-                            Gib deine Kontaktdaten ein und sende sie ab
-                            <div class="translation">Enter your contact details and submit them</div>
-                        </div>
-                        <div class="number">3</div>
-                        <div class="instruction">
                             Lasse die Bestätigung zur Überprüfung geöffnet
                             <div class="translation">Keep the confirmation screen open for verification</div>
                         </div>

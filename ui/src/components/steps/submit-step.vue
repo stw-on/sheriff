@@ -28,7 +28,7 @@
 
 <script>
   export default {
-    name: 'submit-page',
+    name: 'submit-step',
     props: {
       visitData: Object,
       contactDetails: Object,

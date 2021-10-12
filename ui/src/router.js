@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {path: '/', name: 'index', component: require('./pages/index-page').default},
   {path: '/register', name: 'register', component: require('./pages/register-page').default},
+  {path: '/checkin', name: 'checkin', component: require('./pages/checkin-page').default},
   {
     path: '/admin', component: require('./pages/admin-page').default,
     children: [

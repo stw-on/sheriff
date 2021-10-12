@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2 class="font-weight-light text-center mb-3">{{ $t('scan-qr-code') }}</h2>
-
     <div class="scanner-card-container">
       <v-card class="scanner-card" color="black" dark>
         <div class="info-container">
@@ -21,10 +19,6 @@
         </div>
       </v-card>
     </div>
-
-    <p class="mt-3 grey--text text-center">
-      {{ $t('scan-qr-code-prompt') }}
-    </p>
   </div>
 </template>
 
@@ -32,7 +26,7 @@
   import {QrcodeStream} from 'vue-qrcode-reader'
 
   export default {
-    name: 'scan-page',
+    name: 'qr-scanner',
     components: {
       QrcodeStream,
     },

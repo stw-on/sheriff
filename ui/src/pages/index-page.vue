@@ -135,17 +135,41 @@
       <img v-else class="logo" :src="logoUrl" alt="Logo" />
     </div>
 
-    <h2 class="font-weight-light text-center">{{ $t('guest-registration') }}</h2>
+    <h2 class="font-weight-light text-center">
+      {{
+        savedContactDetails
+          ? `${$t('welcome-back')}, ${savedContactDetails.first_name}`
+          : $t('guest-registration')
+      }}
+    </h2>
 
-    <p class="text-center">
-      {{ $t('guest-registration-welcome') }}
-    </p>
+    <template v-if="!!savedContactDetails">
+      <p class="text-center">
+        {{ $t('ready-to-checkin') }}
+      </p>
 
-    <div class="text-center mb-5">
-      <v-btn :to="{name: 'register'}" color="primary" x-large>
-        {{ $t('lets-go') }}
-      </v-btn>
-    </div>
+      <div class="text-center mb-5">
+        <v-btn :to="{name: 'checkin'}" color="primary" x-large>
+          {{ $t('check-in') }}
+          <v-icon right>
+            mdi-chevron-right
+          </v-icon>
+        </v-btn>
+      </div>
+    </template>
+    <template v-else>
+      <p class="text-center">
+        {{ $t('guest-registration-welcome') }}
+      </p>
+
+      <v-alert class="hidden-md-and-down" color="warning" dismissible v-html="$t('desktop-warning')" />
+
+      <div class="text-center mb-5">
+        <v-btn :to="{name: 'register'}" color="primary" x-large>
+          {{ $t('lets-go') }}
+        </v-btn>
+      </div>
+    </template>
 
     <h2 class="font-weight-light text-center pt-5 pb-3">FAQ</h2>
 
@@ -181,9 +205,22 @@
 <script>
   export default {
     name: 'index-page',
+    data: () => ({
+      savedContactDetails: null,
+    }),
     computed: {
       logoUrl() {
         return window.__sheriff_config?.logo_url ?? null
+      }
+    },
+    mounted() {
+      try {
+        const signedContactDetailsBlob = window.localStorage.getItem('signedContactDetailsBlob')
+        if (signedContactDetailsBlob) {
+          this.savedContactDetails = JSON.parse(atob(JSON.parse(signedContactDetailsBlob)['blob']));
+        }
+      } catch (e) {
+        console.error(e)
       }
     }
   }

@@ -1,39 +1,163 @@
 <template>
-  <v-sheet :color="colorOfTheDay" :dark="!!colorOfTheDay" class="fill-height transition-background-color">
+  <v-sheet class="fill-height">
     <v-container class="full-height">
-      <v-expand-transition>
-        <v-stepper v-if="step !== '3'" :value="step" alt-labels class="elevation-0 transparent">
-          <v-stepper-header class="elevation-0">
-            <v-stepper-step step="1" />
-            <v-divider></v-divider>
-            <v-stepper-step :complete="!!urlData" step="2" />
-            <v-divider></v-divider>
-            <v-stepper-step step="3" />
-          </v-stepper-header>
-        </v-stepper>
-      </v-expand-transition>
+      <v-stepper :value="step" alt-labels class="elevation-0 transparent">
+        <v-stepper-header class="elevation-0">
+          <v-stepper-step step="1" />
+          <v-divider></v-divider>
+          <v-stepper-step step="2" />
+          <v-divider></v-divider>
+          <v-stepper-step step="3" />
+        </v-stepper-header>
+      </v-stepper>
 
-      <v-fade-transition mode="out-in">
-        <enter-contact-details-page
-          v-if="step === '1'"
-          :loading="loading"
-          :offline="offline"
-          @proceed="onEnterContactDetailsPageProceed"
-        />
-        <scan-page
-          v-else-if="step === '2'"
-          :loading="loading"
-          :offline="offline"
-          @error="message => onReadError(message)"
-          @scanned="onQrCodeScanned"
-        />
-        <submit-page
-          v-else-if="step === '3'"
-          :contact-details="contactDetails"
-          :visit-data="visitData"
-          :offline="offline"
-        />
-      </v-fade-transition>
+      <v-scroll-y-reverse-transition mode="out-in">
+        <div v-if="step === '1'" key="scan">
+          <h2 class="font-weight-light text-center mb-3">{{ $t('scan-covid-certificate') }}!</h2>
+
+          <qr-scanner
+            :loading="loading"
+            :offline="offline"
+            @error="showError"
+            @scanned="onQrCodeScanned"
+          />
+
+          <p class="mt-3 grey--text text--darken-2 text-center">
+            {{ $t('scan-covid-certificate-description') }}
+          </p>
+        </div>
+
+        <div v-else-if="step === '2'" key="register">
+          <h2 class="font-weight-light text-center mb-3">Hi, {{ contactDetails.firstName }}!</h2>
+
+          <p class="mt-3 grey--text text--darken-2 text-center">
+            {{ $t('enter-contact-details-prompt') }}
+          </p>
+
+          <v-form v-model="contactDetailsAreValid" :disabled="loading">
+            <v-row dense>
+              <v-col cols="6">
+                <v-text-field
+                  v-model="contactDetails.firstName"
+                  hide-details
+                  outlined
+                  readonly
+                />
+              </v-col>
+              <v-col cols="6">
+                <v-text-field
+                  v-model="contactDetails.lastName"
+                  hide-details
+                  outlined
+                  readonly
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="contactDetails.street"
+                  :rules="[v => !!v, v => v.length >= 2]"
+                  hide-details
+                  maxlength="128"
+                  outlined
+                  :placeholder="$t('street-and-no')"
+                />
+              </v-col>
+              <v-col cols="4">
+                <v-text-field
+                  v-model="contactDetails.zip"
+                  :rules="[v => !!v, v => v.length === 5]"
+                  hide-details
+                  maxlength="5"
+                  outlined
+                  :placeholder="$t('zip')"
+                />
+              </v-col>
+              <v-col cols="8">
+                <v-text-field
+                  v-model="contactDetails.city"
+                  :rules="[v => !!v, v => v.length >= 2]"
+                  hide-details
+                  maxlength="128"
+                  outlined
+                  :placeholder="$t('city')"
+                />
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="contactDetails.phone"
+                  :rules="[v => !!v, v => v.length >= 2]"
+                  hide-details
+                  maxlength="128"
+                  outlined
+                  :placeholder="$t('phone')"
+                />
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col cols="12">
+                <v-checkbox
+                  v-model="acceptedPrivacy"
+                  :rules="[v => !!v]"
+                >
+                  <template v-slot:label>
+                    <div>
+                      {{ $t('privacy-accepted-1') }}
+                      <a href="#" @click.prevent.stop="showPrivacyPolicy = true">{{ $t('privacy-terms') }}</a>
+                      {{ $t('privacy-accepted-3') }}
+                    </div>
+                  </template>
+                </v-checkbox>
+              </v-col>
+            </v-row>
+          </v-form>
+
+          <div class="d-flex justify-center mb-12">
+            <v-btn
+              :disabled="!contactDetailsAreValid || offline"
+              :loading="loading"
+              class="mt-4"
+              color="primary"
+              large
+              @click="createSignedContactDetails"
+            >
+              <template v-if="offline">
+                <v-icon left>mdi-cloud-off-outline</v-icon>
+                {{ $t('offline') }}
+              </template>
+              <template v-else>
+                {{ $t('next') }}
+                <v-icon right>mdi-chevron-right</v-icon>
+              </template>
+            </v-btn>
+          </div>
+        </div>
+
+        <div v-else-if="step === '3'" key="done">
+          <h2 class="font-weight-light text-center mb-3 mt">{{ $t('done') }}!</h2>
+
+          <p class="mt-3 grey--text text--darken-2 text-center">
+            {{ $t('registration-done-description') }}
+          </p>
+
+          <div class="text-center">
+            <v-icon size="96" color="green">
+              mdi-check
+            </v-icon>
+          </div>
+
+          <div class="d-flex justify-center mt-12 mb-12">
+            <v-btn
+              color="primary"
+              large
+              exact
+              :to="{name: 'index'}"
+            >
+              {{ $t('check-in-now') }}
+              <v-icon right>mdi-chevron-right</v-icon>
+            </v-btn>
+          </div>
+        </div>
+      </v-scroll-y-reverse-transition>
     </v-container>
 
     <v-snackbar v-model="errorSnackbar" multi-line color="primary" top>
@@ -44,79 +168,54 @@
       <v-icon left>mdi-cloud-off-outline</v-icon>
       {{ $t('no-connection') }}
     </v-snackbar>
+
+    <v-dialog v-model="showPrivacyPolicy" fullscreen transition="dialog-bottom-transition">
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-btn icon dark @click="showPrivacyPolicy = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ $t('privacy-terms') }}</v-toolbar-title>
+        </v-toolbar>
+
+        <div class="pa-3" v-html="$t('privacy-policy')"></div>
+      </v-card>
+    </v-dialog>
   </v-sheet>
 </template>
 
 <script>
-  import EnterContactDetailsPage from '@/pages/steps/enter-contact-details-page'
-  import ScanPage from '@/pages/steps/scan-page'
-  import SubmitPage from '@/pages/steps/submit-page'
-  import {axios, axiosForHost} from '@/lib/axios'
-  import base64Url from 'base64-url'
+  import {axios} from "@/lib/axios";
+  import QrScanner from "@/components/steps/qr-scanner";
 
   export default {
-    name: 'register-page',
-    components: {SubmitPage, ScanPage, EnterContactDetailsPage},
+    name: 'checkin-page',
+    components: {QrScanner},
     data: () => ({
       step: '1',
-      contactDetails: null,
       loading: false,
-      urlData: null,
-      visitData: null,
+      contactDetails: {
+        firstName: '',
+        lastName: '',
+        dateOfBirth: '',
+        street: '',
+        zip: '',
+        city: '',
+        phone: '',
+      },
+      hcert: null,
+      acceptedPrivacy: false,
+      showPrivacyPolicy: false,
+      contactDetailsAreValid: false,
       errorSnackbar: false,
       errorSnackbarText: '',
       offline: !navigator.onLine || false,
     }),
-    computed: {
-      colorOfTheDay() {
-        return this.visitData?.color_of_the_day
-      },
-    },
     async mounted() {
       window.addEventListener('online', () => this.offline = false)
       window.addEventListener('offline', () => this.offline = true)
-
-      if (this.$route.query.scan) {
-        const data = this.$route.query.scan
-
-        await this.$router.replace({query: {scan: undefined}})
-
-        const urlData = await this.validateRegistrationData(data)
-
-        if (urlData) {
-          this.urlData = urlData
-          console.log('Got initial QR data')
-        } else {
-          console.error('URL data check failed')
-          this.onReadError(this.$t('invalid-link'))
-        }
-
-        setTimeout(() => {
-          this.loading = false
-        }, 1000)
-      }
     },
     methods: {
-      async onEnterContactDetailsPageProceed(contactDetails) {
-        this.contactDetails = contactDetails
-
-        if (this.urlData) {
-          this.loading = true
-
-          try {
-            this.visitData = await this.registerVisit(this.urlData)
-            this.urlData = null
-            this.step = '3'
-          } catch (e) {
-            this.onReadError()
-            console.error(e)
-          }
-
-          this.loading = false
-        } else {
-          this.step = '2'
-        }
-      },
       async onQrCodeScanned(result) {
         if (this.loading || !result) {
           return
@@ -125,69 +224,67 @@
         this.loading = true
 
         try {
-          const url = new URL(result)
-          const data = url.searchParams.get('scan')
-          const qrData = await this.validateRegistrationData(data)
+          const data = await axios.$post('/covpass/check', {
+            hcert: result,
+          })
 
-          if (qrData) {
-            this.visitData = await this.registerVisit(qrData)
-            this.step = '3'
-          } else {
-            setTimeout(() => {
-              this.loading = false
-            }, 1000)
-          }
+          this.hcert = result
+          this.contactDetails.firstName = data.first_name
+          this.contactDetails.lastName = data.last_name
+          this.contactDetails.dateOfBirth = data.date_of_birth
+          this.step = '2'
+
+          this.loading = false
         } catch (e) {
           console.error(e)
-          this.onReadError()
+
+          this.errorSnackbarText = this.$t('invalid-qr-code')
+
+          switch (e.response?.data?.error) {
+            case 'hcert_invalid_signature':
+              this.errorSnackbarText = this.$t('error-invalid-signature');
+              break;
+            case 'hcert_not_covered':
+              this.errorSnackbarText = this.$t('error-certificate-not-covered');
+              break;
+          }
+
+          this.errorSnackbar = true
 
           setTimeout(() => {
             this.loading = false
           }, 1000)
         }
       },
-      async validateRegistrationData(base64Data) {
-        if (!base64Data) {
-          return null
+      async createSignedContactDetails() {
+        if (this.loading) {
+          return
         }
 
-        console.log('Checking data:', base64Data)
+        this.loading = true
 
         try {
-          const qrData = JSON.parse(base64Url.decode(base64Data))
-
-          if (!qrData.host || !qrData.data) {
-            this.onReadError()
-            return null
-          }
-
-          // Check if we are allowed to communicate with the host
-          const {data: hostConfig} = await axios.get('/config/host', {
-            params: {host: qrData.host},
+          const data = await axios.$post('/covpass/sign', {
+            hcert: this.hcert,
+            street: this.contactDetails.street,
+            zip: this.contactDetails.zip,
+            city: this.contactDetails.city,
+            phone: this.contactDetails.phone,
           })
 
-          if (!hostConfig.allowed) {
-            this.onReadError(this.$t('check-in-not-possible-here'))
-            return null
-          }
+          window.localStorage.setItem('signedContactDetailsBlob', JSON.stringify(data))
+          this.step = '3'
 
           this.loading = false
-          return qrData
         } catch (e) {
-          this.onReadError()
+          console.error(e)
+
+          setTimeout(() => {
+            this.loading = false
+          }, 1000)
         }
-
-        return null
       },
-      async registerVisit(registrationData) {
-        const {data: visitData} = await axiosForHost(registrationData.host).post(`/visit/register`, {
-          id_data: registrationData.data,
-          ...this.contactDetails,
-        })
-
-        return visitData
-      },
-      onReadError(text = this.$t('invalid-qr-code')) {
+      showError(text = this.$t('invalid-qr-code')) {
         this.errorSnackbar = true
         this.errorSnackbarText = text
       },
@@ -200,9 +297,5 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
-  }
-
-  .transition-background-color {
-    transition: background-color 150ms 200ms;
   }
 </style>

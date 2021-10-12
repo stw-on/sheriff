@@ -31,7 +31,7 @@ class Location extends BaseModel
         'visits_today',
     ];
 
-    const COLORS = [
+    private const COLORS = [
         '#d32f2f',
         '#7b1fa2',
         '#303f9f',
@@ -44,17 +44,41 @@ class Location extends BaseModel
         '#607d8b',
     ];
 
+    private const ICONS = [
+        'star',
+        'anchor',
+        'cloud',
+        'arrow-down-circle',
+        'asterisk',
+        'brightness-6',
+        'bug',
+        'broadcast',
+        'camera-iris',
+        'car',
+        'cards-heart',
+        'cards-diamond',
+        'cards-club',
+        'cards-spade',
+        'clippy',
+        'compass',
+        'earth',
+        'emoticon-happy',
+        'halloween',
+        'koala',
+        'lightning-bolt-circle',
+    ];
+
     public function generateQrString()
     {
         return json_encode([
             'host' => config('sheriff.host'),
             'data' => Crypt::encryptString($this->id),
-        ]);
+        ], JSON_THROW_ON_ERROR);
     }
 
     public function getQrUrlAttribute()
     {
-        return 'https://' . config('sheriff.host') . '/register?scan=' . base64_encode($this->generateQrString());
+        return 'https://' . config('sheriff.host') . '/checkin?scan=' . base64_encode($this->generateQrString());
     }
 
     public function getVisitsTodayAttribute()
@@ -72,9 +96,15 @@ class Location extends BaseModel
         return $this->belongsTo(PublicKey::class);
     }
 
-    public function getColorOfTheDay()
+    public function getColorOfTheHour()
     {
-        $hash = crc32($this->publicKey->key . Carbon::today()->format('Ymd'));
+        $hash = crc32($this->publicKey->key . Carbon::today()->format('YmdH'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
+    }
+
+    public function getIconOfTheHour()
+    {
+        $hash = crc32($this->publicKey->key . Carbon::today()->format('YmdH'));
+        return self::ICONS[abs($hash) % count(self::ICONS)];
     }
 }

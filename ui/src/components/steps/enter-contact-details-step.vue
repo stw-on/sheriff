@@ -4,26 +4,6 @@
 
     <v-form v-model="isValid">
       <v-row dense>
-        <v-col cols="6">
-          <v-text-field
-            v-model="firstName"
-            :rules="[v => !!v, v => v.length >= 2]"
-            hide-details
-            maxlength="128"
-            outlined
-            :placeholder="$t('first-name')"
-          />
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            v-model="lastName"
-            :rules="[v => !!v, v => v.length >= 2]"
-            hide-details
-            maxlength="128"
-            outlined
-            :placeholder="$t('last-name')"
-          />
-        </v-col>
         <v-col cols="12">
           <v-text-field
             v-model="street"
@@ -66,15 +46,6 @@
         </v-col>
       </v-row>
       <v-row no-gutters>
-        <v-col cols="12">
-          <v-checkbox
-            v-if="!hasSavedContactDetails"
-            v-model="saveContactDetails"
-            :label="$t('save-for-next-time')"
-            hide-details
-          />
-          <a v-else @click="deleteSavedContactDetails">{{ $t('delete-local-data') }}</a>
-        </v-col>
         <v-col cols="12">
           <v-checkbox
             v-model="acceptedPrivacy"
@@ -142,7 +113,7 @@
 
 <script>
   export default {
-    name: 'enter-contact-details-page',
+    name: 'enter-contact-details-step',
     props: {
       loading: Boolean,
       offline: Boolean,

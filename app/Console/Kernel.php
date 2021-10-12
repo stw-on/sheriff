@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\DbChoreCommand;
+use App\Console\Commands\FetchTrustAnchorsCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -28,6 +29,10 @@ class Kernel extends ConsoleKernel
         $schedule
             ->command(DbChoreCommand::class)
             ->everyMinute();
+
+        $schedule
+            ->command(FetchTrustAnchorsCommand::class)
+            ->everyThreeHours();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Location;
 use App\Models\PublicKey;
+use App\Models\SigningKey;
 use Illuminate\Console\Command;
 use SodiumException;
 
@@ -14,7 +15,7 @@ class GenerateKeypairCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'keypair:generate';
+    protected $signature = 'keypair:generate {--sign : Generate a signing keypair instead of an encryption keypair}';
 
     /**
      * The console command description.
@@ -41,20 +42,31 @@ class GenerateKeypairCommand extends Command
      */
     public function handle()
     {
-        $publicKey = new PublicKey();
-        $publicKey->name = $this->ask('Key name');
+        if ($this->option('sign')) {
+            $keypair = sodium_crypto_sign_keypair();
+            $key = sodium_crypto_sign_secretkey($keypair);
 
-        $keypair = sodium_crypto_box_keypair();
+            $signingKey = new SigningKey();
+            $signingKey->key = $key;
+            $signingKey->save();
 
-        $publicKeyBytes = sodium_crypto_box_publickey($keypair);
+            $this->line('Generated new signing key with ID ' . $signingKey->id);
+        } else {
+            $publicKey = new PublicKey();
+            $publicKey->name = $this->ask('Key name');
 
-        $publicKey->key = $publicKeyBytes;
-        $publicKey->save();
+            $keypair = sodium_crypto_box_keypair();
 
-        $this->line('Private: ' . base64_encode(sodium_crypto_box_secretkey($keypair)));
-        $this->line('Public:  ' . base64_encode($publicKeyBytes));
+            $publicKeyBytes = sodium_crypto_box_publickey($keypair);
 
-        $this->warn('Store the private key in two physically separate, secure locations. You will not be able to see it again!');
+            $publicKey->key = $publicKeyBytes;
+            $publicKey->save();
+
+            $this->line('Private: ' . base64_encode(sodium_crypto_box_secretkey($keypair)));
+            $this->line('Public:  ' . base64_encode($publicKeyBytes));
+
+            $this->warn('Store the private key in two physically separate, secure locations. You will not be able to see it again!');
+        }
 
         sodium_memzero($keypair);
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\CovPassController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PublicKeyController;
 use App\Http\Controllers\SessionController;
@@ -25,6 +26,11 @@ Route::group(['prefix' => '/config'], function () {
 
 Route::group(['prefix' => '/visit'], function () {
     Route::post('/register', [VisitController::class, 'registerVisit'])->middleware('throttle:20,1');
+});
+
+Route::group(['prefix' => '/covpass'], function () {
+    Route::post('/check', [CovPassController::class, 'checkCovPass'])->middleware('throttle:10,1');
+    Route::post('/sign', [CovPassController::class, 'signContactDetails'])->middleware('throttle:10,1');
 });
 
 Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], function () {

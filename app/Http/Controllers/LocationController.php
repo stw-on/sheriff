@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use App\Models\PublicKey;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
 class LocationController extends Controller

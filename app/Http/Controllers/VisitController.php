@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use App\Models\Visit;
+use App\Resources\SignedDataBlob;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
@@ -17,41 +19,48 @@ class VisitController extends Controller
     {
         $data = $this->validateWith([
             'id_data' => 'string|max:4096|required',
-            'first_name' => 'string|min:2|max:128|required',
-            'last_name' => 'string|min:2|max:128|required',
-            'street' => 'string|min:2|max:128|required',
-            'zip' => 'string|min:5|max:5|required',
-            'city' => 'string|min:3|max:128|required',
-            'phone' => 'string|min:5|max:128|required',
+            'signed_contact_details' => 'array|required',
         ]);
 
         try {
             $identificationData = Crypt::decryptString($data['id_data']);
         } catch (DecryptException $exception) {
+            report($exception);
             throw new BadRequestHttpException();
         }
 
         /** @var Location $location */
         $location = Location::query()->findOrFail($identificationData);
 
-        $visit = new Visit();
-        $visit->location()->associate($location);
-        $visit->entered_at = Carbon::now();
-        $visit->storeContactDetails(Arr::only($data, [
+        try {
+            $signedDataBlob = SignedDataBlob::fromArray(request('signed_contact_details'));
+        } catch (Exception $exception) {
+            report($exception);
+            throw new BadRequestHttpException('Could not verify signature');
+        }
+
+        $contactDetails = Arr::only($signedDataBlob->getData(), [
             'first_name',
             'last_name',
             'street',
             'zip',
             'city',
             'phone',
-        ]));
+        ]);
+
+        $visit = new Visit();
+        $visit->location()->associate($location);
+        $visit->entered_at = Carbon::now();
+        $visit->storeContactDetails($contactDetails);
         $visit->save();
 
         return response()->json([
             'visit_id' => Crypt::encryptString($visit->id),
-            'color_of_the_day' => $location->getColorOfTheDay(),
+            'color_of_the_hour' => $location->getColorOfTheHour(),
+            'icon_of_the_hour' => $location->getIconOfTheHour(),
             'location_name' => $location->name,
             'entered_at' => $visit->entered_at->format('H:i'),
-        ]);
+            'date_of_birth' => $signedDataBlob->get('date_of_birth'),
+        ] + $contactDetails);
     }
 }

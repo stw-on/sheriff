@@ -24,7 +24,7 @@ RUN cd ui && \
 
 
 # Stage 3: Build the final container
-FROM php:7.4-apache
+FROM php:8.0-apache
 
 ENV APACHE_DOCUMENT_ROOT /app/public
 WORKDIR /app
@@ -33,10 +33,8 @@ COPY --from=build2 --chown=www-data:www-data /app /app
 
 RUN apt-get update -y && \
     a2enmod rewrite && \
-    apt-get -y install libpq-dev wait-for-it libsodium-dev libyaml-dev && \
-    docker-php-ext-install pdo pgsql pdo_pgsql && \
-    pecl install libsodium && \
-    docker-php-ext-enable sodium && \
+    apt-get -y install libpq-dev wait-for-it libyaml-dev libgmp-dev && \
+    docker-php-ext-install pdo pgsql pdo_pgsql gmp && \
     pecl install redis && \
     docker-php-ext-enable redis && \
     pecl install yaml && \

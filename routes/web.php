@@ -22,7 +22,7 @@ if (app()->environment('production')) {
             'custom_translations' => file_exists('/app/strings.yml')
                 ? yaml_parse_file('/app/strings.yml')
                 : null,
-        ]);
+        ], JSON_THROW_ON_ERROR);
 
         $config = <<<CONFIG
 <script>
@@ -30,6 +30,6 @@ if (app()->environment('production')) {
 </script>
 CONFIG;
 
-        return str_replace('%CONFIG%', $config, file_get_contents(public_path('ui-index.html')));
+        return str_replace('<!-- SHERIFF_CONFIG -->', $config, file_get_contents(public_path('ui-index.html')));
     })->where('any', '.*');
 }

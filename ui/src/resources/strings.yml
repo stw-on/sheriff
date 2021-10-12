@@ -4,6 +4,10 @@ de:
   guest-registration-welcome: >
     Hier findest du die schnelle und sichere Gästeregistrierung
     für Mensen des Studentenwerk OstNiedersachsens.
+  desktop-warning: >
+    Du scheinst diese Webseite mit einem Laptop oder PC zu besuchen. Bitte beachte, dass du für die Registrierung und
+    den Check-In vorort <strong>dein Smartphone</strong> benutzen musst. Du musst für die Registrierung und den Check-In
+    vorort <strong>dasselbe Gerät</strong> verwenden.
   lets-go: Los geht's
   why-register: Warum muss ich mich registrieren?
   why-register-text: >
@@ -27,6 +31,9 @@ de:
   security-check-text: >
     Der gesamte Quellcode dieser App und der dazugehörigen API ist frei verfügbar auf
     <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+  welcome-back: Willkommen zurück
+  ready-to-checkin: Du kannst dich mit diesem Gerät bei unseren Örtlichkeiten einchecken.
+  check-in: Einchecken
 
   # register
   no-connection: Keine Internetverbindung
@@ -50,13 +57,17 @@ de:
   saved: Gespeichert
   save-only: Daten nur speichern
 
+  # hcert
+  error-invalid-signature: Dieses Zertifikat ist ungültig
+  error-certificate-not-covered: Das Zertifikat belegt den 2G-Status
+
   # scan
   scan-qr-code: QR-Code scannen
   scan-qr-code-prompt: Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist.
   no-camera-access: Kein Zugriff auf die Kamera
 
   # submit
-  keep-open-prompt: Bitte lass' diese Seite geöffnet. Es kann sein, dass du sie in der Örtlichkeit vorzeigen musst.
+  keep-open-prompt: Bitte lass' diese Seite geöffnet. Du musst sie beim Eingang vorzeigen. Halte deinen Ausweis griffbereit.
 
   # privacy
   privacy-policy: >
@@ -141,12 +152,30 @@ de:
       3 angegeben weiterzuverarbeiten, stellt es Ihnen vor dieser Weiterverarbeitung Informationen über diesen
       anderen Zweck und alle anderen maßgeblichen Informationen zur Verfügung.
     </p>
+
+  # register 2
+  scan-covid-certificate: COVID Zertifikat scannen
+  scan-covid-certificate-description: >
+    In den meisten Fällen hast du dein Zertifikat nach der Impfung oder Genesung von COVID bekommen.
+    Alternativ kannst du auch ein Screenshot des Zertifikats auswählen, beispielsweise aus der Corona Warn App.
+  enter-contact-details-prompt: >
+    Dein Gesundheitszertifikat wurde erfolgreich validiert. Bitte gib' nun deine Kontaktdaten ein, die beim Betreten
+    einer unserer Örtlichkeiten verschlüsselt bei uns gespeichert werden.
+  done: Fertig
+  registration-done-description: >
+    Geschafft! Du kannst dich nun mit diesem Gerät in Mensen und Cafeterien des Studentenwerk OstNiedersachsen einchecken.
+  check-in-now: Jetzt einchecken
+
 en:
   # index
   guest-registration: Guest Registration
   guest-registration-welcome: >
     This is the fast and secure guest registration for canteens and cafeterias of
     Studentenwerk OstNiedersachsen.
+  desktop-warning: >
+    It seems like you are visiting this page on a laptop or PC. Please note that you
+    <strong>must use your phone</strong> for registration
+    and check-in on site. You <strong>cannot</strong> use different devices for registration and check-in.
   lets-go: Let's go
   why-register: Why do I have to register?
   why-register-text: >
@@ -167,6 +196,9 @@ en:
   security-check-text: >
     The source code of this web app, including its API, is freely available on
     <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+  welcome-back: Welcome back
+  ready-to-checkin: You can check in at our locations with this device.
+  check-in: Check in
 
   # register
   no-connection: No connection
@@ -190,10 +222,27 @@ en:
   saved: Saved
   save-only: Save data only
 
+  # hcert
+  error-invalid-signature: This certificate is invalid
+  error-certificate-not-covered: This certificate does not meet the 2G requirement
+
   # scan
   scan-qr-code: Scan QR code
-  scan-qr-code-prompt: Now, please scan the QR code that is posted at the facility.
+  scan-qr-code-prompt: Please scan the QR code that is posted at the facility.
   no-camera-access: No access to the camera
 
   # submit
-  keep-open-prompt: Please keep this page open. You might need to show it for verification.
+  keep-open-prompt: Please keep this page open. You will need to show it for verification. Keep your ID ready.
+
+  # register 2
+  scan-covid-certificate: Scan COVID certificate
+  scan-covid-certificate-description: >
+    In most cases you got the QR code after vaccination or recovery from COVID.
+    You can also select a screenshot of the certificate (e.g. in the Corona Warn App).
+  enter-contact-details-prompt: >
+    Your Health certificate has been validated successfully. Please enter additional contact details that get stored for
+    three weeks when entering one of our locations.
+  done: Done
+  registration-done-description: >
+    From now on you can now check in to our locations with this device.
+  check-in-now: Check in now
