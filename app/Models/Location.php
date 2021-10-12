@@ -104,7 +104,7 @@ class Location extends BaseModel
 
     public function getIconOfTheHour()
     {
-        $hash = crc32($this->publicKey->key . Carbon::today()->format('YmdH'));
+        $hash = crc32($this->publicKey->key . Carbon::today()->format('HYmd'));
         return self::ICONS[abs($hash) % count(self::ICONS)];
     }
 }
