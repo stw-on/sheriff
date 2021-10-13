@@ -53,9 +53,10 @@ Sheriff is a tool for easy and secure guest registration during the coronavirus 
 9. Run `docker-compose exec app php artisan keypair:generate` and follow the steps to generate a key pair.<br>
    **IMPORTANT: Store the private key in multiple, physically separate safe locations (e.g. a text file on a USB flash drive). DO NOT store it on the server. You will NOT see it again after running the above command. You NEED this key to decrypt all saved data.**
 10. Run `docker-compose exec app php artisan keypair:generate --sign` to generate a signing keypair. You don't need to save that one. You can generate new ones at any time.
-11. Visit `<your domain>/admin`, log in and create a new location
-12. Generate a QR code for the new location and try to register with your phone
-13. Run `docker-compose exec app php artisan visits:export`, enter the key and verify that the data you just submitted with your phone is correctly exported.
+11. Run `docker-compose exec app php artisan trust-anchors:fetch` to fetch the latest list of trust anchors for EU Health Certificate verification. The application will check for new certificates every three hours.
+12. Visit `<your domain>/admin`, log in and create a new location
+13. Generate a QR code for the new location and try to register with your phone
+14. Run `docker-compose exec app php artisan visits:export`, enter the key and verify that the data you just submitted with your phone is correctly exported.
 
 If everything works as expected, you can start customizing your instance. **Remember to
 modify the privacy policy accordingly!**

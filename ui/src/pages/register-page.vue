@@ -13,7 +13,7 @@
 
       <v-scroll-y-reverse-transition mode="out-in">
         <div v-if="step === '1'" key="scan">
-          <h2 class="font-weight-light text-center mb-3">{{ $t('scan-covid-certificate') }}!</h2>
+          <h2 class="font-weight-light text-center mb-3">{{ $t('scan-covid-certificate') }}</h2>
 
           <qr-scanner
             :loading="loading"
@@ -155,7 +155,7 @@
               color="primary"
               large
               exact
-              :to="{name: 'cleckin'}"
+              :to="{name: 'checkin'}"
             >
               {{ $t('check-in-now') }}
               <v-icon right>mdi-chevron-right</v-icon>
@@ -225,7 +225,7 @@
         this.$refs.fileInput.click()
       },
       async onFileSelected(event) {
-        console.log(event)
+        this.loading = true
 
         if (event.target.files.length > 0) {
           const barcodeDetector = new window.BarcodeDetector({formats: ["qr_code"]})
