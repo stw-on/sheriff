@@ -25,7 +25,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
   app:
-    image: stwon/sheriff
+    image: ghcr.io/stw-on/sheriff
     env_file: .env
     restart: always
     expose:
@@ -37,12 +37,12 @@ services:
       - traefik.http.middlewares.sheriff-middlewares.headers.sslredirect=true
       - traefik.http.middlewares.sheriff-middlewares.headers.stsSeconds=31536000
   worker:
-    image: stwon/sheriff
+    image: ghcr.io/stw-on/sheriff
     env_file: .env
     command: worker
     restart: always
   scheduler:
-    image: stwon/sheriff
+    image: ghcr.io/stw-on/sheriff
     env_file: .env
     command: scheduler
     restart: always
