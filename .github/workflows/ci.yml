@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3.4.0
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}{% raw %}
+
+      - name: Set image Tag
+        run: |
+          echo IMAGE_TAG=dev >> $GITHUB_ENV
+          if [ $GITHUB_REF = "refs/heads/main" ]; then
+            echo IMAGE_TAG=latest >> $GITHUB_ENV
+          fi
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.6.1
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          labels: ${{ steps.meta.outputs.labels }}
