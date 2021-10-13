@@ -27,7 +27,13 @@
           </p>
         </div>
 
-        <v-sheet dark color="transparent" v-else-if="step === '2'" class="d-flex flex-column flex-grow-1 align-center justify-center" key="done">
+        <v-sheet
+          dark
+          color="transparent"
+          v-else-if="step === '2'"
+          class="d-flex flex-column flex-grow-1 align-center justify-center"
+          key="done"
+        >
           <div class="text-center">
             <div class="big mb-10">{{ visitData.location_name }}</div>
             <div ref="time" class="time mb-10">{{ visitData.entered_at }}</div>
@@ -62,10 +68,10 @@
 </template>
 
 <script>
-  import {axios, axiosForHost} from "@/lib/axios";
-  import QrScanner from "@/components/steps/qr-scanner";
-  import base64Url from "base64-url";
-  import {confettiFromElement} from "@/lib/confettiFromElement";
+  import {axios, axiosForHost} from "@/lib/axios"
+  import QrScanner from "@/components/steps/qr-scanner"
+  import base64Url from "base64-url"
+  import {confettiFromElement} from "@/lib/confettiFromElement"
 
   export default {
     name: 'checkin-page',
@@ -87,9 +93,18 @@
         return this.visitData?.icon_of_the_hour
       },
     },
-    async mounted() {
+    mounted() {
       window.addEventListener('online', () => this.offline = false)
       window.addEventListener('offline', () => this.offline = true)
+
+      if (!window.localStorage.getItem('signedContactDetailsBlob')) {
+        this.$router.replace({name: 'index'})
+        return
+      }
+
+      if (this.$route.query.scan) {
+        this.registerVisit(this.$route.query.scan)
+      }
     },
     methods: {
       showError(text = this.$t('invalid-qr-code')) {
@@ -106,43 +121,14 @@
         try {
           const url = new URL(result)
           const data = url.searchParams.get('scan')
-          const qrData = await this.validateRegistrationData(data)
 
-          if (qrData) {
-            this.visitData = await this.registerVisit(qrData)
-            this.step = '2'
-
-            setTimeout(() => {
-              this.keepOpenSnackbar = true
-
-              if (this.visitData.entered_at === '13:37') {
-                confettiFromElement(this.$refs.time, {
-                  disableForReducedMotion: true,
-                  zIndex: 100000,
-                })
-              }
-            }, 1000)
-          } else {
-            this.showError()
-            setTimeout(() => {
-              this.loading = false
-            }, 1000)
-          }
+          await this.registerVisit(data)
         } catch (e) {
           console.error(e)
-
-          switch (e.response?.data?.error) {
-            case 'hcert_not_covered':
-              this.showError(this.$t('error-certificate-not-covered'))
-              break
-            default:
-              this.showError()
-              break
-          }
-
+          this.showError()
           setTimeout(() => {
             this.loading = false
-          }, 1000);
+          }, 1000)
         }
       },
       async validateRegistrationData(base64Data) {
@@ -177,13 +163,47 @@
 
         return null
       },
-      async registerVisit(registrationData) {
-        const {data: visitData} = await axiosForHost(registrationData.host).post(`/visit/register`, {
-          id_data: registrationData.data,
-          signed_contact_details: JSON.parse(window.localStorage.getItem('signedContactDetailsBlob')),
-        })
+      async registerVisit(locationIdentifier) {
+        try {
+          const registrationData = await this.validateRegistrationData(locationIdentifier)
 
-        return visitData;
+          if (registrationData) {
+            const {data: visitData} = await axiosForHost(registrationData.host).post(`/visit/register`, {
+              id_data: registrationData.data,
+              signed_contact_details: JSON.parse(window.localStorage.getItem('signedContactDetailsBlob')),
+            })
+            this.visitData = visitData
+            this.step = '2'
+
+            setTimeout(() => {
+              this.keepOpenSnackbar = true
+
+              if (this.visitData.entered_at === '13:37') {
+                confettiFromElement(this.$refs.time, {
+                  disableForReducedMotion: true,
+                  zIndex: 100000,
+                })
+              }
+            }, 1000)
+          } else {
+            this.showError()
+            setTimeout(() => {
+              this.loading = false
+            }, 1000)
+          }
+
+        } catch (e) {
+          console.error(e)
+
+          switch (e.response?.data?.error) {
+            case 'hcert_not_covered':
+              this.showError(this.$t('error-certificate-not-covered'))
+              break
+            default:
+              this.showError()
+              break
+          }
+        }
       },
     },
   }

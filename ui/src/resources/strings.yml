@@ -56,6 +56,8 @@ de:
   next: Weiter
   saved: Gespeichert
   save-only: Daten nur speichern
+  select-screenshot: Screenshot auswählen
+  no-qr-code-detected: Kein QR Code erkannt
 
   # hcert
   error-invalid-signature: Dieses Zertifikat ist ungültig
@@ -221,6 +223,8 @@ en:
   next: Proceed
   saved: Saved
   save-only: Save data only
+  select-screenshot: Select screenshot
+  no-qr-code-detected: No QR code detected
 
   # hcert
   error-invalid-signature: This certificate is invalid

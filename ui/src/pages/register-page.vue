@@ -25,6 +25,11 @@
           <p class="mt-3 grey--text text--darken-2 text-center">
             {{ $t('scan-covid-certificate-description') }}
           </p>
+
+          <div class="text-center">
+            <v-btn @click="selectFile" text outlined>{{ $t('select-screenshot') }}</v-btn>
+          </div>
+          <input ref="fileInput" class="hidden" type="file" @change="onFileSelected">
         </div>
 
         <div v-else-if="step === '2'" key="register">
@@ -150,7 +155,7 @@
               color="primary"
               large
               exact
-              :to="{name: 'index'}"
+              :to="{name: 'cleckin'}"
             >
               {{ $t('check-in-now') }}
               <v-icon right>mdi-chevron-right</v-icon>
@@ -185,8 +190,8 @@
 </template>
 
 <script>
-  import {axios} from "@/lib/axios";
-  import QrScanner from "@/components/steps/qr-scanner";
+  import {axios} from "@/lib/axios"
+  import QrScanner from "@/components/steps/qr-scanner"
 
   export default {
     name: 'checkin-page',
@@ -216,6 +221,25 @@
       window.addEventListener('offline', () => this.offline = true)
     },
     methods: {
+      selectFile() {
+        this.$refs.fileInput.click()
+      },
+      async onFileSelected(event) {
+        console.log(event)
+
+        if (event.target.files.length > 0) {
+          const barcodeDetector = new window.BarcodeDetector({formats: ["qr_code"]})
+          const detectedCodes = await barcodeDetector.detect(event.target.files[0])
+          this.$refs.fileInput.value = ''
+
+          if (detectedCodes.length === 0) {
+            this.showError(this.$t('no-qr-code-detected'))
+            return
+          }
+
+          await this.onQrCodeScanned(detectedCodes[0].rawValue)
+        }
+      },
       async onQrCodeScanned(result) {
         if (this.loading || !result) {
           return
@@ -242,8 +266,8 @@
 
           switch (e.response?.data?.error) {
             case 'hcert_invalid_signature':
-              this.errorSnackbarText = this.$t('error-invalid-signature');
-              break;
+              this.errorSnackbarText = this.$t('error-invalid-signature')
+              break
           }
 
           this.errorSnackbar = true
@@ -294,5 +318,9 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>

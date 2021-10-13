@@ -222,7 +222,7 @@
       try {
         const signedContactDetailsBlob = window.localStorage.getItem('signedContactDetailsBlob')
         if (signedContactDetailsBlob) {
-          this.savedContactDetails = JSON.parse(atob(JSON.parse(signedContactDetailsBlob)['blob']));
+          this.savedContactDetails = JSON.parse(atob(JSON.parse(signedContactDetailsBlob)['blob']))
         }
       } catch (e) {
         console.error(e)
@@ -231,7 +231,7 @@
     methods: {
       deleteRegistration() {
         if (confirm(this.$t('delete-registration-prompt'))) {
-          window.localStorage.removeItem('signedContactDetailsBlob');
+          window.localStorage.removeItem('signedContactDetailsBlob')
           this.savedContactDetails = null
         }
       }

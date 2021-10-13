@@ -121,7 +121,7 @@
       async generatePdf() {
         const pdfWindow = window.open()
 
-        pdfWindow.document.documentElement.innerHTML = 'PDF wird geladen...';
+        pdfWindow.document.documentElement.innerHTML = 'PDF wird geladen...'
 
         try {
           const {data} = await axios.get(`/location/${this.$route.params.id}/pdf`, {
@@ -131,7 +131,7 @@
           pdfWindow.location.href = window.URL.createObjectURL(new Blob([data], {type: 'application/pdf'}))
         } catch (e) {
           console.error(e)
-          pdfWindow.document.documentElement.innerHTML = 'Ein Fehler ist aufgetreten.';
+          pdfWindow.document.documentElement.innerHTML = 'Ein Fehler ist aufgetreten.'
         }
       },
     },

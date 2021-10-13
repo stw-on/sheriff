@@ -11,8 +11,14 @@
       </div>
       <v-divider />
       <div class="text-center white--text">
-        <div v-if="!!contactDetails" :style="{backgroundColor: visitData.color_of_the_day}" class="pa-5 contact-details">
-          <span class="text-uppercase font-weight-bold">{{ contactDetails.first_name }} {{ contactDetails.last_name }}</span><br>
+        <div
+          v-if="!!contactDetails"
+          :style="{backgroundColor: visitData.color_of_the_day}"
+          class="pa-5 contact-details"
+        >
+          <span class="text-uppercase font-weight-bold">{{ contactDetails.first_name }} {{
+              contactDetails.last_name
+            }}</span><br>
           {{ contactDetails.street }}<br>
           {{ contactDetails.zip }} {{ contactDetails.city }}<br>
           {{ contactDetails.phone }}
@@ -33,9 +39,7 @@
       visitData: Object,
       contactDetails: Object,
     },
-    data: () => ({
-
-    }),
+    data: () => ({}),
   }
 </script>
 

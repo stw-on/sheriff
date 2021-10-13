@@ -81,7 +81,15 @@
             </v-btn>
           </div>
           <div>
-            <v-btn v-if="saveContactDetails" :disabled="!isValid || saved" text class="mt-4" color="primary" large @click="save">
+            <v-btn
+              v-if="saveContactDetails"
+              :disabled="!isValid || saved"
+              text
+              class="mt-4"
+              color="primary"
+              large
+              @click="save"
+            >
               <template v-if="saved">
                 <v-icon left>mdi-check</v-icon>
                 {{ $t('saved') }}
