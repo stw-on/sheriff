@@ -13,7 +13,10 @@ class LocationController extends Controller
 {
     public function getAll()
     {
-        return response()->json(Location::query()->orderBy('name')->get()->makeVisible('visits_today'));
+        return Location::query()
+            ->orderBy('name')
+            ->get()
+            ->makeVisible(['visits_today', 'allowed_certifications']);
     }
 
     public function get(string $id)
@@ -21,8 +24,7 @@ class LocationController extends Controller
         return response()->json(
             Location::query()
                 ->findOrFail($id)
-                ->append('qr_url')
-                ->makeVisible('public_key_id', 'qr_url')
+                ->makeVisible(Location::ADMIN_FIELDS)
         );
     }
 
@@ -34,6 +36,7 @@ class LocationController extends Controller
             'id' => 'string|sometimes',
             'name' => 'string|required',
             'public_key_id' => 'string|required',
+            'allowed_certifications' => 'int|required',
         ]);
 
         $publicKey = PublicKey::query()->findOrFail($data['public_key_id']);
@@ -45,10 +48,11 @@ class LocationController extends Controller
         }
 
         $location->name = $data['name'];
+        $location->allowed_certifications = $data['allowed_certifications'];
         $location->publicKey()->associate($publicKey);
         $location->save();
 
-        return response()->json($location->makeVisible('public_key_id'));
+        return response()->json($location->makeVisible(Location::ADMIN_FIELDS));
     }
 
     public function downloadPdf(string $id)

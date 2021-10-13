@@ -27,7 +27,14 @@ class Location extends BaseModel
         'name',
     ];
 
+    public const ADMIN_FIELDS = [
+        'public_key_id',
+        'qr_url',
+        'allowed_certifications',
+    ];
+
     protected $appends = [
+        'qr_url',
         'visits_today',
     ];
 
@@ -98,13 +105,13 @@ class Location extends BaseModel
 
     public function getColorOfTheHour()
     {
-        $hash = crc32($this->publicKey->key . Carbon::today()->format('YmdH'));
+        $hash = crc32($this->publicKey->key . Carbon::now()->format('Ymdh'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
     }
 
     public function getIconOfTheHour()
     {
-        $hash = crc32($this->publicKey->key . Carbon::today()->format('HYmd'));
+        $hash = crc32($this->publicKey->key . Carbon::now()->format('hYmd'));
         return self::ICONS[abs($hash) % count(self::ICONS)];
     }
 }

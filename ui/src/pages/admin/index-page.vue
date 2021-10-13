@@ -15,10 +15,15 @@
       :headers="[
         {text: 'Name', value: 'name'},
         {text: 'Registrierungen heute', value: 'visits_today'},
+        {text: 'Eintritt erlaubt für', value: 'allowed_certifications'},
       ]"
       :items="locations"
       @click:row="edit"
-    />
+    >
+      <template #item.allowed_certifications="{item}">
+        {{ allowedCertificationsToString(item.allowed_certifications) }}
+      </template>
+    </v-data-table>
   </v-container>
 </template>
 
@@ -45,6 +50,16 @@
       edit(entity) {
         this.$router.push({name: `admin/location`, params: {id: entity.id}})
       },
+      allowedCertificationsToString(allowedCertifications) {
+        return Object.entries({
+          0b001: 'Geimpft',
+          0b010: 'Getestet',
+          0b100: 'Genesen',
+        })
+          .filter(v => allowedCertifications & v[0])
+          .map(v => v[1])
+          .join(', ')
+      }
     }
   }
 </script>

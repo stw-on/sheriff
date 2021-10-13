@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CovPassCheck\DatabaseTrustStore;
+use App\Exceptions\CertificateExpiredException;
 use App\Exceptions\CertificateNotCoveredException;
 use App\Http\Requests\SignedDataBlobRequest;
 use App\Models\SigningKey;
@@ -19,21 +20,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CovPassController extends Controller
 {
-    private const COVERED_TYPES = HealthCertificate::TYPE_VACCINATION | HealthCertificate::TYPE_RECOVERY;
-
     /**
      * @param string $certificateData
      * @return HealthCertificate
-     * @throws CertificateNotCoveredException
      * @throws InvalidSignatureException
+     * @throws CertificateExpiredException
      * @throws MissingHC1HeaderException
      */
     private function readAndCheckCertificate(string $certificateData): HealthCertificate
     {
         $check = new CovPassCheck(new DatabaseTrustStore());
         $certificate = $check->readCertificate($certificateData);
-        if (!$certificate->isCovered(Target::COVID19, self::COVERED_TYPES)) {
-            throw new CertificateNotCoveredException();
+
+        if ($certificate->isExpired()) {
+            throw new CertificateExpiredException();
         }
 
         return $certificate;
@@ -63,9 +63,9 @@ class CovPassController extends Controller
                 'error' => 'hcert_hc1_header_missing',
             ], Response::HTTP_BAD_REQUEST);
 
-        } catch (CertificateNotCoveredException) {
+        } catch (CertificateExpiredException) {
             return response()->json([
-                'error' => 'hcert_not_covered',
+                'error' => 'hcert_expired',
             ], Response::HTTP_BAD_REQUEST);
         }
     }
@@ -86,16 +86,17 @@ class CovPassController extends Controller
 
             $data = request(['street', 'zip', 'city', 'phone']);
             $data += [
-                'expires_at' => $certificate->getCoverageExpiryDate(Target::COVID19, self::COVERED_TYPES),
+                'expires_at' => $certificate->getExpiresAt()->toIso8601String(),
                 'first_name' => $certificate->getSubject()->getFirstName(),
                 'last_name' => $certificate->getSubject()->getLastName(),
                 'date_of_birth' => $certificate->getSubject()->getDateOfBirth(),
+                'certificate_type' => $certificate->getType(),
             ];
 
             return new SignedDataBlob($data, $key);
-        } catch (InvalidSignatureException | MissingHC1HeaderException | CertificateNotCoveredException) {
+        } catch (InvalidSignatureException | MissingHC1HeaderException | CertificateExpiredException) {
             return response()->json([
-                'error' => 'cert_error',
+                'error' => 'hcert_error',
             ], Response::HTTP_BAD_REQUEST);
         }
     }

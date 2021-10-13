@@ -30,10 +30,13 @@
         <v-sheet dark color="transparent" v-else-if="step === '2'" class="d-flex flex-column flex-grow-1 align-center justify-center" key="done">
           <div class="text-center">
             <div class="big mb-10">{{ visitData.location_name }}</div>
-            <div class="big mb-10">{{ visitData.entered_at }}</div>
+            <div ref="time" class="time mb-10">{{ visitData.entered_at }}</div>
+            <div class="big">{{ visitData.last_name }},</div>
             <div class="big">{{ visitData.first_name }}</div>
-            <div class="headline">{{ visitData.last_name }}</div>
             <div class="headline">{{ visitData.date_of_birth }}</div>
+            <div class="headline mt-2">{{ visitData.street }}</div>
+            <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
+            <div class="headline">{{ visitData.phone }}</div>
 
             <v-icon size="100vw" class="overlay-icon">
               mdi-{{ iconOfTheHour }}
@@ -62,6 +65,7 @@
   import {axios, axiosForHost} from "@/lib/axios";
   import QrScanner from "@/components/steps/qr-scanner";
   import base64Url from "base64-url";
+  import {confettiFromElement} from "@/lib/confettiFromElement";
 
   export default {
     name: 'checkin-page',
@@ -110,19 +114,35 @@
 
             setTimeout(() => {
               this.keepOpenSnackbar = true
+
+              if (this.visitData.entered_at === '13:37') {
+                confettiFromElement(this.$refs.time, {
+                  disableForReducedMotion: true,
+                  zIndex: 100000,
+                })
+              }
             }, 1000)
           } else {
+            this.showError()
             setTimeout(() => {
               this.loading = false
             }, 1000)
           }
         } catch (e) {
           console.error(e)
-          this.showError()
+
+          switch (e.response?.data?.error) {
+            case 'hcert_not_covered':
+              this.showError(this.$t('error-certificate-not-covered'))
+              break
+            default:
+              this.showError()
+              break
+          }
 
           setTimeout(() => {
             this.loading = false
-          }, 1000)
+          }, 1000);
         }
       },
       async validateRegistrationData(base64Data) {
@@ -163,7 +183,7 @@
           signed_contact_details: JSON.parse(window.localStorage.getItem('signedContactDetailsBlob')),
         })
 
-        return visitData
+        return visitData;
       },
     },
   }
@@ -184,6 +204,22 @@
     font-weight: bold;
     font-size: 3em;
     line-height: 1;
+  }
+
+  @keyframes scale {
+    from {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  }
+
+  .time {
+    font-weight: bold;
+    font-size: 5em;
+    line-height: 1;
+    animation: scale 1s infinite alternate;
   }
 
   @keyframes rotate {

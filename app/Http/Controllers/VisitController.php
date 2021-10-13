@@ -10,7 +10,7 @@ use Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class VisitController extends Controller
@@ -37,6 +37,12 @@ class VisitController extends Controller
         } catch (Exception $exception) {
             report($exception);
             throw new BadRequestHttpException('Could not verify signature');
+        }
+
+        if (!((int)$signedDataBlob->get('certificate_type') & $location->allowed_certifications)) {
+            return response()->json([
+                'error' => 'hcert_not_covered',
+            ], Response::HTTP_BAD_REQUEST);
         }
 
         $contactDetails = Arr::only($signedDataBlob->getData(), [

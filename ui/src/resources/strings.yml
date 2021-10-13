@@ -34,6 +34,8 @@ de:
   welcome-back: Willkommen zurück
   ready-to-checkin: Du kannst dich mit diesem Gerät bei unseren Örtlichkeiten einchecken.
   check-in: Einchecken
+  delete-registration: Registrierung löschen
+  delete-registration-prompt: Möchtest du die Registrierung wirklich löschen? Du kannst dich erst nach erneuter Registrierung wieder mit diesem Gerät einchecken.
 
   # register
   no-connection: Keine Internetverbindung
@@ -47,8 +49,6 @@ de:
   zip: PLZ
   city: Ort
   phone: Telefon- oder Handynummer
-  save-for-next-time: Meine Daten für das nächste Mal auf diesem Gerät speichern
-  delete-local-data: Gespeicherte Daten von diesem Gerät löschen
   privacy-accepted-1: Ich habe die
   privacy-terms: Hinweise zum Datenschutz
   privacy-accepted-3: gelesen, stimme ihnen zu und versichere, meine Daten korrekt angegeben zu haben
@@ -59,7 +59,7 @@ de:
 
   # hcert
   error-invalid-signature: Dieses Zertifikat ist ungültig
-  error-certificate-not-covered: Das Zertifikat belegt den 2G-Status
+  error-certificate-not-covered: Das Zertifikat weist nicht das für den Eintritt in diese Mensa erforderliche Merkmal auf.
 
   # scan
   scan-qr-code: QR-Code scannen
@@ -199,6 +199,8 @@ en:
   welcome-back: Welcome back
   ready-to-checkin: You can check in at our locations with this device.
   check-in: Check in
+  delete-registration: Delete registration
+  delete-registration-prompt: Are you sure you want to delete your registration? You will be unable to check in with this device until you registered again.
 
   # register
   no-connection: No connection
@@ -212,8 +214,6 @@ en:
   zip: ZIP
   city: City
   phone: Phone or mobile number
-  save-for-next-time: Save my data on this device for next time
-  delete-local-data: Delete saved data from this device
   privacy-accepted-1: I have read the
   privacy-terms: privacy policy
   privacy-accepted-3: carefully, accept it and ensure to have entered my data correctly.
@@ -224,7 +224,7 @@ en:
 
   # hcert
   error-invalid-signature: This certificate is invalid
-  error-certificate-not-covered: This certificate does not meet the 2G requirement
+  error-certificate-not-covered: Your health certificate does not meet the requirement to enter this location.
 
   # scan
   scan-qr-code: Scan QR code

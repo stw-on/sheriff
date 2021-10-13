@@ -244,9 +244,6 @@
             case 'hcert_invalid_signature':
               this.errorSnackbarText = this.$t('error-invalid-signature');
               break;
-            case 'hcert_not_covered':
-              this.errorSnackbarText = this.$t('error-certificate-not-covered');
-              break;
           }
 
           this.errorSnackbar = true

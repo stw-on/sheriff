@@ -148,12 +148,17 @@
         {{ $t('ready-to-checkin') }}
       </p>
 
-      <div class="text-center mb-5">
+      <div class="text-center mb-2">
         <v-btn :to="{name: 'checkin'}" color="primary" x-large>
           {{ $t('check-in') }}
           <v-icon right>
             mdi-chevron-right
           </v-icon>
+        </v-btn>
+      </div>
+      <div class="text-center mb-5">
+        <v-btn text @click="deleteRegistration">
+          {{ $t('delete-registration') }}
         </v-btn>
       </div>
     </template>
@@ -221,6 +226,14 @@
         }
       } catch (e) {
         console.error(e)
+      }
+    },
+    methods: {
+      deleteRegistration() {
+        if (confirm(this.$t('delete-registration-prompt'))) {
+          window.localStorage.removeItem('signedContactDetailsBlob');
+          this.savedContactDetails = null
+        }
       }
     }
   }

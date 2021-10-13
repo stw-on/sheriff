@@ -1289,16 +1289,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.63.0",
+            "version": "v8.64.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8f3d280f36a427730c8c8fa34316c79eed38781e"
+                "reference": "3337c029e1bb31d9712d27437cc27010ba302c9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8f3d280f36a427730c8c8fa34316c79eed38781e",
-                "reference": "8f3d280f36a427730c8c8fa34316c79eed38781e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3337c029e1bb31d9712d27437cc27010ba302c9e",
+                "reference": "3337c029e1bb31d9712d27437cc27010ba302c9e",
                 "shasum": ""
             },
             "require": {
@@ -1456,20 +1456,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-10-05T14:04:25+00:00"
+            "time": "2021-10-12T13:43:13+00:00"
         },
         {
             "name": "laravel/sanctum",
-            "version": "v2.11.2",
+            "version": "v2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "b21e65cbe13896946986cb0868180cd69e1bd5d3"
+                "reference": "5f0683417270fc033bc0fbf69e824cf58d33a623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/b21e65cbe13896946986cb0868180cd69e1bd5d3",
-                "reference": "b21e65cbe13896946986cb0868180cd69e1bd5d3",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/5f0683417270fc033bc0fbf69e824cf58d33a623",
+                "reference": "5f0683417270fc033bc0fbf69e824cf58d33a623",
                 "shasum": ""
             },
             "require": {
@@ -1520,7 +1520,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2021-06-15T15:56:21+00:00"
+            "time": "2021-10-12T15:50:15+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -4315,16 +4315,16 @@
         },
         {
             "name": "stwon/covpasscheck-php",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stw-on/covpasscheck-php.git",
-                "reference": "6d5335d7c6f0238acbb648b429e94c1926b455cc"
+                "reference": "13046c4998be7f7e0d0c2a4d16ff79315176f0af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/6d5335d7c6f0238acbb648b429e94c1926b455cc",
-                "reference": "6d5335d7c6f0238acbb648b429e94c1926b455cc",
+                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/13046c4998be7f7e0d0c2a4d16ff79315176f0af",
+                "reference": "13046c4998be7f7e0d0c2a4d16ff79315176f0af",
                 "shasum": ""
             },
             "require": {
@@ -4353,9 +4353,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stw-on/covpasscheck-php/issues",
-                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.2.0"
+                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.3.0"
             },
-            "time": "2021-10-12T10:00:51+00:00"
+            "time": "2021-10-13T10:33:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
