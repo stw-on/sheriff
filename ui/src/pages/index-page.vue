@@ -179,28 +179,10 @@
     <h2 class="font-weight-light text-center pt-5 pb-3">FAQ</h2>
 
     <v-expansion-panels accordion>
-      <v-expansion-panel>
-        <v-expansion-panel-header>{{ $t('why-register') }}</v-expansion-panel-header>
+      <v-expansion-panel v-for="(item, index) in $t('faq')" :key="index">
+        <v-expansion-panel-header>{{ item.title }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div v-html="$t('why-register-text')"></div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>{{ $t('where-register') }}</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          {{ $t('where-register-text') }}
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>{{ $t('how-and-where-saved') }}</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <div v-html="$t('how-and-where-saved-text')"></div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>{{ $t('security-check') }}</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <div v-html="$t('security-check-text')"></div>
+          <div v-html="item.description"></div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>

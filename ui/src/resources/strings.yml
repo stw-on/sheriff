@@ -9,28 +9,40 @@ de:
     den Check-In vorort <strong>dein Smartphone</strong> benutzen musst. Du musst für die Registrierung und den Check-In
     vorort <strong>dasselbe Gerät</strong> verwenden.
   lets-go: Los geht's
-  why-register: Warum muss ich mich registrieren?
-  why-register-text: >
-    Laut der <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/161342">Niedersächsischen
-    Verordnung zur Neuordnung der Maßnahmen gegen die Ausbreitung des Corona-Virus</a>
-    SARS-CoV-2 (CoronaVO) müssen wir alle Gäste erfassen, die ihr Essen in unseren Einrichtungen vor Ort
-    einnehmen.
-  where-register: Bei welchen Einrichtungen kann ich mich über diese App registrieren?
-  where-register-text: >
-    Die Web-App wird in den Einrichtungen unserer Hochschulgastronomie eingesetzt,
-    in denen ein Verzehr der Speisen vor Ort vorgesehen ist.
-  how-and-where-saved: Wie und wo werden meine Daten gespeichert?
-  how-and-where-saved-text: >
-    Deine Daten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
-    transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach drei Wochen
-    gelöscht.<br>
-    <br>
-    Sofern die Option aktiviert ist, werden deine eingegebenen Daten lokal auf deinem Gerät
-    gespeichert, damit du sie nicht jedes Mal erneut eingeben musst.
-  security-check: Kann ich die Sicherheit dieser App überprüfen?
-  security-check-text: >
-    Der gesamte Quellcode dieser App und der dazugehörigen API ist frei verfügbar auf
-    <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+  faq:
+    - title: Warum muss ich mich registrieren?
+      description: >
+        Zum einen sind wir laut der
+        <a href="https://www.niedersachsen.de/Coronavirus/vorschriften-der-landesregierung-185856.html">
+          Niedersächsischen Corona-Verordnung vom 22.09.2021
+        </a> dazu verpflichtet, deine
+        Kontaktdaten zu registrieren. Zusätzlich gilt in der Mensa die 2G-Regelung (geimpft oder genesen).
+        Um deinen 2G-Status nachzuweisen musst du vor dem Mensabesuch deinen Impf- oder Genesenennachweises
+        in dieser Web App verifizieren.
+    - title: Muss ich mich bei jedem Mensabesuch neu registrieren?
+      description: >
+        Deinen Impf- oder Genesenennachweises musst du nur einmal hochladen. Auch deine Kontaktdaten musst du
+        nur einmal angeben, danach werden sie lokal auf deinem Gerät gespeichert. Du musst allerdings bei jedem Mensabesuch
+        den vor Ort ausgehängten QR-Code scannen und dich damit in der Mensa einchecken.
+    - title: Bei welchen Einrichtungen kann ich mich über diese App einchecken?
+      description: >
+        Die Web App wird in den Einrichtungen unserer Hochschulgastronomie eingesetzt, in denen ein Verzehr der
+        Speisen vor Ort vorgesehen ist.
+    - title: Ich bin nicht geimpft oder genesen, möchte aber in der Mensa essen. Was nun?
+      description: >
+        Dann nutze bitte weiterhin unsere To-go-Angebote, z.B. an einem unserer Foodtrucks oder in anderen Bistros oder
+        Mensen an deinem Standort. Die Sitzplätze stehen nur Gästen mit 2G-Status zur Verfügung.
+    - title: Wie und wo werden meine Daten gespeichert?
+      description: >
+        Deine Kontaktdaten werden grundsätzlich auf Servern des Studentenwerks OstNiedersachsen gespeichert. Sie werden
+        transportverschlüsselt zum Server übertragen, dort End-to-End verschlüsselt gespeichert und nach drei Wochen
+        gelöscht. Das digitale Impf- oder Genesenenzertifikat wird einmal zur Überprüfung genutzt, aber nie gespeichert
+        (du musst es daher nur einmal hochladen). Damit du deine Kontaktdaten nicht jedes Mal erneut eingeben musst,
+        werden sie lokal auf deinem Gerät gespeichert. Du kannst sie auf der Startseite löschen.
+    - title: Kann ich die Sicherheit dieser Web App überprüfen?
+      description: >
+        Der gesamte Quellcode dieser App und der dazugehörigen API ist frei zur Nutzung und Überprüfung verfügbar auf
+        <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
   welcome-back: Willkommen zurück
   ready-to-checkin: Du kannst dich mit diesem Gerät bei unseren Örtlichkeiten einchecken.
   check-in: Einchecken
@@ -179,25 +191,39 @@ en:
     <strong>must use your phone</strong> for registration
     and check-in on site. You <strong>cannot</strong> use different devices for registration and check-in.
   lets-go: Let's go
-  why-register: Why do I have to register?
-  why-register-text: >
-    According to <a rel="noreferrer noopener" href="https://www.niedersachsen.de/download/161342">Lower Saxony's order
-    for measures to prevent the spread of the Corona-Virus</a>
-    SARS-CoV-2 (CoronaVO) we have to register all guests who consume their food inside our canteens and cafeterias.
-  where-register: In which facilities can I use this app for registration?
-  where-register-text: >
-    This web app is supported in all of our gastronomic facilities where you can eat inside the building.
-  how-and-where-saved: How and where is my personal data stored?
-  how-and-where-saved-text: >
-    Your personal data is uploaded using transport encryption, stored End-to-End encrypted on servers of
-    the Studentenwerk OstNiedersachsen and will be deleted after 3 weeks.<br>
-    <br>
-    If the according option is enabled, your personal data will additionally be stored locally on your device so you
-    don't have to enter it again every time you want to enter a facility.
-  security-check: Can I verify the security of this web app?
-  security-check-text: >
-    The source code of this web app, including its API, is freely available on
-    <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
+  faq:
+    - title: Why do I have to register?
+      description: >
+        Firstly, according to the <a href="https://www.niedersachsen.de/Coronavirus/vorschriften-der-landesregierung-185856.html">
+          „Niedersächsische Corona-Verordnung“ (Lower Saxony Corona Ordinance) of 22.09.2021
+        </a>,
+        we are obliged to register your contact details. The „2G“ rule (including only vaccinated or recovered people)
+        applies in the Mensas. To prove your 2G status, you need to verify your proof of vaccination or recovery in this
+        web app before going to the Mensa.
+    - title: Do I have to register every time I visit the Mensa?
+      description: >
+        You only have to upload your vaccination or recovery certificate once. You also only have to enter your contact
+        details once, after that they will be saved locally on your device. However, you must scan the QR code posted
+        on-site every time you visit and use it to check in at the Mensa.
+    - title: At which facilities can I check in via this app?
+      description: >
+        The web app is used in the Mensas where it is possible to consume the food on-site in the indoor seating area.
+    - title: I am not vaccinated or recovered but want to eat at the Mensa. What now?
+      description: >
+        Then please continue to use our to-go offers, e.g. at one of our food trucks or in other bistros or Mensas at
+        your location. Seating is only available to guests who meet the 2G requirements.
+    - title: How and where is my data stored?
+      description: >
+        Your contact details are always stored on servers of the Studentenwerk OstNiedersachsen. They are transmitted
+        to the server in transport-encrypted form, stored end-to-end encrypted and deleted after three weeks. The
+        digital vaccination or recovery certificate is used only once for verification, but never stored
+        (therefore you only need to upload it once).
+        For you to not enter your contact details again each time, we store them locally on your device for next time.
+        You can delete them on the main page of this web app.
+    - title: Can I check the security of this app?
+      description: >
+        The entire source code of this web app including its API is free and open source software. It is available on
+        <a rel="noreferrer noopener" href="https://github.com/stw-on/sheriff">GitHub</a>.
   welcome-back: Welcome back
   ready-to-checkin: You can check in at our locations with this device.
   check-in: Check in
