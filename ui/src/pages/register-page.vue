@@ -237,8 +237,11 @@
             return
           }
 
+          this.loading = false
           await this.onQrCodeScanned(detectedCodes[0].rawValue)
         }
+
+        this.loading = false
       },
       async onQrCodeScanned(result) {
         if (this.loading || !result) {
