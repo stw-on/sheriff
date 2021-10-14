@@ -46,7 +46,10 @@
       async qrStreamInit(promise) {
         try {
           await promise
-          this.showVideo = true
+
+          if (!this.loading) {
+            this.showVideo = true
+          }
         } catch (e) {
           this.noCameraFound = true
           this.$emit('error', this.$t('no-camera-access'))

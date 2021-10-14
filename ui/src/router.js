@@ -12,6 +12,7 @@ const routes = [
     children: [
       {path: '', name: 'admin/index', component: require('./pages/admin/index-page').default},
       {path: 'location/:id?', name: 'admin/location', component: require('./pages/admin/location-page').default},
+      {path: 'scan', name: 'admin/scanner', component: require('./pages/admin/scanner-page').default},
     ],
   },
 ]

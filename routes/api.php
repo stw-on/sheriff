@@ -5,6 +5,7 @@ use App\Http\Controllers\CovPassController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PublicKeyController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SigningKeyController;
 use App\Http\Controllers\VisitController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
@@ -49,6 +50,10 @@ Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], functio
 
         Route::group(['prefix' => '/public-key'], function () {
             Route::get('/', [PublicKeyController::class, 'getAll']);
+        });
+
+        Route::group(['prefix' => '/signing-key'], function () {
+            Route::get('/', [SigningKeyController::class, 'get']);
         });
     });
 });

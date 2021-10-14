@@ -22,11 +22,16 @@
       <v-toolbar-title>Verwaltung</v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
+        <v-btn text :to="{name: 'admin/scanner'}">
+          <v-icon left>mdi-qrcode-scan</v-icon>
+          Scanner
+        </v-btn>
+
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" text>
-              <v-icon left>mdi-account</v-icon>
-              {{ user.display_name }}
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-account</v-icon>
+              <span class="hidden-sm-and-down">{{ user.display_name }}</span>
             </v-btn>
           </template>
           <v-list>

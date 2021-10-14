@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\SigningKey;
 use App\Models\Visit;
 use App\Resources\SignedDataBlob;
 use Carbon\Carbon;
@@ -62,11 +63,16 @@ class VisitController extends Controller
 
         return response()->json([
             'visit_id' => Crypt::encryptString($visit->id),
-            'color_of_the_hour' => $location->getColorOfTheHour(),
-            'icon_of_the_hour' => $location->getIconOfTheHour(),
+            'color_of_the_hour' => $location->getColorOfTheHour($visit->entered_at),
+            'icon_of_the_hour' => $location->getIconOfTheHour($visit->entered_at),
             'location_name' => $location->name,
             'entered_at' => $visit->entered_at->format('H:i'),
             'date_of_birth' => $signedDataBlob->get('date_of_birth'),
+            'entrance_certificate' => (new SignedDataBlob([
+                'entered_at' => $visit->entered_at->format('H:i'),
+                'location_name' => $location->name,
+                'date_of_birth' => $signedDataBlob->get('date_of_birth'),
+            ] + $contactDetails, SigningKey::latest()))->jsonSerialize(),
         ] + $contactDetails);
     }
 }

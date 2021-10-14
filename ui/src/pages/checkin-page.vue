@@ -1,18 +1,16 @@
 <template>
-  <v-sheet :style="{backgroundColor: colorOfTheHour}" class="fill-height transition-background-color">
-    <v-container class="full-height">
-      <v-expand-transition>
-        <v-stepper v-if="step !== '2'" :value="step" alt-labels class="elevation-0 transparent">
+  <v-sheet :dark="step === '2'" :style="{backgroundColor: colorOfTheHour}" class="fill-height transition-background-color">
+    <v-scroll-y-reverse-transition mode="out-in">
+      <v-container v-if="step === '1'" key="scan" class="full-height">
+        <v-stepper :value="step" alt-labels class="elevation-0 transparent">
           <v-stepper-header class="elevation-0">
             <v-stepper-step step="1" />
             <v-divider></v-divider>
             <v-stepper-step step="2" />
           </v-stepper-header>
         </v-stepper>
-      </v-expand-transition>
 
-      <v-scroll-y-reverse-transition mode="out-in">
-        <div v-if="step === '1'" key="scan">
+        <div>
           <h2 class="font-weight-light text-center mb-3">{{ $t('scan-qr-code') }}!</h2>
 
           <qr-scanner
@@ -26,14 +24,10 @@
             {{ $t('scan-qr-code-prompt') }}
           </p>
         </div>
+      </v-container>
 
-        <v-sheet
-          dark
-          color="transparent"
-          v-else-if="step === '2'"
-          class="d-flex flex-column flex-grow-1 align-center justify-center"
-          key="done"
-        >
+      <div v-else-if="step === '2'" key="done">
+        <div class="checkin-screen d-flex flex-column flex-grow-1 align-center justify-center">
           <div class="text-center">
             <div class="big mb-10">{{ visitData.location_name }}</div>
             <div ref="time" class="time mb-10">{{ visitData.entered_at }}</div>
@@ -43,14 +37,16 @@
             <div class="headline mt-2">{{ visitData.street }}</div>
             <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
             <div class="headline">{{ visitData.phone }}</div>
-
-            <v-icon size="100vw" class="overlay-icon">
-              mdi-{{ iconOfTheHour }}
-            </v-icon>
           </div>
-        </v-sheet>
-      </v-scroll-y-reverse-transition>
-    </v-container>
+        </div>
+
+        <div class="d-flex justify-center py-12">
+          <v-card class="qr-svg pa-3" color="white">
+            <div v-html="qrHtml" />
+          </v-card>
+        </div>
+      </div>
+    </v-scroll-y-reverse-transition>
 
     <v-snackbar v-model="errorSnackbar" multi-line color="primary" top>
       {{ errorSnackbarText }}
@@ -64,6 +60,10 @@
       <v-icon left>mdi-cloud-off-outline</v-icon>
       {{ $t('no-connection') }}
     </v-snackbar>
+
+    <v-icon size="100vw" class="overlay-icon" :class="{hidden: step !== '2'}">
+      mdi-{{ iconOfTheHour }}
+    </v-icon>
   </v-sheet>
 </template>
 
@@ -71,6 +71,7 @@
   import {axios, axiosForHost} from "@/lib/axios"
   import QrScanner from "@/components/steps/qr-scanner"
   import base64Url from "base64-url"
+  import QRCode from 'qrcode-svg'
   import {confettiFromElement} from "@/lib/confettiFromElement"
 
   export default {
@@ -84,6 +85,7 @@
       visitData: null,
       keepOpenSnackbar: false,
       offline: !navigator.onLine || false,
+      qrHtml: '',
     }),
     computed: {
       colorOfTheHour() {
@@ -175,6 +177,14 @@
             this.visitData = visitData
             this.step = '2'
 
+            this.qrHtml = new QRCode({
+              content: JSON.stringify(visitData.entrance_certificate),
+              ecl: 'M',
+              join: true,
+              container: 'svg-viewbox',
+              padding: 0,
+            }).svg()
+
             setTimeout(() => {
               this.keepOpenSnackbar = true
 
@@ -258,5 +268,29 @@
     transform: translateX(-50%) translateY(-50%);
     opacity: 0.2;
     animation: rotate 5s infinite linear;
+    z-index: 0;
+    transition: opacity 400ms;
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+
+  .checkin-screen {
+    min-height: 100vh;
+  }
+</style>
+
+<style lang="scss">
+  .qr-svg {
+
+    svg {
+      width: 100%;
+      display: block;
+
+      &::after {
+        padding-bottom: 100%;
+      }
+    }
   }
 </style>

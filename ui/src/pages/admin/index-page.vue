@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="d-flex">
+    <div class="d-flex flex-wrap">
       <h1>Örtlichkeiten verwalten</h1>
       <v-spacer />
       <v-btn :disabled="!user.can_manage_locations" :to="{name: 'admin/location'}" color="primary">
