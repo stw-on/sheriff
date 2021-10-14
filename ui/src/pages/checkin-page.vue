@@ -70,7 +70,7 @@
 <script>
   import {axios, axiosForHost} from "@/lib/axios"
   import QrScanner from "@/components/steps/qr-scanner"
-  import base64Url from "base64-url"
+  import {Base64} from 'js-base64'
   import QRCode from 'qrcode-svg'
   import {confettiFromElement} from "@/lib/confettiFromElement"
 
@@ -141,7 +141,7 @@
         console.log('Checking data:', base64Data)
 
         try {
-          const qrData = JSON.parse(base64Url.decode(base64Data))
+          const qrData = JSON.parse(Base64.decode(base64Data))
 
           if (!qrData.host || !qrData.data) {
             this.showError()

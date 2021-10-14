@@ -7,7 +7,13 @@
     />
 
     <v-scroll-x-reverse-transition mode="out-in">
-      <v-card v-if="scanResult || scanError" class="pa-3 result" :color="scanError ? 'error' : 'success'" dark :key="scanId">
+      <v-card
+        v-if="scanResult || scanError"
+        class="pa-3 result"
+        :color="scanError ? 'error' : 'success'"
+        dark
+        :key="scanId"
+      >
         <template v-if="!!scanError">
           <div class="text-pre">{{ scanError }}</div>
         </template>
@@ -27,7 +33,7 @@
 <script>
   import QrScanner from "@/components/steps/qr-scanner"
   import {axios} from "@/lib/axios"
-  import { Base64 } from 'js-base64';
+  import {Base64} from 'js-base64'
   import Sodium from 'sodium-javascript'
 
   export default {
