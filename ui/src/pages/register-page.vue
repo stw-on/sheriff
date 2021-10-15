@@ -192,6 +192,7 @@
 <script>
   import {axios} from "@/lib/axios"
   import QrScanner from "@/components/steps/qr-scanner"
+  import qrScannerWorkerSource from '!!raw-loader!../../node_modules/qr-scanner/qr-scanner-worker.min.js'
 
   export default {
     name: 'checkin-page',
@@ -227,18 +228,22 @@
       async onFileSelected(event) {
         this.loading = true
 
+        const QrScanner = (await import('qr-scanner')).default
+        QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
+
         if (event.target.files.length > 0) {
-          const barcodeDetector = new window.BarcodeDetector({formats: ["qr_code"]})
-          const detectedCodes = await barcodeDetector.detect(event.target.files[0])
-          this.$refs.fileInput.value = ''
-
-          if (detectedCodes.length === 0) {
+          try {
+            const result = await QrScanner.scanImage(event.target.files[0])
+            this.loading = false
+            await this.onQrCodeScanned(result)
+          } catch (e) {
+            console.error(e)
             this.showError(this.$t('no-qr-code-detected'))
-            return
           }
+        }
 
-          this.loading = false
-          await this.onQrCodeScanned(detectedCodes[0].rawValue)
+        if (this.$refs.fileInput) {
+          this.$refs.fileInput.value = ''
         }
 
         this.loading = false

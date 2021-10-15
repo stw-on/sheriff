@@ -6,12 +6,6 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import './registerServiceWorker'
 import {translate} from '@/lib/translate'
-import BarcodeDetector from "barcode-detector"
-
-// polyfill unless already supported
-if (!("BarcodeDetector" in window)) {
-  window.BarcodeDetector = BarcodeDetector
-}
 
 Vue.config.productionTip = false
 
