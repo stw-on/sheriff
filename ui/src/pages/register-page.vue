@@ -324,6 +324,9 @@
   }
 
   .hidden {
-    display: none;
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
   }
 </style>
