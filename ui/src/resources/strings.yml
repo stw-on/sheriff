@@ -48,6 +48,8 @@ de:
   check-in: Einchecken
   delete-registration: Registrierung löschen
   delete-registration-prompt: Möchtest du die Registrierung wirklich löschen? Du kannst dich erst nach erneuter Registrierung wieder mit diesem Gerät einchecken.
+  update-available: Ein Update für diese App wurde heruntergeladen.
+  reload: Neu laden
 
   # register
   no-connection: Keine Internetverbindung
@@ -226,6 +228,8 @@ en:
   check-in: Check in
   delete-registration: Delete registration
   delete-registration-prompt: Are you sure you want to delete your registration? You will be unable to check in with this device until you registered again.
+  update-available: An update for this app has been downloaded.
+  reload: Reload
 
   # register
   no-connection: No connection
