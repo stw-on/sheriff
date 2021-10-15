@@ -103,15 +103,15 @@ class Location extends BaseModel
         return $this->belongsTo(PublicKey::class);
     }
 
-    public function getColorOfTheHour(Carbon $time)
+    public function getCurrentColor(Carbon $time)
     {
-        $hash = crc32($this->publicKey->key . $time->format('Ymdh'));
+        $hash = crc32($this->publicKey->key . $time->format('Ymd'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
     }
 
-    public function getIconOfTheHour(Carbon $time)
+    public function getCurrentIcon(Carbon $time)
     {
-        $hash = crc32($this->publicKey->key . $time->format('hYmd'));
+        $hash = crc32($this->publicKey->key . $time->format('dYm'));
         return self::ICONS[abs($hash) % count(self::ICONS)];
     }
 }

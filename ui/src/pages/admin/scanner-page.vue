@@ -10,7 +10,7 @@
       <v-card
         v-if="scanResult || scanError"
         class="pa-3 result"
-        :color="scanError ? 'error' : 'success'"
+        :color="cardColor"
         dark
         :key="scanId"
       >
@@ -19,7 +19,7 @@
         </template>
         <template v-else>
           <h2>{{ scanResult.last_name }}, {{ scanResult.first_name }}</h2>
-          <h3>{{ scanResult.entered_at }}, {{ scanResult.location_name }}</h3>
+          <h3>{{ formatDate(scanResult.entered_at) }}, {{ scanResult.location_name }}</h3>
           <div>{{ scanResult.date_of_birth }}</div>
           <div>{{ scanResult.street }}</div>
           <div>{{ scanResult.zip }} {{ scanResult.city }}</div>
@@ -35,6 +35,9 @@
   import {axios} from "@/lib/axios"
   import {Base64} from 'js-base64'
   import Sodium from 'sodium-javascript'
+  import {differenceInMinutes, format as formatDate, parseISO} from 'date-fns'
+  import {de} from 'date-fns/locale'
+
 
   export default {
     name: "scanner-page",
@@ -52,7 +55,25 @@
 
       this.loading = false
     },
+    computed: {
+      cardColor() {
+        if (this.scanError || !this.scanResult) {
+          return 'error'
+        }
+
+        if (differenceInMinutes(new Date(), parseISO(this.scanResult.entered_at)) > 20) {
+          return 'warning'
+        }
+
+        return 'success'
+      }
+    },
     methods: {
+      formatDate(isoString) {
+        return formatDate(parseISO(isoString), 'dd.MM.yyyy hh:mm', {
+          locale: de,
+        })
+      },
       onQrCodeScanned(result) {
         this.scanId++
 

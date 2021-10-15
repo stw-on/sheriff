@@ -13,6 +13,7 @@
     "barcode-detector": "^1.0.0",
     "canvas-confetti": "^1.4.0",
     "core-js": "^3.18.2",
+    "date-fns": "^2.25.0",
     "js-base64": "^3.7.2",
     "lodash.merge": "^4.6.2",
     "qrcode-svg": "^1.1.0",

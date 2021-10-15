@@ -1,5 +1,5 @@
 <template>
-  <v-sheet :dark="step === '2'" :style="{backgroundColor: colorOfTheHour}" class="fill-height transition-background-color">
+  <v-sheet :dark="step === '2'" :style="{backgroundColor: currentColor}" class="fill-height transition-background-color">
     <v-scroll-y-reverse-transition mode="out-in">
       <v-container v-if="step === '1'" key="scan" class="full-height">
         <v-stepper :value="step" alt-labels class="elevation-0 transparent">
@@ -34,16 +34,19 @@
             <div class="big">{{ visitData.last_name }},</div>
             <div class="big">{{ visitData.first_name }}</div>
             <div class="headline">{{ visitData.date_of_birth }}</div>
-            <div class="headline mt-2">{{ visitData.street }}</div>
-            <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
-            <div class="headline">{{ visitData.phone }}</div>
           </div>
         </div>
 
         <div class="d-flex justify-center py-12">
-          <v-card class="qr-svg pa-3" color="white">
+          <v-card class="qr-svg pa-3 mb-4" color="white">
             <div v-html="qrHtml" />
           </v-card>
+
+          <div class="text-center">
+            <div class="headline">{{ visitData.street }}</div>
+            <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
+            <div class="headline">{{ visitData.phone }}</div>
+          </div>
         </div>
       </div>
     </v-scroll-y-reverse-transition>
@@ -62,7 +65,7 @@
     </v-snackbar>
 
     <v-icon size="100vw" class="overlay-icon" :class="{hidden: step !== '2'}">
-      mdi-{{ iconOfTheHour }}
+      mdi-{{ currentIcon }}
     </v-icon>
   </v-sheet>
 </template>
@@ -88,11 +91,11 @@
       qrHtml: '',
     }),
     computed: {
-      colorOfTheHour() {
-        return this.visitData?.color_of_the_hour
+      currentColor() {
+        return this.visitData?.current_color
       },
-      iconOfTheHour() {
-        return this.visitData?.icon_of_the_hour
+      currentIcon() {
+        return this.visitData?.current_icon
       },
     },
     mounted() {
