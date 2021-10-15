@@ -50,6 +50,7 @@ de:
   delete-registration-prompt: Möchtest du die Registrierung wirklich löschen? Du kannst dich erst nach erneuter Registrierung wieder mit diesem Gerät einchecken.
   update-available: Ein Update für diese App wurde heruntergeladen.
   reload: Neu laden
+  registration-available-from: Die Registrierung ist ab Mittwoch, 20.10.2021 möglich
 
   # register
   no-connection: Keine Internetverbindung
@@ -348,6 +349,7 @@ en:
   delete-registration-prompt: Are you sure you want to delete your registration? You will be unable to check in with this device until you registered again.
   update-available: An update for this app has been downloaded.
   reload: Reload
+  registration-available-from: Registration is available from Wednesday, 20.10.2021
 
   # register
   no-connection: No connection

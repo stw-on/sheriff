@@ -170,9 +170,12 @@
       <v-alert class="hidden-md-and-down" color="warning" dismissible v-html="$t('desktop-warning')" />
 
       <div class="text-center mb-5">
-        <v-btn :to="{name: 'register'}" color="primary" x-large>
+        <v-btn :to="{name: 'register'}" color="primary" x-large disabled>
           {{ $t('lets-go') }}
         </v-btn>
+        <div class="mt-4 font-weight-bold">
+          {{ $t('registration-available-from') }}
+        </div>
       </div>
     </template>
 
