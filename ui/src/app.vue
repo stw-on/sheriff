@@ -5,7 +5,7 @@
         <router-view />
       </v-fade-transition>
 
-      <v-snackbar v-model="updateAvailable">
+      <v-snackbar multi-line v-model="updateAvailable">
         {{ $t('update-available') }}
         <template v-slot:action="{ attrs }">
           <v-btn
