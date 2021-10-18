@@ -19,6 +19,7 @@ if (app()->environment('production')) {
         $configJson = json_encode([
             'theme_color' => config('sheriff.theme_color'),
             'logo_url' => config('sheriff.logo_url'),
+            'registration_disabled' => config('sheriff.registration_disabled'),
             'custom_translations' => file_exists('/app/strings.yml')
                 ? yaml_parse_file('/app/strings.yml')
                 : null,
