@@ -31,6 +31,6 @@ if (app()->environment('production')) {
 </script>
 CONFIG;
 
-        return str_replace('<!-- SHERIFF_CONFIG -->', $config, file_get_contents(public_path('ui-index.html')));
+        return str_replace('<script id="sheriff-config"></script>', $config, file_get_contents(public_path('ui-index.html')));
     })->where('any', '.*');
 }
