@@ -4,18 +4,13 @@ namespace App\Http\Controllers;
 
 use App\CovPassCheck\DatabaseTrustStore;
 use App\Exceptions\CertificateExpiredException;
-use App\Exceptions\CertificateNotCoveredException;
-use App\Http\Requests\SignedDataBlobRequest;
 use App\Models\SigningKey;
 use App\Resources\SignedDataBlob;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use JsonSerializable;
 use stwon\CovPassCheck\CovPassCheck;
 use stwon\CovPassCheck\Exceptions\InvalidSignatureException;
 use stwon\CovPassCheck\Exceptions\MissingHC1HeaderException;
 use stwon\CovPassCheck\HealthCertificate\HealthCertificate;
-use stwon\CovPassCheck\HealthCertificate\Target;
 use Symfony\Component\HttpFoundation\Response;
 
 class CovPassController extends Controller
@@ -72,6 +67,12 @@ class CovPassController extends Controller
 
     public function signContactDetails(): SignedDataBlob|JsonResponse
     {
+        if (config('sheriff.registration_disabled')) {
+            return response()->json([
+                'error' => 'registration_disabled',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $this->validateWith([
             'hcert' => 'string|required',
             'street' => 'string|min:2|max:128|required',

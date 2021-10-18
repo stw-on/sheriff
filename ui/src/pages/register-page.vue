@@ -308,6 +308,16 @@
         } catch (e) {
           console.error(e)
 
+          this.errorSnackbarText = this.$t('invalid-qr-code')
+
+          switch (e.response?.data?.error) {
+            case 'registration_disabled':
+              this.errorSnackbarText = this.$t('registration-available-from')
+              break
+          }
+
+          this.errorSnackbar = true
+
           setTimeout(() => {
             this.loading = false
           }, 1000)

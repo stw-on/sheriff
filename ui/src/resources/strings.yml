@@ -51,6 +51,7 @@ de:
   update-available: Ein Update für diese App wurde heruntergeladen.
   reload: Neu laden
   registration-available-from: Die Registrierung ist ab Mittwoch, 20.10.2021 möglich
+  generic-error: Es ist ein Fehler aufgetreten
 
   # register
   no-connection: Keine Internetverbindung
@@ -350,6 +351,7 @@ en:
   update-available: An update for this app has been downloaded.
   reload: Reload
   registration-available-from: Registration is available from Wednesday, 20.10.2021
+  generic-error: An error occurred
 
   # register
   no-connection: No connection

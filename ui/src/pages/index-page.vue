@@ -170,10 +170,10 @@
       <v-alert class="hidden-md-and-down" color="warning" dismissible v-html="$t('desktop-warning')" />
 
       <div class="text-center mb-5">
-        <v-btn :to="{name: 'register'}" color="primary" x-large disabled>
+        <v-btn :to="{name: 'register'}" color="primary" x-large :disabled="registrationDisabled">
           {{ $t('lets-go') }}
         </v-btn>
-        <div class="mt-4 font-weight-bold">
+        <div v-if="registrationDisabled" class="mt-4 font-weight-bold">
           {{ $t('registration-available-from') }}
         </div>
       </div>
@@ -201,6 +201,9 @@
     computed: {
       logoUrl() {
         return window.__sheriff_config?.logo_url ?? null
+      },
+      registrationDisabled() {
+        return window.__sheriff_config?.registration_disabled ?? false
       }
     },
     mounted() {
