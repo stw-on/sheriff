@@ -5,6 +5,10 @@
         <router-view />
       </v-fade-transition>
 
+      <v-container>
+        <contact-button />
+      </v-container>
+
       <v-snackbar multi-line v-model="updateAvailable">
         {{ $t('update-available') }}
         <template v-slot:action="{ attrs }">
@@ -24,8 +28,10 @@
 
 <script>
   import {isUpdateReady, registerServiceWorker, serviceWorkerEventBus} from "@/registerServiceWorker"
+  import ContactButton from "@/components/contact-button"
 
   export default {
+    components: {ContactButton},
     data: () => ({
       updateAvailable: isUpdateReady(),
     }),

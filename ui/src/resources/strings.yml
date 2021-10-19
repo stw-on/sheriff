@@ -299,6 +299,13 @@ de:
     Geschafft! Du kannst dich nun mit diesem Gerät in Mensen und Cafeterien des Studentenwerk OstNiedersachsen einchecken.
   check-in-now: Jetzt einchecken
 
+  # help
+  need-help: Du hast Probleme mit dieser Webseite?
+  send-email: Schreib' uns
+  describe-your-problem: Beschreibe dein Problem
+  it-info: Infos für die IT (bitte nicht entfernen)
+  target-email: checkin-support@stw-on.de
+
 en:
   # index
   guest-registration: Guest Registration
@@ -347,7 +354,7 @@ en:
   ready-to-checkin: You can check in at our locations with this device.
   check-in: Check in
   delete-registration: Delete registration
-  delete-registration-prompt: Are you sure you want to delete your registration? You will be unable to check in with this device until you registered again.
+  delete-registration-prompt: Are you sure you want to delete your registration? You will be unable to check in with this device until you register again.
   update-available: An update for this app has been downloaded.
   reload: Reload
   registration-available-from: Registration is available from Wednesday, 20.10.2021
@@ -399,3 +406,10 @@ en:
   registration-done-description: >
     From now on you can now check in to our locations with this device.
   check-in-now: Check in now
+
+  # help
+  need-help: Having trouble with this page?
+  send-email: Message us
+  describe-your-problem: Describe your problem
+  it-info: Technical information (please keep)
+  target-email: checkin-support@stw-on.de
