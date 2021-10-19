@@ -63,7 +63,7 @@ class VisitController extends Controller
 
         return response()->json([
             'visit_id' => Crypt::encryptString($visit->id),
-            'current_colors' => $location->getCurrentColor($visit->entered_at),
+            'current_color' => $location->getCurrentColor($visit->entered_at),
             'current_icon' => $location->getCurrentIcon($visit->entered_at),
             'location_name' => $location->name,
             'entered_at' => $visit->entered_at->format('H:i'),
