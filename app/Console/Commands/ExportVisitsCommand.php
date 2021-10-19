@@ -53,55 +53,46 @@ class ExportVisitsCommand extends Command
         /** @var Location $location */
         $location = $keyedLocations[$locationIndex];
 
-        $decrypted = false;
+        $privateKeys = []; // Key ID → keypair
 
-        do {
+        if ($this->argument('file')) {
+            file_put_contents($this->argument('file'), '');
+            $csv = Writer::createFromPath($this->argument('file'));
+        } else {
+            $csv = Writer::createFromStream(STDOUT);
+        }
+
+        $csv->insertOne(['entered_at', 'left_at', 'first_name', 'last_name', 'street', 'zip', 'city', 'phone']);
+
+        foreach ($location->visits as $visit) {
             try {
-                $privateKey = base64_decode($this->ask('Enter private key for key ' . $location->public_key_id));
-
-                $keypair = sodium_crypto_box_keypair_from_secretkey_and_publickey($privateKey, $location->publicKey->key);
-
-                if ($this->argument('file')) {
-                    file_put_contents($this->argument('file'), '');
-                    $csv = Writer::createFromPath($this->argument('file'));
-                } else {
-                    $csv = Writer::createFromStream(STDOUT);
+                if (!array_key_exists($visit->public_key_id, $privateKeys)) {
+                    $privateKey = base64_decode($this->ask('Enter private key for key ' . $visit->public_key_id));
+                    $keypair = sodium_crypto_box_keypair_from_secretkey_and_publickey($privateKey, $visit->publicKey->key);
+                    $privateKeys[$visit->public_key_id] = $keypair;
                 }
 
-                $csv->insertOne(['entered_at', 'left_at', 'first_name', 'last_name', 'street', 'zip', 'city', 'phone']);
+                $data = optional(
+                    json_decode(sodium_unpad(
+                        sodium_crypto_box_seal_open($visit->contact_details, $privateKeys[$visit->public_key_id]),
+                        Visit::PAD_LENGTH
+                    ), true, 512, JSON_THROW_ON_ERROR)
+                );
 
-                foreach ($location->visits as $visit) {
-                    try {
-                        $data = optional(
-                            json_decode(
-                                sodium_unpad(
-                                    sodium_crypto_box_seal_open($visit->contact_details, $keypair),
-                                    Visit::PAD_LENGTH
-                                ),
-                                true
-                            )
-                        );
-
-                        $csv->insertOne([
-                            $visit->entered_at->toIso8601String(),
-                            optional($visit->left_at)->toIso8601String(),
-                            $data['first_name'],
-                            $data['last_name'],
-                            $data['street'],
-                            $data['zip'],
-                            $data['city'],
-                            $data['phone'],
-                        ]);
-                    } catch (\Exception $exception) {
-                        $this->error('Error exporting visit ' . $visit->id . ': ' . $exception->getMessage());
-                    }
-                }
-
-                $decrypted = true;
-            } catch (\SodiumException $exception) {
-                $this->error($exception->getMessage());
+                $csv->insertOne([
+                    $visit->entered_at->toIso8601String(),
+                    optional($visit->left_at)->toIso8601String(),
+                    $data['first_name'],
+                    $data['last_name'],
+                    $data['street'],
+                    $data['zip'],
+                    $data['city'],
+                    $data['phone'],
+                ]);
+            } catch (\Exception $exception) {
+                $this->error('Error exporting visit ' . $visit->id . ': ' . $exception->getMessage());
             }
-        } while (!$decrypted);
+        }
 
         return 0;
     }
