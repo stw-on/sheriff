@@ -37,16 +37,16 @@
           </div>
         </div>
 
-        <div class="d-flex justify-center py-12">
+        <div class="d-flex justify-center pt-12">
           <v-card class="qr-svg pa-3 mb-4" color="white">
             <div v-html="qrHtml" />
           </v-card>
+        </div>
 
-          <div class="text-center">
-            <div class="headline">{{ visitData.street }}</div>
-            <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
-            <div class="headline">{{ visitData.phone }}</div>
-          </div>
+        <div class="text-center mt-4 mb-12">
+          <div class="headline">{{ visitData.street }}</div>
+          <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
+          <div class="headline">{{ visitData.phone }}</div>
         </div>
       </div>
     </v-scroll-y-reverse-transition>
