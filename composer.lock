@@ -4396,16 +4396,16 @@
         },
         {
             "name": "stwon/covpasscheck-php",
-            "version": "1.3.3",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stw-on/covpasscheck-php.git",
-                "reference": "b07d8ae1c1cf818a509e0f3031026d8ed7ffac3e"
+                "reference": "3d1374fad48b5afbfb450d5a4f4bcaea3c0024e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/b07d8ae1c1cf818a509e0f3031026d8ed7ffac3e",
-                "reference": "b07d8ae1c1cf818a509e0f3031026d8ed7ffac3e",
+                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/3d1374fad48b5afbfb450d5a4f4bcaea3c0024e5",
+                "reference": "3d1374fad48b5afbfb450d5a4f4bcaea3c0024e5",
                 "shasum": ""
             },
             "require": {
@@ -4435,9 +4435,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stw-on/covpasscheck-php/issues",
-                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.3.3"
+                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.3.4"
             },
-            "time": "2021-10-20T08:54:31+00:00"
+            "time": "2021-10-20T09:11:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
