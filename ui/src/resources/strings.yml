@@ -81,6 +81,7 @@ de:
   # hcert
   error-invalid-signature: Dieses Zertifikat ist ungültig
   error-certificate-not-covered: Das Zertifikat weist nicht das für den Eintritt in diese Mensa erforderliche Merkmal auf.
+  error-vaccination-series-not-complete: Unvollständige Impfung. Bitte benutze das Zertifikat deiner letzten Impfung.
 
   # scan
   scan-qr-code: QR-Code scannen
@@ -380,7 +381,7 @@ en:
   privacy-accepted-3: carefully and accept it.
   accept: Accept
   privacy: Privacy
-  entered-data-correctly: I ensure to have endered my data correctly.
+  entered-data-correctly: I ensure to have entered my data correctly.
   offline: Offline
   next: Proceed
   saved: Saved
@@ -391,6 +392,7 @@ en:
   # hcert
   error-invalid-signature: This certificate is invalid
   error-certificate-not-covered: Your health certificate does not meet the requirement to enter this location.
+  error-vaccination-series-not-complete: Vaccination incomplete. Please use the latest certificate of your vaccination.
 
   # scan
   scan-qr-code: Scan QR code

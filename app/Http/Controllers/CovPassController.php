@@ -43,6 +43,12 @@ class CovPassController extends Controller
         try {
             $certificate = $this->readAndCheckCertificate(request('hcert'));
 
+            if ($certificate->getType() & HealthCertificate::TYPE_VACCINATION && !$certificate->getVaccinationEntries()[0]->isFullyVaccinated()) {
+                return response()->json([
+                    'error' => 'hcert_vaccination_series_not_complete',
+                ], Response::HTTP_BAD_REQUEST);
+            }
+
             return [
                 'first_name' => $certificate->getSubject()->getFirstName(),
                 'last_name' => $certificate->getSubject()->getLastName(),
@@ -91,7 +97,7 @@ class CovPassController extends Controller
                 'first_name' => $certificate->getSubject()->getFirstName(),
                 'last_name' => $certificate->getSubject()->getLastName(),
                 'date_of_birth' => $certificate->getSubject()->getDateOfBirth(),
-                'certificate_type' => $certificate->getType(),
+                'certificate_type' => $certificate->getType(fullyVaccinatedOnly: true),
             ];
 
             return new SignedDataBlob($data, $key);

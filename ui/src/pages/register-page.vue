@@ -275,6 +275,9 @@
             case 'hcert_invalid_signature':
               this.errorSnackbarText = this.$t('error-invalid-signature')
               break
+            case 'hcert_vaccination_series_not_complete':
+              this.errorSnackbarText = this.$t('error-vaccination-series-not-complete')
+              break
           }
 
           this.errorSnackbar = true
