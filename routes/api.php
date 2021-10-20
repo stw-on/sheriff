@@ -26,7 +26,7 @@ Route::group(['prefix' => '/config'], function () {
 });
 
 Route::group(['prefix' => '/visit'], function () {
-    Route::post('/register', [VisitController::class, 'registerVisit'])->middleware('throttle:20,1');
+    Route::post('/register', [VisitController::class, 'registerVisit']);
 });
 
 Route::group(['prefix' => '/covpass'], function () {
