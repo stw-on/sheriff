@@ -2,12 +2,25 @@
   <v-app>
     <v-main>
       <v-fade-transition mode="out-in">
-        <router-view />
+        <router-view @show-privacy-policy="showPrivacyPolicy = true" />
       </v-fade-transition>
 
       <v-container>
-        <contact-button />
+        <page-footer @show-privacy-policy="showPrivacyPolicy = true" />
       </v-container>
+
+      <v-dialog v-model="showPrivacyPolicy" fullscreen transition="dialog-bottom-transition">
+        <v-card>
+          <v-toolbar dark color="primary">
+            <v-btn icon dark @click="showPrivacyPolicy = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-toolbar-title>{{ $t('privacy-terms') }}</v-toolbar-title>
+          </v-toolbar>
+
+          <div class="pa-3" v-html="$t('privacy-policy')"></div>
+        </v-card>
+      </v-dialog>
 
       <v-snackbar multi-line v-model="updateAvailable">
         {{ $t('update-available') }}
@@ -28,12 +41,13 @@
 
 <script>
   import {isUpdateReady, registerServiceWorker, serviceWorkerEventBus} from "@/registerServiceWorker"
-  import ContactButton from "@/components/contact-button"
+  import PageFooter from "@/components/page-footer"
 
   export default {
-    components: {ContactButton},
+    components: {PageFooter},
     data: () => ({
       updateAvailable: isUpdateReady(),
+      showPrivacyPolicy: false,
     }),
     beforeMount() {
       serviceWorkerEventBus.$on('updated', () => {

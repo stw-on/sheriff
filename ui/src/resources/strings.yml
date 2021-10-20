@@ -65,9 +65,12 @@ de:
   zip: PLZ
   city: Ort
   phone: Telefon- oder Handynummer
-  privacy-accepted-1: Ich habe die
+  privacy-accepted-1: Der Schutz deiner Daten ist uns sehr wichtig, daher speichern wir nur Daten, die für das Einchecken notwendig sind. Bitte bestätige, die
   privacy-terms: Hinweise zum Datenschutz
-  privacy-accepted-3: gelesen, stimme ihnen zu und versichere, meine Daten korrekt angegeben zu haben
+  privacy-accepted-3: gelesen zu haben und ihnen zuzustimmen.
+  accept: Akzeptieren
+  privacy: Datenschutz
+  entered-data-correctly: Ich versichere, meine Daten korrekt angegeben zu haben.
   offline: Offline
   next: Weiter
   saved: Gespeichert
@@ -372,9 +375,12 @@ en:
   zip: ZIP
   city: City
   phone: Phone or mobile number
-  privacy-accepted-1: I have read the
+  privacy-accepted-1: Your privacy is very important to us, that's why we only collect data that is necessary for the check in. Please confirm you have read
   privacy-terms: privacy policy
-  privacy-accepted-3: carefully, accept it and ensure to have entered my data correctly.
+  privacy-accepted-3: carefully and accept it.
+  accept: Accept
+  privacy: Privacy
+  entered-data-correctly: I ensure to have endered my data correctly.
   offline: Offline
   next: Proceed
   saved: Saved

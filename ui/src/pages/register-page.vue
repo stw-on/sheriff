@@ -15,21 +15,35 @@
         <div v-if="step === '1'" key="scan">
           <h2 class="font-weight-light text-center mb-3">{{ $t('scan-covid-certificate') }}</h2>
 
-          <qr-scanner
-            :loading="loading"
-            :offline="offline"
-            @error="showError"
-            @scanned="onQrCodeScanned"
-          />
+          <v-fade-transition mode="out-in">
+            <div v-if="!acceptedPrivacy" key="privacy" class="d-flex flex-column align-center justify-center">
+              <div class="max-width-400 text-center">
+                {{ $t('privacy-accepted-1') }}
+                <a href="#" @click.prevent.stop="$emit('show-privacy-policy')">{{ $t('privacy-terms') }}</a>
+                {{ $t('privacy-accepted-3') }}
+              </div>
 
-          <p class="mt-3 grey--text text--darken-2 text-center">
-            {{ $t('scan-covid-certificate-description') }}
-          </p>
+              <v-btn @click="acceptedPrivacy = true" class="mt-4" color="accent">{{ $t('next') }}</v-btn>
+            </div>
 
-          <div class="text-center">
-            <v-btn @click="selectFile" text outlined>{{ $t('select-screenshot') }}</v-btn>
-          </div>
-          <input ref="fileInput" class="hidden" type="file" @change="onFileSelected">
+            <div v-else key="scan">
+              <qr-scanner
+                :loading="loading"
+                :offline="offline"
+                @error="showError"
+                @scanned="onQrCodeScanned"
+              />
+
+              <p class="mt-3 grey--text text--darken-2 text-center">
+                {{ $t('scan-covid-certificate-description') }}
+              </p>
+
+              <div class="text-center">
+                <v-btn @click="selectFile" text outlined>{{ $t('select-screenshot') }}</v-btn>
+              </div>
+              <input ref="fileInput" class="hidden" type="file" @change="onFileSelected">
+            </div>
+          </v-fade-transition>
         </div>
 
         <div v-else-if="step === '2'" key="register">
@@ -101,14 +115,12 @@
             <v-row no-gutters>
               <v-col cols="12">
                 <v-checkbox
-                  v-model="acceptedPrivacy"
+                  v-model="enteredDataCorrectly"
                   :rules="[v => !!v]"
                 >
                   <template v-slot:label>
                     <div>
-                      {{ $t('privacy-accepted-1') }}
-                      <a href="#" @click.prevent.stop="showPrivacyPolicy = true">{{ $t('privacy-terms') }}</a>
-                      {{ $t('privacy-accepted-3') }}
+                      {{ $t('entered-data-correctly') }}
                     </div>
                   </template>
                 </v-checkbox>
@@ -173,19 +185,6 @@
       <v-icon left>mdi-cloud-off-outline</v-icon>
       {{ $t('no-connection') }}
     </v-snackbar>
-
-    <v-dialog v-model="showPrivacyPolicy" fullscreen transition="dialog-bottom-transition">
-      <v-card>
-        <v-toolbar dark color="primary">
-          <v-btn icon dark @click="showPrivacyPolicy = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title>{{ $t('privacy-terms') }}</v-toolbar-title>
-        </v-toolbar>
-
-        <div class="pa-3" v-html="$t('privacy-policy')"></div>
-      </v-card>
-    </v-dialog>
   </v-sheet>
 </template>
 
@@ -211,7 +210,7 @@
       },
       hcert: null,
       acceptedPrivacy: false,
-      showPrivacyPolicy: false,
+      enteredDataCorrectly: false,
       contactDetailsAreValid: false,
       errorSnackbar: false,
       errorSnackbarText: '',
@@ -343,5 +342,9 @@
     position: absolute;
     width: 0;
     height: 0;
+  }
+
+  .max-width-400 {
+    max-width: 400px;
   }
 </style>
