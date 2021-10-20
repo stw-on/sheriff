@@ -30,8 +30,8 @@ Route::group(['prefix' => '/visit'], function () {
 });
 
 Route::group(['prefix' => '/covpass'], function () {
-    Route::post('/check', [CovPassController::class, 'checkCovPass'])->middleware('throttle:10,1');
-    Route::post('/sign', [CovPassController::class, 'signContactDetails'])->middleware('throttle:10,1');
+    Route::post('/check', [CovPassController::class, 'checkCovPass']);
+    Route::post('/sign', [CovPassController::class, 'signContactDetails']);
 });
 
 Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], function () {
