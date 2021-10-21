@@ -32,6 +32,12 @@
     "nunomaduro/collision": "^4.1",
     "phpunit/phpunit": "^8.5"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "git@github.com:timoschwarzer/cbor-php.git"
+    }
+  ],
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbcac2f481a7d851bdf3bae041fc367a",
+    "content-hash": "7751cc32da4b5d9b22276855d2d9472b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4329,21 +4329,22 @@
         },
         {
             "name": "spomky-labs/cbor-php",
-            "version": "v2.0.1",
+            "version": "dev-byte-string-encode-fix",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Spomky-Labs/cbor-php.git",
-                "reference": "9776578000be884cd7864eeb7c37a4ac92d8c995"
+                "url": "https://github.com/timoschwarzer/cbor-php.git",
+                "reference": "976a51ee666ebc77c999fb9c38b3cff81b811aec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Spomky-Labs/cbor-php/zipball/9776578000be884cd7864eeb7c37a4ac92d8c995",
-                "reference": "9776578000be884cd7864eeb7c37a4ac92d8c995",
+                "url": "https://api.github.com/repos/timoschwarzer/cbor-php/zipball/976a51ee666ebc77c999fb9c38b3cff81b811aec",
+                "reference": "976a51ee666ebc77c999fb9c38b3cff81b811aec",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.8.15|^0.9.0",
-                "php": ">=7.3"
+                "php": ">=7.3",
+                "symfony/var-dumper": "^5.3"
             },
             "require-dev": {
                 "phpstan/phpstan": "^0.12",
@@ -4362,7 +4363,11 @@
                     "CBOR\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "CBOR\\Test\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -4378,34 +4383,33 @@
             ],
             "description": "CBOR Encoder/Decoder for PHP",
             "keywords": [
+                "CBOR",
                 "Concise Binary Object Representation",
-                "RFC7049",
-                "cbor"
+                "RFC7049"
             ],
             "support": {
-                "issues": "https://github.com/Spomky-Labs/cbor-php/issues",
-                "source": "https://github.com/Spomky-Labs/cbor-php/tree/v2.0.1"
+                "source": "https://github.com/timoschwarzer/cbor-php/tree/byte-string-encode-fix"
             },
             "funding": [
                 {
-                    "url": "https://www.patreon.com/FlorentMorselli",
-                    "type": "patreon"
+                    "type": "patreon",
+                    "url": "https://www.patreon.com/FlorentMorselli"
                 }
             ],
-            "time": "2020-08-31T20:08:03+00:00"
+            "time": "2021-10-21T10:21:18+00:00"
         },
         {
             "name": "stwon/covpasscheck-php",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stw-on/covpasscheck-php.git",
-                "reference": "964e6e3b54221cc5f5a0332b6581a8de8d7d65f1"
+                "reference": "ea599316ee7def02b7e78a57cda6daccab424830"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/964e6e3b54221cc5f5a0332b6581a8de8d7d65f1",
-                "reference": "964e6e3b54221cc5f5a0332b6581a8de8d7d65f1",
+                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/ea599316ee7def02b7e78a57cda6daccab424830",
+                "reference": "ea599316ee7def02b7e78a57cda6daccab424830",
                 "shasum": ""
             },
             "require": {
@@ -4414,7 +4418,7 @@
                 "ext-zlib": "*",
                 "mhauri/base45": "^0.1.1",
                 "nesbot/carbon": "^2.53",
-                "spomky-labs/cbor-php": "^2.0",
+                "spomky-labs/cbor-php": "dev-byte-string-encode-fix",
                 "web-auth/cose-lib": "^3.3"
             },
             "type": "library",
@@ -4435,9 +4439,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stw-on/covpasscheck-php/issues",
-                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.4.1"
+                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.4.2"
             },
-            "time": "2021-10-20T10:06:02+00:00"
+            "time": "2021-10-21T10:24:59+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
