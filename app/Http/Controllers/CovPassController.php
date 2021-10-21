@@ -93,7 +93,7 @@ class CovPassController extends Controller
 
             $data = request(['street', 'zip', 'city', 'phone']);
             $data += [
-                'expires_at' => $certificate->getExpiresAt()->toIso8601String(),
+                'expires_at' => $certificate->getExpiresAt()->endOfDay()->toIso8601String(),
                 'first_name' => $certificate->getSubject()->getFirstName(),
                 'last_name' => $certificate->getSubject()->getLastName(),
                 'date_of_birth' => $certificate->getSubject()->getDateOfBirth(),
