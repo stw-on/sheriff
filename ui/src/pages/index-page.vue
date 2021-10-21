@@ -148,16 +148,33 @@
         {{ $t('ready-to-checkin') }}
       </p>
 
-      <div class="text-center mb-2">
-        <v-btn :to="{name: 'checkin'}" color="primary" x-large>
-          {{ $t('check-in') }}
+      <div class="text-center mb-3">
+        <v-btn :to="{name: 'checkin'}" color="primary" x-large :disabled="certificateExpired">
+          <template v-if="certificateExpired">
+            {{ $t('certificate-expired') }}
+          </template>
+          <template v-else>
+            {{ $t('check-in') }}
+          </template>
           <v-icon right>
             mdi-chevron-right
           </v-icon>
         </v-btn>
       </div>
+
+      <div class="text-center mb-3">
+        {{ $t('certificate-valid-until') }}
+        {{ formatDate(savedContactDetails.expires_at) }}.
+      </div>
+
+      <div class="text-center mb-3">
+        <v-btn text outlined :to="{name: 'register'}">
+          {{ $t('register-other-certificate') }}
+        </v-btn>
+      </div>
+
       <div class="text-center mb-5">
-        <v-btn text @click="deleteRegistration">
+        <v-btn text @click="deleteRegistration" outlined>
           {{ $t('delete-registration') }}
         </v-btn>
       </div>
@@ -193,6 +210,9 @@
 </template>
 
 <script>
+  import {format as formatDate, parseISO, isPast} from "date-fns"
+  import {de} from "date-fns/locale"
+
   export default {
     name: 'index-page',
     data: () => ({
@@ -204,7 +224,14 @@
       },
       registrationDisabled() {
         return window.__sheriff_config?.registration_disabled ?? false
-      }
+      },
+      certificateExpired() {
+        if (!this.savedContactDetails) {
+          return false
+        }
+
+        return isPast(this.savedContactDetails.expires_at)
+      },
     },
     mounted() {
       try {
@@ -222,7 +249,12 @@
           window.localStorage.removeItem('signedContactDetailsBlob')
           this.savedContactDetails = null
         }
-      }
+      },
+      formatDate(isoString) {
+        return formatDate(parseISO(isoString), 'dd.MM.yyyy', {
+          locale: de,
+        })
+      },
     }
   }
 </script>

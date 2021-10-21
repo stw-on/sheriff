@@ -219,6 +219,18 @@
     async mounted() {
       window.addEventListener('online', () => this.offline = false)
       window.addEventListener('offline', () => this.offline = true)
+
+      try {
+        const signedContactDetailsBlob = window.localStorage.getItem('signedContactDetailsBlob')
+        if (signedContactDetailsBlob) {
+          const savedContactDetails = JSON.parse(atob(JSON.parse(signedContactDetailsBlob)['blob']))
+          for (const key of ['street', 'zip', 'city', 'phone']) {
+            this.contactDetails[key] = savedContactDetails[key]
+          }
+        }
+      } catch (e) {
+        console.error(e)
+      }
     },
     methods: {
       selectFile() {

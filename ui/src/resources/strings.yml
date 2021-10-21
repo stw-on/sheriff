@@ -52,6 +52,9 @@ de:
   reload: Neu laden
   registration-available-from: Die Registrierung ist ab Mittwoch, 20.10.2021 möglich
   generic-error: Es ist ein Fehler aufgetreten
+  register-other-certificate: Zertifikat ändern
+  certificate-valid-until: Zertifikat gültig bis
+  certificate-expired: Zertifikat abgelaufen
 
   # register
   no-connection: Keine Internetverbindung
@@ -388,6 +391,9 @@ en:
   save-only: Save data only
   select-screenshot: Select screenshot
   no-qr-code-detected: No QR code detected
+  register-other-certificate: Change certificate
+  certificate-valid-until: Certificate valid until
+  certificate-expired: Certificate expired
 
   # hcert
   error-invalid-signature: This certificate is invalid
