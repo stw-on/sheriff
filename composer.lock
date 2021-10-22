@@ -1370,16 +1370,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.65.0",
+            "version": "v8.66.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6db59afadca28dfdb2f719e7d79f93885ede17e4"
+                "reference": "b757fe143a3ab802a08a191032fc7046b582f107"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6db59afadca28dfdb2f719e7d79f93885ede17e4",
-                "reference": "6db59afadca28dfdb2f719e7d79f93885ede17e4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b757fe143a3ab802a08a191032fc7046b582f107",
+                "reference": "b757fe143a3ab802a08a191032fc7046b582f107",
                 "shasum": ""
             },
             "require": {
@@ -1537,7 +1537,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-10-19T13:59:41+00:00"
+            "time": "2021-10-21T14:20:46+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4400,16 +4400,16 @@
         },
         {
             "name": "stwon/covpasscheck-php",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stw-on/covpasscheck-php.git",
-                "reference": "ea599316ee7def02b7e78a57cda6daccab424830"
+                "reference": "498c911305d028946142c80249b38d2dc6bd4f52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/ea599316ee7def02b7e78a57cda6daccab424830",
-                "reference": "ea599316ee7def02b7e78a57cda6daccab424830",
+                "url": "https://api.github.com/repos/stw-on/covpasscheck-php/zipball/498c911305d028946142c80249b38d2dc6bd4f52",
+                "reference": "498c911305d028946142c80249b38d2dc6bd4f52",
                 "shasum": ""
             },
             "require": {
@@ -4417,7 +4417,6 @@
                 "ext-openssl": "*",
                 "ext-zlib": "*",
                 "mhauri/base45": "^0.1.1",
-                "nesbot/carbon": "^2.53",
                 "spomky-labs/cbor-php": "dev-byte-string-encode-fix",
                 "web-auth/cose-lib": "^3.3"
             },
@@ -4439,9 +4438,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stw-on/covpasscheck-php/issues",
-                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.4.2"
+                "source": "https://github.com/stw-on/covpasscheck-php/tree/1.5.0"
             },
-            "time": "2021-10-21T10:24:59+00:00"
+            "time": "2021-10-22T08:04:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
