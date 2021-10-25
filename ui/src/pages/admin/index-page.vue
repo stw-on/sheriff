@@ -14,7 +14,7 @@
       v-else
       :headers="[
         {text: 'Name', value: 'name'},
-        {text: 'Registrierungen heute', value: 'visits_today'},
+        {text: 'Check-Ins heute', value: 'visits_today'},
         {text: 'Eintritt erlaubt für', value: 'allowed_certifications'},
       ]"
       :items="locations"
