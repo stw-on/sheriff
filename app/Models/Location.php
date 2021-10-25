@@ -105,13 +105,13 @@ class Location extends BaseModel
 
     public function getCurrentColor(Carbon $time)
     {
-        $hash = crc32($this->publicKey->key . $time->format('Ymd'));
+        $hash = crc32($this->id . $this->publicKey->key . $time->format('Ymd'));
         return self::COLORS[abs($hash) % count(self::COLORS)];
     }
 
     public function getCurrentIcon(Carbon $time)
     {
-        $hash = crc32($this->publicKey->key . $time->format('dYm'));
+        $hash = crc32($this->id . $this->publicKey->key . $time->format('dYm'));
         return self::ICONS[abs($hash) % count(self::ICONS)];
     }
 }
