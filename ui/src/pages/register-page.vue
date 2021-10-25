@@ -191,6 +191,7 @@
 <script>
   import {axios} from "@/lib/axios"
   import QrScanner from "@/components/steps/qr-scanner"
+  import {QrScanner as QrScannerLib} from "@/lib/qrScanner"
 
   export default {
     name: 'checkin-page',
@@ -240,7 +241,7 @@
 
         if (event.target.files.length > 0) {
           try {
-            const result = await QrScanner.scanImage(event.target.files[0])
+            const result = await QrScannerLib.scanImage(event.target.files[0])
             this.loading = false
             await this.onQrCodeScanned(result)
           } catch (e) {

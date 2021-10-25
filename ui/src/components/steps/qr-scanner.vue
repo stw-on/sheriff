@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import QrScanner from "qr-scanner"
+  import {QrScanner} from "@/lib/qrScanner"
 
   export default {
     name: 'qr-scanner',

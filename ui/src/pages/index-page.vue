@@ -230,7 +230,7 @@
           return false
         }
 
-        return isPast(this.savedContactDetails.expires_at)
+        return isPast(parseISO(this.savedContactDetails.expires_at))
       },
     },
     mounted() {
