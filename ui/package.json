@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdi/font": "^6.2.95",
     "axios": "^0.22.0",
+    "axios-retry": "^3.2.3",
     "barcode-detector": "^1.0.0",
     "canvas-confetti": "^1.4.0",
     "core-js": "^3.18.2",

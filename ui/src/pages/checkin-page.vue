@@ -112,9 +112,13 @@
       }
     },
     methods: {
-      showError(text = this.$t('invalid-qr-code')) {
+      showError(text = this.$t('invalid-qr-code'), code = null) {
         this.errorSnackbar = true
         this.errorSnackbarText = text
+
+        if (code) {
+          this.errorSnackbarText += ` (${code})`
+        }
       },
       async onQrCodeScanned(result) {
         if (this.loading || !result) {
@@ -163,7 +167,7 @@
 
           return qrData
         } catch (e) {
-          this.showError()
+          this.showError(this.$t('error-network-wifi'), e.response?.status)
         }
 
         return null
@@ -213,7 +217,7 @@
               this.showError(this.$t('error-certificate-not-covered'))
               break
             default:
-              this.showError()
+              this.showError(this.$t('error-network-wifi'))
               break
           }
         }

@@ -85,6 +85,8 @@ de:
   error-invalid-signature: Dieses Zertifikat ist ungültig
   error-certificate-not-covered: Das Zertifikat weist nicht das für den Eintritt in diese Mensa erforderliche Merkmal auf.
   error-vaccination-series-not-complete: Unvollständige Impfung. Bitte benutze das Zertifikat deiner letzten Impfung.
+  error-network-wifi: Netzwerkfehler. Wenn du mit einem WLAN verbunden bist, versuche es bitte mit Mobilen Daten noch einmal.
+  error-network-generic: Netzwerkfehler. Bitte probiere es noch einmal.
 
   # scan
   scan-qr-code: QR-Code scannen
@@ -399,6 +401,8 @@ en:
   error-invalid-signature: This certificate is invalid
   error-certificate-not-covered: Your health certificate does not meet the requirement to enter this location.
   error-vaccination-series-not-complete: Vaccination incomplete. Please use the latest certificate of your vaccination.
+  error-network-wifi: Network error. If you are connected to WiFi, please try again using mobile data.
+  error-network-generic: Network error. Please try again.
 
   # scan
   scan-qr-code: Scan QR code

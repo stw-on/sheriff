@@ -278,14 +278,19 @@
         } catch (e) {
           console.error(e)
 
-          this.errorSnackbarText = this.$t('invalid-qr-code')
-
           switch (e.response?.data?.error) {
             case 'hcert_invalid_signature':
               this.errorSnackbarText = this.$t('error-invalid-signature')
               break
             case 'hcert_vaccination_series_not_complete':
               this.errorSnackbarText = this.$t('error-vaccination-series-not-complete')
+              break
+            default:
+              this.errorSnackbarText = this.$t('invalid-qr-code')
+
+              if (e.response?.status) {
+                this.errorSnackbarText += ` (${e.response?.status})`
+              }
               break
           }
 
