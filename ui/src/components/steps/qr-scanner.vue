@@ -47,6 +47,16 @@
         this.qrScanner = new QrScanner(this.$refs.qrVideo, content => {
           if (this.loading) return
           this.$emit('scanned', content)
+        }, undefined, video => {
+          const scanRegionSize = Math.min(video.videoWidth, video.videoHeight);
+          return {
+            x: Math.round((video.videoWidth - scanRegionSize) / 2),
+            y: Math.round((video.videoHeight - scanRegionSize) / 2),
+            width: scanRegionSize,
+            height: scanRegionSize,
+            downScaledWidth: 512,
+            downScaledHeight: 512,
+          };
         })
 
         await this.qrScanner.start()
@@ -60,6 +70,9 @@
         console.error(e)
       }
     },
+    beforeDestroy() {
+      this.qrScanner?.stop()
+    }
   }
 </script>
 
