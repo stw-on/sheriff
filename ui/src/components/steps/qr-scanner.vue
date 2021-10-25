@@ -9,7 +9,9 @@
           <v-progress-circular v-else indeterminate />
         </div>
         <v-fade-transition>
-          <qrcode-stream class="qr-video" v-show="showVideo" @init="qrStreamInit" @decode="qrStreamDecoded" />
+          <div v-show="showVideo">
+            <video ref="qrVideo" class="qr-video"></video>
+          </div>
         </v-fade-transition>
         <div :class="{visible: showVideo}" class="scan-overlay">
           <div></div>
@@ -23,43 +25,40 @@
 </template>
 
 <script>
-  import {QrcodeStream} from 'vue-qrcode-reader'
+  import QrScanner from "qr-scanner"
 
   export default {
     name: 'qr-scanner',
-    components: {
-      QrcodeStream,
-    },
     props: {
       loading: Boolean,
     },
     data: () => ({
       showVideo: false,
       noCameraFound: false,
+      qrScanner: null,
     }),
     watch: {
       loading(value) {
         this.showVideo = !value
       },
     },
-    methods: {
-      async qrStreamInit(promise) {
-        try {
-          await promise
+    async mounted() {
+      try {
+        this.qrScanner = new QrScanner(this.$refs.qrVideo, content => {
+          if (this.loading) return
+          this.$emit('scanned', content)
+        })
 
-          if (!this.loading) {
-            this.showVideo = true
-          }
-        } catch (e) {
-          this.noCameraFound = true
-          this.$emit('error', this.$t('no-camera-access'))
-          console.error(e)
+        await this.qrScanner.start()
+
+        if (!this.loading) {
+          this.showVideo = true
         }
-      },
-      qrStreamDecoded(content) {
-        if (this.loading) return
-        this.$emit('scanned', content)
-      },
+      } catch (e) {
+        this.noCameraFound = true
+        this.$emit('error', this.$t('no-camera-access'))
+        console.error(e)
+      }
     },
   }
 </script>

@@ -191,7 +191,6 @@
 <script>
   import {axios} from "@/lib/axios"
   import QrScanner from "@/components/steps/qr-scanner"
-  import qrScannerWorkerSource from '!!raw-loader!../../node_modules/qr-scanner/qr-scanner-worker.min.js'
 
   export default {
     name: 'checkin-page',
@@ -238,9 +237,6 @@
       },
       async onFileSelected(event) {
         this.loading = true
-
-        const QrScanner = (await import('qr-scanner')).default
-        QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
         if (event.target.files.length > 0) {
           try {
