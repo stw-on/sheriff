@@ -99,6 +99,11 @@
         try {
           try {
             const url = new URL(result)
+
+            if (!url.searchParams.get('scan')) {
+              throw new Error('Not a checkin URL')
+            }
+
             this.locationIdentifier = url.searchParams.get('scan')
             this.scanError = null
             this.scanType = 'location_identifier'
@@ -117,7 +122,9 @@
             }
 
             this.scanType = 'checkin'
-            await this.registerVisit(data.data, this.locationIdentifier)
+            if (!await this.registerVisit(data.data, this.locationIdentifier)) {
+              return
+            }
           } else {
             const publicKeyBase64 = this.signingKeys[data.key_id]
             if (!publicKeyBase64) {
@@ -189,6 +196,7 @@
               signed_contact_details: signedContactDetails,
             })
             this.scanResult = visitData
+            return visitData
           } else {
             this.showError()
             setTimeout(() => {
