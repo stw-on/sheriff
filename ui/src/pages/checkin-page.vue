@@ -192,6 +192,14 @@
               padding: 0,
             }).svg()
 
+            // some browsers... smh
+            this.$nextTick(() => {
+              window.scrollTo({
+                top: 0,
+                behavior: 'auto',
+              })
+            })
+
             setTimeout(() => {
               this.keepOpenSnackbar = true
 
