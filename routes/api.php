@@ -34,9 +34,12 @@ Route::group(['prefix' => '/covpass'], function () {
     Route::post('/sign', [CovPassController::class, 'signContactDetails']);
 });
 
+Route::group(['prefix' => '/signing-key'], function () {
+    Route::get('/', [SigningKeyController::class, 'get']);
+});
+
 Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], function () {
     Route::post('/session/authenticate', [SessionController::class, 'authenticate']);
-
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/session/current', [SessionController::class, 'getCurrent']);
         Route::post('/session/destroy', [SessionController::class, 'destroy']);
@@ -50,10 +53,6 @@ Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], functio
 
         Route::group(['prefix' => '/public-key'], function () {
             Route::get('/', [PublicKeyController::class, 'getAll']);
-        });
-
-        Route::group(['prefix' => '/signing-key'], function () {
-            Route::get('/', [SigningKeyController::class, 'get']);
         });
     });
 });

@@ -91,7 +91,7 @@ de:
 
   # scan
   scan-qr-code: QR-Code scannen
-  scan-qr-code-prompt: Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist.
+  scan-qr-code-prompt: Bitte scanne nun den QR-Code, der an der Örtlichkeit ausgehängt ist. Alternativ kannst du diesen QR-Code vom Eingangspersonal scannen lassen
   no-camera-access: Kein Zugriff auf die Kamera. Bitte aktiviere die Berechtigung in den Browsereinstellungen und lade die Seite neu. (In Chrome findest du die Einstellung durch Tippen auf das Schloss-Symbol neben der Adresse)
 
   # submit
@@ -408,7 +408,7 @@ en:
 
   # scan
   scan-qr-code: Scan QR code
-  scan-qr-code-prompt: Please scan the QR code that is posted at the facility.
+  scan-qr-code-prompt: Please scan the QR code that is posted at the facility. Alternatively, let our staff scan this QR code to check in.
   no-camera-access: No access to the camera. Please enable access in your browser settings and reload the page. (in Chrome, tap the lock icon next to the address)
 
   # submit

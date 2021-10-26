@@ -11,7 +11,7 @@
         </v-stepper>
 
         <div>
-          <h2 class="font-weight-light text-center mb-3">{{ $t('scan-qr-code') }}!</h2>
+          <h2 class="font-weight-light text-center mb-3">{{ $t('check-in') }}!</h2>
 
           <qr-scanner
             :loading="loading"
@@ -21,8 +21,14 @@
           />
 
           <p class="mt-3 grey--text text--darken-2 text-center">
-            {{ $t('scan-qr-code-prompt') }}
+            {{ $t('scan-qr-code-prompt') }}:
           </p>
+
+          <div class="d-flex justify-center pt-12">
+            <v-card class="qr-svg pa-3 mb-4" color="white">
+              <div v-html="checkinQrHtml" />
+            </v-card>
+          </div>
         </div>
       </v-container>
 
@@ -39,7 +45,7 @@
 
         <div class="d-flex justify-center pt-12">
           <v-card class="qr-svg pa-3 mb-4" color="white">
-            <div v-html="qrHtml" />
+            <div v-html="confirmationQrHtml" />
           </v-card>
         </div>
 
@@ -88,7 +94,8 @@
       visitData: null,
       keepOpenSnackbar: false,
       offline: !navigator.onLine || false,
-      qrHtml: '',
+      confirmationQrHtml: '',
+      checkinQrHtml: '',
     }),
     computed: {
       currentColor() {
@@ -110,6 +117,17 @@
       if (this.$route.query.scan) {
         this.registerVisit(this.$route.query.scan)
       }
+
+      this.checkinQrHtml = new QRCode({
+        content: JSON.stringify({
+          type: 'checkin',
+          data: JSON.parse(window.localStorage.getItem('signedContactDetailsBlob')),
+        }),
+        ecl: 'M',
+        join: true,
+        container: 'svg-viewbox',
+        padding: 0,
+      }).svg()
     },
     methods: {
       showError(text = this.$t('invalid-qr-code'), code = null) {
@@ -184,7 +202,7 @@
             this.visitData = visitData
             this.step = '2'
 
-            this.qrHtml = new QRCode({
+            this.confirmationQrHtml = new QRCode({
               content: JSON.stringify(visitData.entrance_certificate),
               ecl: 'M',
               join: true,
