@@ -35,7 +35,7 @@ Route::group(['prefix' => '/covpass'], function () {
 });
 
 Route::group(['middleware' => EnsureFrontendRequestsAreStateful::class], function () {
-    Route::post('/session/authenticate', [SessionController::class, 'authenticate'])->middleware('throttle:5,1');
+    Route::post('/session/authenticate', [SessionController::class, 'authenticate']);
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/session/current', [SessionController::class, 'getCurrent']);
