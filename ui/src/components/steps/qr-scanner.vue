@@ -9,9 +9,7 @@
           <v-progress-circular v-else indeterminate />
         </div>
         <v-fade-transition>
-          <div v-show="showVideo">
-            <video ref="qrVideo" class="qr-video"></video>
-          </div>
+          <qrcode-stream class="qr-video" v-show="showVideo" @init="qrStreamInit" @decode="qrStreamDecoded" />
         </v-fade-transition>
         <div :class="{visible: showVideo}" class="scan-overlay">
           <div></div>
@@ -25,54 +23,44 @@
 </template>
 
 <script>
-  import {QrScanner} from "@/lib/qrScanner"
+  import {QrcodeStream} from 'vue-qrcode-reader'
 
   export default {
     name: 'qr-scanner',
+    components: {
+      QrcodeStream,
+    },
     props: {
       loading: Boolean,
     },
     data: () => ({
       showVideo: false,
       noCameraFound: false,
-      qrScanner: null,
     }),
     watch: {
       loading(value) {
         this.showVideo = !value
       },
     },
-    async mounted() {
-      try {
-        this.qrScanner = new QrScanner(this.$refs.qrVideo, content => {
-          if (this.loading) return
-          this.$emit('scanned', content)
-        }, undefined, video => {
-          const scanRegionSize = Math.min(video.videoWidth, video.videoHeight);
-          return {
-            x: Math.round((video.videoWidth - scanRegionSize) / 2),
-            y: Math.round((video.videoHeight - scanRegionSize) / 2),
-            width: scanRegionSize,
-            height: scanRegionSize,
-            downScaledWidth: 512,
-            downScaledHeight: 512,
-          };
-        })
+    methods: {
+      async qrStreamInit(promise) {
+        try {
+          await promise
 
-        await this.qrScanner.start()
-
-        if (!this.loading) {
-          this.showVideo = true
+          if (!this.loading) {
+            this.showVideo = true
+          }
+        } catch (e) {
+          this.noCameraFound = true
+          this.$emit('error', this.$t('no-camera-access'))
+          console.error(e)
         }
-      } catch (e) {
-        this.noCameraFound = true
-        this.$emit('error', this.$t('no-camera-access'))
-        console.error(e)
-      }
+      },
+      qrStreamDecoded(content) {
+        if (this.loading) return
+        this.$emit('scanned', content)
+      },
     },
-    beforeDestroy() {
-      this.qrScanner?.stop()
-    }
   }
 </script>
 
