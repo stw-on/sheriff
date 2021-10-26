@@ -324,7 +324,7 @@
         } catch (e) {
           console.error(e)
 
-          this.errorSnackbarText = this.$t('invalid-qr-code')
+          this.errorSnackbarText = this.$t('invalid-data')
 
           switch (e.response?.data?.error) {
             case 'registration_disabled':
