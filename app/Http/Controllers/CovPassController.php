@@ -82,7 +82,7 @@ class CovPassController extends Controller
         $this->validateWith([
             'hcert' => 'string|required',
             'street' => 'string|min:2|max:128|required',
-            'zip' => 'string|min:5|max:5|required',
+            'zip' => 'string|min:4|max:5|required',
             'city' => 'string|min:3|max:128|required',
             'phone' => 'string|min:5|max:128|required',
         ]);
