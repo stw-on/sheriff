@@ -22,7 +22,8 @@
     "lstrojny/functional-php": "^1.14",
     "sentry/sentry-laravel": "^2.9",
     "spomky-labs/base64url": "^2.0",
-    "stwon/covpasscheck-php": "^1.1.0"
+    "stwon/covpasscheck-php": "^1.1.0",
+    "web-token/jwt-core": "^2.2"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
