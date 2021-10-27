@@ -239,7 +239,11 @@
       async onFileSelected(event) {
         this.loading = true
 
-        window.BarcodeDetector = undefined
+        // This is due to a bug in Mobile Safari 12-14
+        if ('BarcodeDetector' in window) {
+          delete window.BarcodeDetector
+        }
+
         const QrScanner = (await import('qr-scanner')).default
         QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
