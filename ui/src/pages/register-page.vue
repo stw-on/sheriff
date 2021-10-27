@@ -239,6 +239,7 @@
       async onFileSelected(event) {
         this.loading = true
 
+        window.BarcodeDetector = undefined
         const QrScanner = (await import('qr-scanner')).default
         QrScanner.WORKER_PATH = URL.createObjectURL(new Blob([qrScannerWorkerSource]));
 
