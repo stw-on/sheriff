@@ -14,7 +14,7 @@
         dark
         :key="scanId"
       >
-        <div class="d-flex justify-end">
+        <div class="float-right">
           <v-btn icon @click="scanError = null; scanResult = null">
             <v-icon>mdi-close</v-icon>
           </v-btn>
