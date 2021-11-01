@@ -14,6 +14,11 @@
         dark
         :key="scanId"
       >
+        <div class="d-flex justify-end">
+          <v-btn icon @click="scanError = null; scanResult = null">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
         <template v-if="!!scanError">
           <div class="text-pre">{{ scanError }}</div>
         </template>
