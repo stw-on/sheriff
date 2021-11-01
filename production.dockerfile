@@ -9,7 +9,7 @@ RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 
 # Stage 2: Build UI
-FROM node as build2
+FROM node:16-alpine as build2
 
 WORKDIR /app
 
