@@ -30,7 +30,7 @@
           `\n` +
           `path: ${window.location.pathname}\n` +
           `user agent: ${window.navigator.userAgent}\n` +
-          `signed blob: ${window.localStorage.getItem('signedContactDetailsBlob') ?? 'null'}`
+          `has signed blob: ${window.localStorage.getItem('signedContactDetailsBlob') ? 'yes' : 'no'}`
       },
     },
   }
