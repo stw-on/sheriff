@@ -68,7 +68,6 @@ class Location extends BaseModel
         'cards-spade',
         'clippy',
         'compass',
-        'earth',
         'emoticon-happy',
         'halloween',
         'koala',
