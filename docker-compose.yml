@@ -46,7 +46,7 @@ services:
     command: scheduler
     restart: on-failure
   ui:
-    image: node:alpine
+    image: node:16-alpine
     volumes:
       - ./ui:/app/ui
     working_dir: /app/ui
