@@ -5,6 +5,10 @@
     </div>
 
     <div class="text-center mt-8">
+      <strong>{{ `${savedContactDetails.last_name}, ${savedContactDetails.first_name}` }}</strong>
+    </div>
+
+    <div class="text-center mt-3">
       {{ $t('certificate-valid-until') }}
       {{ formatDate(savedContactDetails.expires_at) }}.
     </div>
