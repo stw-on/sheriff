@@ -310,6 +310,7 @@ de:
   check-in-now: Jetzt einchecken
   print-checkin-code: Eincheckcode drucken
   print-checkin-code-description: Wenn es dir nicht möglich ist, dich mit einem Smartphone vor den Örtlichkeiten einzuchecken, kannst du einen Code speichern oder ausdrucken, der von unserem PersonaEinlasspersonal eingescannt werden kann.
+  print-notice: Wenn Du kein Smartphone besitzt, kannst Du ausnahmsweise auch diesen Ausdruck am Eingang vorzeigen. Bitte halte zusätzlich deinen Lichtbildausweis bereit.
 
   # help
   need-help: Du hast Probleme mit dieser Webseite?
@@ -430,6 +431,7 @@ en:
   check-in-now: Check in now
   print-checkin-code: Print check-in code
   print-checkin-code-description: If you are unable to check in with a smartphone, you can save or print out a code that can be scanned by our staff to check in.
+  print-notice: If you cannot check in with a smartphone, you can exceptionally print and show this printout at the entrance. Please keep your ID ready.
 
   # help
   need-help: Having trouble with this page?

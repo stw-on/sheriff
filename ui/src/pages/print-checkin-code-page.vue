@@ -8,6 +8,9 @@
       {{ $t('certificate-valid-until') }}
       {{ formatDate(savedContactDetails.expires_at) }}.
     </div>
+    <div class="text-center mt-3">
+      {{ $t('print-notice') }}
+    </div>
 
     <div class="mt-8 text-center">
       <page-logo max-width="45%" />
