@@ -13,6 +13,13 @@
         <div>
           <h2 class="font-weight-light text-center mb-3">{{ $t('check-in') }}!</h2>
 
+          <v-alert class="hidden-md-and-down" color="warning" dismissible>
+            <div v-html="$t('desktop-warning')" />
+            <div v-html="$t('print-checkin-code-description')" />
+
+            <v-btn class="mt-3" depressed :to="{name: 'print'}">{{ $t('print-checkin-code') }}</v-btn>
+          </v-alert>
+
           <qr-scanner
             :loading="loading"
             :offline="offline"

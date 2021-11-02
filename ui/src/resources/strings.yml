@@ -308,6 +308,8 @@ de:
   registration-done-description: >
     Geschafft! Du kannst dich nun mit diesem Gerät in Mensen und Cafeterien des Studentenwerk OstNiedersachsen einchecken.
   check-in-now: Jetzt einchecken
+  print-checkin-code: Eincheckcode drucken
+  print-checkin-code-description: Wenn es dir nicht möglich ist, dich mit einem Smartphone vor den Örtlichkeiten einzuchecken, kannst du einen Code speichern oder ausdrucken, der von unserem PersonaEinlasspersonal eingescannt werden kann.
 
   # help
   need-help: Du hast Probleme mit dieser Webseite?
@@ -426,6 +428,8 @@ en:
   registration-done-description: >
     From now on you can now check in to our locations with this device.
   check-in-now: Check in now
+  print-checkin-code: Print check-in code
+  print-checkin-code-description: If you are unable to check in with a smartphone, you can save or print out a code that can be scanned by our staff to check in.
 
   # help
   need-help: Having trouble with this page?

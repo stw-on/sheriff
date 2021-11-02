@@ -8,6 +8,7 @@ const routes = [
   {path: '/register', name: 'register', component: require('./pages/register-page').default},
   {path: '/checkin', name: 'checkin', component: require('./pages/checkin-page').default},
   {path: '/scanner', name: 'scanner', component: require('./pages/scanner-page').default},
+  {path: '/print', name: 'print', component: require('./pages/print-checkin-code-page').default},
   {
     path: '/admin', component: require('./pages/admin-page').default,
     children: [
