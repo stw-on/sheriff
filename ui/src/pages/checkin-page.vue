@@ -31,7 +31,10 @@
             {{ $t('scan-qr-code-prompt') }}:
           </p>
 
-          <div class="d-flex justify-center pt-12">
+          <div class="text-center pt-12 pb-2">
+            <strong>{{ $t('keep-id-ready') }}</strong>
+          </div>
+          <div class="d-flex justify-center">
             <v-card class="qr-svg pa-3 mb-4" color="white">
               <div v-html="checkinQrHtml" />
             </v-card>
