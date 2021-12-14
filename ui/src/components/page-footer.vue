@@ -9,8 +9,15 @@
       {{ $t('send-email') }}
     </v-btn>
 
-    <a href="#" @click.prevent.stop="$emit('show-privacy-policy')" class="d-block mt-4 privacy-policy">
+    <a v-if="privacyUrl === null" href="#" @click.prevent.stop="$emit('show-privacy-policy')" class="d-block mt-4 privacy-policy">
       {{ $t('privacy') }}
+    </a>
+    <a v-else :href="privacyUrl" class="d-block mt-4 privacy-policy">
+      {{ $t('privacy') }}
+    </a>
+
+    <a v-if="!!imprintUrl" :href="imprintUrl" class="d-block mt-4 privacy-policy">
+      {{ $t('imprint') }}
     </a>
   </div>
 </template>
@@ -18,6 +25,14 @@
 <script>
   export default {
     name: "page-footer",
+    computed: {
+      privacyUrl() {
+        return window.__sheriff_config?.privacy_url ?? null
+      },
+      imprintUrl() {
+        return window.__sheriff_config?.imprint_url ?? null
+      },
+    },
     methods: {
       sendMail() {
         window.open(`mailto:${this.$t('target-email')}?subject=${encodeURIComponent('Check In')}&body=${encodeURIComponent(this.getMailBody())}`)

@@ -49,7 +49,7 @@
             <div ref="time" class="time mb-10">{{ visitData.entered_at }}</div>
             <div class="big">{{ visitData.last_name }},</div>
             <div class="big">{{ visitData.first_name }}</div>
-            <div class="headline">{{ visitData.date_of_birth }}</div>
+            <div v-if="!hideBirthDate" class="headline">{{ visitData.date_of_birth }}</div>
           </div>
         </div>
 
@@ -60,6 +60,7 @@
         </div>
 
         <div class="text-center mt-4 mb-12">
+          <div v-if="hideBirthDate" class="headline">{{ visitData.date_of_birth }}</div>
           <div class="headline">{{ visitData.street }}</div>
           <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
           <div class="headline">{{ visitData.phone }}</div>
@@ -114,6 +115,9 @@
       currentIcon() {
         return this.visitData?.current_icon
       },
+      hideBirthDate() {
+        return window.__sheriff_config?.hide_birth_date_at_checkin ?? false
+      }
     },
     mounted() {
       window.addEventListener('online', () => this.offline = false)

@@ -20,6 +20,10 @@ if (app()->environment('production')) {
             'theme_color' => config('sheriff.theme_color'),
             'logo_url' => config('sheriff.logo_url'),
             'registration_disabled' => config('sheriff.registration_disabled'),
+            'hide_birth_date_at_checkin' => config('sheriff.hide_birth_date_at_checkin'),
+            'hide_manual_checkin_after_seconds' => config('sheriff.hide_manual_checkin_after_seconds'),
+            'privacy_url' => config('sheriff.privacy_url'),
+            'imprint_url' => config('sheriff.imprint_url'),
             'custom_translations' => file_exists('/app/strings.yml')
                 ? yaml_parse_file('/app/strings.yml')
                 : null,
