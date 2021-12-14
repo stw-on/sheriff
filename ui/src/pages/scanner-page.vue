@@ -85,6 +85,9 @@
         }
 
         return 'success'
+      },
+      hideCheckinAfterSeconds() {
+        return Number(window.__sheriff_config?.hide_manual_checkin_after_seconds ?? 0)
       }
     },
     methods: {
@@ -201,6 +204,14 @@
               signed_contact_details: signedContactDetails,
             })
             this.scanResult = visitData
+
+            if (this.hideCheckinAfterSeconds !== 0) {
+              setTimeout(() => {
+                this.scanError = null
+                this.scanResult = null
+              }, this.hideCheckinAfterSeconds * 1000)
+            }
+
             return visitData
           } else {
             this.showError()

@@ -73,6 +73,7 @@ de:
   privacy-accepted-3: gelesen zu haben und ihnen zuzustimmen.
   accept: Akzeptieren
   privacy: Datenschutz
+  imprint: Impressum
   entered-data-correctly: Ich versichere, meine Daten korrekt angegeben zu haben.
   offline: Offline
   next: Weiter
@@ -391,6 +392,7 @@ en:
   privacy-accepted-3: carefully and accept it.
   accept: Accept
   privacy: Privacy
+  imprint: Imprint
   entered-data-correctly: I ensure to have entered my data correctly.
   offline: Offline
   next: Proceed
