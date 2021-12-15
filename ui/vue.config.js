@@ -19,6 +19,7 @@ module.exports = {
     },
     workboxOptions: {
       skipWaiting: true,
+      exclude: [/\.html$/]
     },
   },
 }
