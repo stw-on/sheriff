@@ -9,16 +9,18 @@
       {{ $t('send-email') }}
     </v-btn>
 
-    <a v-if="privacyUrl === null" href="#" @click.prevent.stop="$emit('show-privacy-policy')" class="d-block mt-4 privacy-policy">
-      {{ $t('privacy') }}
-    </a>
-    <a v-else :href="privacyUrl" class="d-block mt-4 privacy-policy">
-      {{ $t('privacy') }}
-    </a>
+    <div class="d-block mt-4">
+      <a v-if="privacyUrl === null" href="#" @click.prevent.stop="$emit('show-privacy-policy')" class="mx-4 legal-link">
+        {{ $t('privacy') }}
+      </a>
+      <a v-else :href="privacyUrl" target="_blank" class="mx-4 legal-link">
+        {{ $t('privacy') }}
+      </a>
 
-    <a v-if="!!imprintUrl" :href="imprintUrl" class="d-block mt-4 privacy-policy">
-      {{ $t('imprint') }}
-    </a>
+      <a v-if="!!imprintUrl" :href="imprintUrl" target="_blank" class="mx-4 legal-link">
+        {{ $t('imprint') }}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -60,7 +62,7 @@
     }
   }
 
-  .privacy-policy {
+  .legal-link {
     color: #aaa;
     text-decoration: none;
   }
