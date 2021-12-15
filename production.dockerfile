@@ -20,7 +20,6 @@ RUN cd ui && \
     yarn build && \
     mv dist/* /app/public && \
     mv /app/public/index.html /app/public/ui-index.html && \
-    mv /app/public/service-worker.js /app/public/service-worker.template.js && \
     rm -rf /app/ui
 
 
