@@ -32,7 +32,9 @@ function getConfigJson() {
 if (app()->environment('production')) {
     Route::get('/service-worker.js', static function () {
         $configJson = getConfigJson();
-        return '// cache-tag: ' . md5($configJson) . "\n\n" . file_get_contents(public_path('service-worker.template.js'));
+        return response('// cache-tag: ' . md5($configJson) . "\n\n" . file_get_contents(public_path('service-worker.template.js')), headers: [
+            'Content-Type' => 'application/javascript',
+        ]);
     });
 
     Route::get('/{any}', static function () {
