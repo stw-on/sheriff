@@ -23,7 +23,7 @@
                 {{ $t('privacy-accepted-3') }}
               </div>
 
-              <v-btn @click="acceptedPrivacy = true" class="mt-4" color="accent">{{ $t('next') }}</v-btn>
+              <v-btn @click="acceptedPrivacy = true" class="mt-4" color="accent">{{ $t('accept') }}</v-btn>
             </div>
 
             <div v-else key="scan">

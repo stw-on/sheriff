@@ -13,22 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+function getConfigJson() {
+    return json_encode([
+        'theme_color' => config('sheriff.theme_color'),
+        'logo_url' => config('sheriff.logo_url'),
+        'registration_disabled' => config('sheriff.registration_disabled'),
+        'hide_birth_date_at_checkin' => config('sheriff.hide_birth_date_at_checkin'),
+        'hide_manual_checkin_after_seconds' => config('sheriff.hide_manual_checkin_after_seconds'),
+        'privacy_url' => config('sheriff.privacy_url'),
+        'imprint_url' => config('sheriff.imprint_url'),
+        'custom_translations' => file_exists('/app/strings.yml')
+            ? yaml_parse_file('/app/strings.yml')
+            : null,
+    ], JSON_THROW_ON_ERROR);
+}
+
 // Don't add this rule in development. 404s are easier to debug without it.
 if (app()->environment('production')) {
-    Route::get('/{any}', function () {
-        $configJson = json_encode([
-            'theme_color' => config('sheriff.theme_color'),
-            'logo_url' => config('sheriff.logo_url'),
-            'registration_disabled' => config('sheriff.registration_disabled'),
-            'hide_birth_date_at_checkin' => config('sheriff.hide_birth_date_at_checkin'),
-            'hide_manual_checkin_after_seconds' => config('sheriff.hide_manual_checkin_after_seconds'),
-            'privacy_url' => config('sheriff.privacy_url'),
-            'imprint_url' => config('sheriff.imprint_url'),
-            'custom_translations' => file_exists('/app/strings.yml')
-                ? yaml_parse_file('/app/strings.yml')
-                : null,
-        ], JSON_THROW_ON_ERROR);
+    Route::get('/service-worker.js', static function () {
+        $configJson = getConfigJson();
+        return '// cache-tag: ' . md5($configJson) . "\n\n" . file_get_contents(public_path('service-worker.js'));
+    });
 
+    Route::get('/{any}', static function () {
+        $configJson = getConfigJson();
         $config = <<<CONFIG
 <script>
   window.__sheriff_config = ${configJson};
