@@ -19,7 +19,8 @@
             <div v-if="!acceptedPrivacy" key="privacy" class="d-flex flex-column align-center justify-center">
               <div class="max-width-400 text-center">
                 {{ $t('privacy-accepted-1') }}
-                <a href="#" @click.prevent.stop="$emit('show-privacy-policy')">{{ $t('privacy-terms') }}</a>
+                <a v-if="privacyUrl === null" href="#" @click.prevent.stop="$emit('show-privacy-policy')">{{ $t('privacy-terms') }}</a>
+                <a v-else :href="privacyUrl" target="_blank">{{ $t('privacy-terms') }}</a>
                 {{ $t('privacy-accepted-3') }}
               </div>
 
@@ -216,6 +217,11 @@
       errorSnackbarText: '',
       offline: !navigator.onLine || false,
     }),
+    computed: {
+      privacyUrl() {
+        return window.__sheriff_config?.privacy_url ?? null
+      },
+    },
     async mounted() {
       window.addEventListener('online', () => this.offline = false)
       window.addEventListener('offline', () => this.offline = true)
