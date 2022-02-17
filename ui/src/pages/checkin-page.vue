@@ -60,7 +60,7 @@
         </div>
 
         <div class="text-center mt-4 mb-12">
-          <div v-if="hideBirthDate" class="headline">{{ visitData.date_of_birth }}</div>
+<!--          <div v-if="hideBirthDate" class="headline">{{ visitData.date_of_birth }}</div>-->
           <div class="headline">{{ visitData.street }}</div>
           <div class="headline">{{ visitData.zip }} {{ visitData.city }}</div>
           <div class="headline">{{ visitData.phone }}</div>
