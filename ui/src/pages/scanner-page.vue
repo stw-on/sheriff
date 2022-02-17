@@ -73,6 +73,14 @@
       this.signingKeys = keys
 
       this.loading = false
+
+      const savedLocationIdentifier = window.localStorage.getItem('scanner.location_identifier')
+      if (this.rememberLocation && savedLocationIdentifier) {
+        this.locationIdentifier = savedLocationIdentifier
+        this.scanError = null
+        this.scanType = 'location_identifier'
+        this.scanResult = true
+      }
     },
     computed: {
       cardColor() {
@@ -88,6 +96,9 @@
       },
       hideCheckinAfterSeconds() {
         return Number(window.__sheriff_config?.hide_manual_checkin_after_seconds ?? 0)
+      },
+      rememberLocation() {
+        return Boolean(window.__sheriff_config?.remember_location_in_scanner ?? false)
       }
     },
     methods: {
@@ -116,6 +127,10 @@
             this.scanError = null
             this.scanType = 'location_identifier'
             this.scanResult = true
+
+            if (this.rememberLocation) {
+              window.localStorage.setItem('scanner.location_identifier', this.locationIdentifier)
+            }
             return
           } catch (e) {
             // It's not a URL...

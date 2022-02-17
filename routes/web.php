@@ -22,6 +22,7 @@ if (app()->environment('production')) {
             'registration_disabled' => config('sheriff.registration_disabled'),
             'hide_birth_date_at_checkin' => config('sheriff.hide_birth_date_at_checkin'),
             'hide_manual_checkin_after_seconds' => config('sheriff.hide_manual_checkin_after_seconds'),
+            'remember_location_in_scanner' => config('sheriff.remember_location_in_scanner'),
             'privacy_url' => config('sheriff.privacy_url'),
             'imprint_url' => config('sheriff.imprint_url'),
             'custom_translations' => file_exists('/app/strings.yml')
